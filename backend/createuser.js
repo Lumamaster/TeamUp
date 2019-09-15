@@ -1,7 +1,11 @@
+/* Iterates through the list, changing the BSON
+   objects to text and printing to console */
 function iterateFunc(doc) {
     console.log(JSON.stringify(doc, null, 4));
 }
  
+/* Catches and prints any errors that occur
+   when iterating through the list of BSON objects */
 function errorFunc(error) {
     if (error != null) {
         console.log(error);
@@ -12,7 +16,6 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 // TODO: email, username, and password values need to come from textboxes
-
 var email = "burns140@purdue.edu";
 var username = "fdsaa77778";
 var password = "V4lidPassword$";
@@ -90,6 +93,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
                 username: username
             }).then(function(count){
                 console.log('User successfully created');
+                createCookie(username, email, 3);
                 client.close();
             }).catch(function (err) {
                 console.log('User creation failed');
