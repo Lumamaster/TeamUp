@@ -1,3 +1,13 @@
+function iterateFunc(doc) {
+    console.log(JSON.stringify(doc, null, 4));
+}
+ 
+function errorFunc(error) {
+    if (error != null) {
+        console.log(error);
+    }
+}
+
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
@@ -50,16 +60,6 @@ if (usernameRegex.test(username) == false) {
     return;
 } else {
     console.log('valid username: ' + username);
-}
-
-function iterateFunc(doc) {
-    console.log(JSON.stringify(doc, null, 4));
-}
- 
-function errorFunc(error) {
-    if (error != null) {
-        console.log(error);
-    }
 }
 
 // Url to connect to server
