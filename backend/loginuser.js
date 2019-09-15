@@ -14,10 +14,6 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
     const db = client.db("Users");
 
     var cursor = db.collection('user').find({
-        $or: [ {email: email}, {username: username} ]
-    });
-
-    var cursor = db.collection('user').find({
         email: email,
         password: password
     });
