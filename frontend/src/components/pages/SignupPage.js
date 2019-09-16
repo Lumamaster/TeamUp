@@ -6,6 +6,7 @@ class SignupPage extends React.Component {
         super(props);
         this.state = {
             email: "",
+            screenname:"",
             password: "",
             password2: "",
             errors: []
@@ -28,6 +29,12 @@ class SignupPage extends React.Component {
         } else if(!this.state.email.match('^([A-Z]|[a-z]|[0-9]){1,480}@purdue\.edu$')) {
             errors.push('Please enter a valid Purdue email address.')
         }
+        if(!this.state.screenname || this.state.screenname.length === 0) {
+            errors.push('The screen name field cannot be blank.');
+        } else if(this.state.screenname.length > 140) {
+            /* TODO: Match a regex for the screen name. */
+            errors.push('Please enter a valid screen name.')
+        }
         if(!this.state.password || this.state.password.length === 0) {
             errors.push('The password field cannot be blank.');
         } else if(this.state.password.length > 140) {
@@ -46,6 +53,7 @@ class SignupPage extends React.Component {
             /* TODO submit this to the backend */
             let payload = {
                 email: this.state.email,
+                screenname: this.state.screenname,
                 password: this.state.password
             }
             console.log("POST to the signup endpoint:",payload);
@@ -61,6 +69,14 @@ class SignupPage extends React.Component {
                         type="text"
                         onChange={this.handleInputChange}
                         placeholder="Email"
+                        autoComplete="email"
+                    />
+                    <br/>
+                    <input 
+                        name="screenname"
+                        type="text"
+                        onChange={this.handleInputChange}
+                        placeholder="Screen name"
                         autoComplete="username"
                     />
                     <br/>
