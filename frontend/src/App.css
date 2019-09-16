@@ -27,9 +27,8 @@
   }
 }
 
-#logo {
-  width: 150px;
-  height: 65px;
+#navbar-logo {
+  width:150px;
 }
 
 #top-border {
@@ -37,5 +36,12 @@
   width: stretch;
   height: 65px;
   max-width: 100%;
-  background-color: rgb(0,0,0);
+  background-color: #6d22d7;
+  color: white;
+  align-items: center;
+}
+#top-border a {
+  color:white;
+  text-decoration: none;
+  margin-left: 15px;
 }
