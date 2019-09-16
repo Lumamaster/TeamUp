@@ -9,6 +9,7 @@ function Navbar() {
         <Link to="/"><img src={TeamUp} alt="" id="navbar-logo" /></Link>
         <Link to="/login/">Log In</Link>
         <Link to="/signup/">Sign Up</Link>
+        <Link to="/user/">My Profile</Link>
     </div>
   );
 }
