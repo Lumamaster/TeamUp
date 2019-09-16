@@ -2,6 +2,9 @@
   text-align: center;
 }
 
+body {
+  background-color: #bbb
+}
 
 .App-header {
   background-color: #282c34;
@@ -39,9 +42,22 @@
   background-color: #6d22d7;
   color: white;
   align-items: center;
+  margin-bottom:20px;
 }
 #top-border a {
   color:white;
   text-decoration: none;
   margin-left: 15px;
+}
+
+.container {
+  width:calc(80% - 50px);
+  margin-left: 10%;
+  padding: 5px 25px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.color-error {
+  color:#ff3737
 }

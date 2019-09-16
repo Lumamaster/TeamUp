@@ -4,7 +4,7 @@ import '../../App.css';
 
 function SignupPage() {
   return (
-    <div>
+    <div className="container">
       <h1>Sign Up</h1>
     </div>
   );
