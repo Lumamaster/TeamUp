@@ -1,14 +1,15 @@
 import React from 'react';
-import TeamUp from './TeamUp.png';
-import './App.css';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import LoginPage from './components/pages/LoginPage';
+import SignupPage from './components/pages/SignupPage';
 
 function App() {
   return (
-    <div>
-      <div id="top-border">
-        <img src={TeamUp} alt="" id="logo" />
-      </div>
-    </div>
+    <Router>
+      <Route exact path="/" component={LoginPage}/>
+      <Route path="/login/" component={LoginPage}/>
+      <Route path="/signup/" component={SignupPage}/>
+    </Router>
   );
 }
 
