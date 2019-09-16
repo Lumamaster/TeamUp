@@ -1,4 +1,4 @@
-# CS408
+# TeamUp
 CS 408 Software Testing project
 
 ### This project's stack consists of:
