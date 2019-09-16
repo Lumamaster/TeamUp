@@ -2,7 +2,6 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 // TODO: email, username, and password values need to come from textboxes
-
 var email = "burns140@purdue.edu";
 var username = "fdsaa77778";
 var password = "V4lidPassword$";
@@ -52,16 +51,6 @@ if (usernameRegex.test(username) == false) {
     console.log('valid username: ' + username);
 }
 
-function iterateFunc(doc) {
-    console.log(JSON.stringify(doc, null, 4));
-}
- 
-function errorFunc(error) {
-    if (error != null) {
-        console.log(error);
-    }
-}
-
 // Url to connect to server
 const url = 'mongodb+srv://sburns:cheebs13@cluster0-wwsap.mongodb.net/test?retryWrites=true&w=majority';
 
@@ -90,6 +79,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
                 username: username
             }).then(function(count){
                 console.log('User successfully created');
+                createCookie(username, email, 3);
                 client.close();
             }).catch(function (err) {
                 console.log('User creation failed');
