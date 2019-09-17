@@ -16,15 +16,6 @@ function addskill(email, skill) {
             skillArr.push(skill);
             console.log(skillArr);
         });
-        //console.log(user);
-        var skills = user.name;        
-    
-        /*db.collection('user').updateOne(
-            { email: email },
-            {
-                $set: { bio: bio, password: password, name: name, curTeams: curTeams, skills: skills }
-            }
-        )*/
         client.close();
     });
 }
@@ -41,7 +32,6 @@ const assert = require('assert');
 var email = "burns140@purdue.edu";
 var password = "password";
 var name = "name";
-var curTeams = ["curteam1", "curteam2"];
 var skills = ["i have no skills"];
 var bio = "lolbio";
 

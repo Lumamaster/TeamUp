@@ -24,7 +24,7 @@ const loginUser = (email, password) => {
             
             // The user is found
             if (result == 1) {
-                //console.log('logging in');
+                console.log('logging in');
                 //createCookie(username, email, 3);
                 client.close();
                 /* TODO: Get information about the user to be passed back in response */
@@ -32,7 +32,7 @@ const loginUser = (email, password) => {
 
             // The user is not found    
             } else if (result == 0) {
-                //console.log('incorrect username or password');
+                console.log('incorrect username or password');
                 return false;
                 client.close();
                 return;

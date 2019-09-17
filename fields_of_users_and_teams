@@ -1,0 +1,21 @@
+User {
+    email: string; contains email
+    name: string; contains name
+    skills: string array; skills such as languages and frameworks
+    rating: int; rating value from other users
+    prevTeams: object array; pairs of teamnames and ids of teams you've been a part of
+    curTeams: object array; pairs of teamnames and ids of teams you are part of
+    blocked: string array; list of users that you have blocked and have blocked you
+    invites: string array; list of teams that you are currently invited to
+}
+
+Team {
+    teamName: string; contains team name
+    teamMembers: string array; contains names of all team teamMembers
+    owner: string; contains name of project owner (team creator)
+    info: string; contains notes about project ideas
+    requestedSkills: string array; list of skills that the team is looking for
+    numMembers: int; number of members in the team
+    open: boolean; whether the team is open or restricted. true means open
+    alive: boolean; whether the group is active or project has ended. true means active
+}

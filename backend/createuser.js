@@ -94,7 +94,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
                 invites: []
             }).then(function(count){
                 console.log('User successfully created');
-                createCookie(name, email, 3);
+                //createCookie(name, email, 3);
                 client.close();
             }).catch(function (err) {
                 console.log(err);
