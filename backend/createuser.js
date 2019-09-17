@@ -1,9 +1,34 @@
+/* Create cookies that will track whether a user is logged in */
+function createCookie(name, value, days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		var expires = "; expires=" + date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+/* Iterates through the list, changing the BSON
+   objects to text and printing to console */
+   function iterateFunc(doc) {
+    console.log(JSON.stringify(doc, null, 4));
+}
+ 
+/* Catches and prints any errors that occur
+   when iterating through the list of BSON objects */
+function errorFunc(error) {
+    if (error != null) {
+        console.log(error);
+    }
+}
+
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 // TODO: email, username, and password values need to come from textboxes
 var email = "burns140@purdue.edu";
-var username = "fdsaa77778";
+var name = "fdsaa77778";
 var password = "V4lidPassword$";
 
 // Confirm it's a purdue email
@@ -34,23 +59,6 @@ letter, one number, and one special character');
     console.log('valid password: ' + password);
 }
 
-// Check username length
-if (username.length < 5 || username.length > 16) {
-    // TODO: set popup about username length
-    console.log('username must be between 5 and 16 characters');
-    return;
-}
-
-// Make sure username is valid
-var usernameRegex = /^[0-9a-zA-Z@#$%^&*()_]/
-if (usernameRegex.test(username) == false) {
-    // TODO: set popup to say username requirements
-    console.log('invalid username');
-    return;
-} else {
-    console.log('valid username: ' + username);
-}
-
 // Url to connect to server
 const url = 'mongodb+srv://sburns:cheebs13@cluster0-wwsap.mongodb.net/test?retryWrites=true&w=majority';
 
@@ -60,7 +68,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
     const db = client.db("Users");
 
     var cursor = db.collection('user').find({
-        $or: [ {email: email}, {username: username} ]
+        email: email
     });
 
     cursor.count().then(function(result) {
@@ -76,13 +84,19 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
             db.collection('user').insertOne({
                 email: email,
                 password: password,
-                username: username
+                name: name,
+                prevTeams: [],
+                curTeams: [],
+                rating: "N/A",
+                skills: [],
+                bio: [],
+                blockedUsers: [],
+                invites: []
             }).then(function(count){
                 console.log('User successfully created');
-                createCookie(username, email, 3);
+                createCookie(name, email, 3);
                 client.close();
             }).catch(function (err) {
-                console.log('User creation failed');
                 console.log(err);
             });
         }
