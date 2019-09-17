@@ -29,7 +29,7 @@ router.post('/', async (req,res) => {
         // The user is not found    
         } else if (result == 0) {
             client.close();
-            res.status(404).json({err:"The specified user was not found"});
+            res.status(404).json({err:"The specified user was not found"}).send();
 
         // More than one user is found    
         } else {
