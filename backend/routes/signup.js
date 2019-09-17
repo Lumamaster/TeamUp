@@ -5,6 +5,7 @@ const dbconfig = require('../db_config.json');
 
 router.use(express.json());
 router.post('/', async (req,res) => {
+    console.log("Signup", req.body);
     
     const {email, screenname, password} = req.body;
     if(!email || !password || !screenname) {
