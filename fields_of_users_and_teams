@@ -12,10 +12,11 @@ User {
 Team {
     teamName: string; contains team name
     teamMembers: string array; contains names of all team teamMembers
-    owner: string; contains name of project owner (team creator)
+    owner: string; contains email of project owner (team creator)
     info: string; contains notes about project ideas
     requestedSkills: string array; list of skills that the team is looking for
     numMembers: int; number of members in the team
     open: boolean; whether the team is open or restricted. true means open
     alive: boolean; whether the group is active or project has ended. true means active
+    class: string; contains class name
 }
