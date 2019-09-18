@@ -19,4 +19,5 @@ Team {
     open: boolean; whether the team is open or restricted. true means open
     alive: boolean; whether the group is active or project has ended. true means active
     class: string; contains class name
+    maxMembers: int; maximum number of members for the team
 }
