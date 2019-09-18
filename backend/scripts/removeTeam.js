@@ -61,41 +61,47 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
                 }
             )
         }
-    });
 
-    user.then(function (result) {
-        var removed = false; 
-        var teamArr = result[0].curTeams;
-        var prevArr = result[0].prevTeams;
-
-        // Remove the team from your curTeam array
-        for (var i = 0; i < teamArr.length; i++) {
-            if (teamArr[i].id == teamID) {
-
-                var teamPair = {
-                    teamName: teamName,
-                    id: teamID
+        user.then(function (userResult) {
+            var removed = false; 
+            var teamArr = userResult[0].curTeams;
+            var prevArr = userResult[0].prevTeams;
+    
+            // Remove the team from your curTeam array
+            for (var i = 0; i < teamArr.length; i++) {
+                if (teamArr[i].id == teamID) {
+    
+                    var teamPair = {
+                        teamName: teamName,
+                        id: teamID
+                    }
+    
+                    prevArr.push(teamPair);
+                    teamArr.splice(i, 1);
+                    removed = true;
                 }
-
-                prevArr.push(teamPair);
-                teamArr.splice(i, 1);
-                removed = true;
             }
-        }
-
-        // If you weren't removed from anything, you were never a part of that team
-        if (removed == false) {
-            console.log('you are not part of a team with that name');
-            return;
-        }
-
-        // Update both the current and prev arrays
-        userdb.collection('user').updateOne(
-            { email: email },
-            {
-                $set: { curTeams: teamArr, prevTeams: prevArr }
+    
+            // If you weren't removed from anything, you were never a part of that team
+            if (removed == false) {
+                console.log('you are not part of a team with that name');
+                return;
             }
-        )
+    
+            // Update both the current and prev arrays
+            userdb.collection('user').updateOne(
+                { email: email },
+                {
+                    $set: { curTeams: teamArr, prevTeams: prevArr }
+                }
+            )
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }).catch(function(error) {
+        console.log(error);
     });
+
+    
 
 });

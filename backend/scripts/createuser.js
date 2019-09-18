@@ -1,30 +1,7 @@
-/* Create cookies that will track whether a user is logged in */
-function createCookie(name, value, days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		var expires = "; expires=" + date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-/* Iterates through the list, changing the BSON
-   objects to text and printing to console */
-   function iterateFunc(doc) {
-    console.log(JSON.stringify(doc, null, 4));
-}
- 
-/* Catches and prints any errors that occur
-   when iterating through the list of BSON objects */
-function errorFunc(error) {
-    if (error != null) {
-        console.log(error);
-    }
-}
-
+const cookie = require('../cookies.js');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const iterator = require('../iterating.js');
 
 // TODO: email, username, and password values need to come from textboxes
 var email = "burns140@purdue.edu";
@@ -72,11 +49,10 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
     });
 
     cursor.count().then(function(result) {
-        
         // If the request returned another user, it already exists
         if (result != 0) {
             console.log('User with that username or email already exists.');
-            cursor.forEach(iterateFunc, errorFunc);
+            cursor.forEach(iterator.iterateFunc, iterator.errorFunc);
             client.close();
         
         // If the request was empty, create the user    
@@ -94,7 +70,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, fu
                 invites: []
             }).then(function(count){
                 console.log('User successfully created');
-                //createCookie(name, email, 3);
+                cookie.createCookie(name, email, 3);
                 client.close();
             }).catch(function (err) {
                 console.log(err);

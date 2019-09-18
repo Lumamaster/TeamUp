@@ -1,5 +1,5 @@
 /* Create cookies that will track whether a user is logged in */
-function createCookie(name, value, days) {
+exports.createCookie = function(name, value, days) {
 	if (days) {
 		var date = new Date();
 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -10,7 +10,7 @@ function createCookie(name, value, days) {
 }
 
 /* Read a cookie to see if the cookie has the user marked as logged in */
-function readCookie(name) {
+exports.readCookie = function(name) {
 	var nameEQ = name + "=";
 	var ca = document.cookie.split(';');
 	for (var i = 0; i < ca.length ; i++) {
@@ -26,7 +26,6 @@ function readCookie(name) {
 }
 
 /* Delete the cookie */
-function eraseCookie(name) {
+exports.eraseCookie = function(name) {
 	createCookie(name, "", -1);
 }
-
