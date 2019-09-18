@@ -19,18 +19,17 @@ class LoginPage extends React.Component {
             [name]:value
         });
     }
-    handleLogin = e => {
+    handleLogin = async e => {
         e.preventDefault();
         let errors = [];
         if(!this.state.email || this.state.email.length === 0) {
             errors.push('The email field cannot be blank.');
-        } else if(!this.state.email.match('^([A-Z]|[a-z]|[0-9]){1,480}@purdue\.edu$')) {
+        } else if(! /\@purdue\.edu/.test(this.state.email)) {
             errors.push('Please enter a valid Purdue email address.')
         }
         if(!this.state.password || this.state.password.length === 0) {
             errors.push('The password field cannot be blank.');
-        } else if(this.state.password.length > 140) {
-            /* TODO: Match a regex for the password. */
+        } else if(! /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/.test(this.state.password) || this.state.password.length > 140) {
             errors.push('Please enter a valid password.')
         }
 
@@ -44,7 +43,26 @@ class LoginPage extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             }
-            console.log("POST to the login endpoint:",payload);
+            let fetchParams = {
+                method: 'POST',
+                headers:{
+                    "content-type":"application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(payload)
+            }
+            const res = await fetch('/login',fetchParams);
+            console.log(res);
+            if(res.status === 200) {
+                //Success!
+                alert('Success!')
+            } else {
+                const data = await res.json()
+                if(data.err) errors.push(data.err);
+                this.setState({
+                    errors:errors
+                })
+            }
+            //console.log("POST to the login endpoint:",payload);
         }
     }
     render() {
