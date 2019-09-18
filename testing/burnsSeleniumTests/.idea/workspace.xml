@@ -2,22 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/subModule1/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/routes/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/scripts/createuser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/scripts/createuser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/src/components/pages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/src/components/pages/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/src/components/pages/SignupPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/src/components/pages/SignupPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/burnsSeleniumTests.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/subModule1-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/CreateUserTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/LoginUserTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-CreateUserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-LoginUserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
@@ -31,43 +27,47 @@
     <session id="1709136862">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="5" />
+          <entry key="class" value="1" />
+          <entry key="java" value="6" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="5" />
+          <entry key="CLASS" value="1" />
+          <entry key="JAVA" value="6" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1943" />
-          <entry key="xml" value="1" />
+          <entry key="java" value="3255" />
+          <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1943" />
-          <entry key="XML" value="1" />
+          <entry key="JAVA" value="3255" />
+          <entry key="XML" value="6" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="238">
+              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -82,21 +82,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1528">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="187">
+              <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1513">
-              <caret line="89" column="28" lean-forward="true" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+            <state relative-caret-position="65">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2185#2328#0" expanded="true" />
+                <element signature="e#2327#2328#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,18 +116,34 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>createUserUrl</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>loginUserUrl</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenProjectNavigator">
@@ -141,9 +162,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1065" />
-    <option name="y" value="-45" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1377" />
+    <option name="y" value="92" />
     <option name="width" value="1630" />
     <option name="height" value="1815" />
   </component>
@@ -153,6 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,13 +231,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568827563307" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568838392887" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -229,7 +250,27 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.LeaveTeamTest.testLeaveTeamSuccess">
+    <configuration name="LeaveTeamTest.learnMongp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LeaveTeamTest" />
+      <option name="METHOD_NAME" value="learnMongp" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LeaveTeamTest.testLeaveTeamSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LeaveTeamTest" />
+      <option name="METHOD_NAME" value="testLeaveTeamSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -277,6 +318,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.LeaveTeamTest.learnMongp" />
+      <item itemvalue="JUnit.LeaveTeamTest.testLeaveTeamSuccess" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.LeaveTeamTest.testLeaveTeamSuccess" />
+        <item itemvalue="JUnit.LeaveTeamTest.learnMongp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -291,58 +342,57 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="LeaveTeamTest_learnMongp - 2019.09.18 at 15h 44m 12s.xml">
+      <configuration name="LeaveTeamTest.learnMongp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveTeamTest_learnMongp - 2019.09.18 at 15h 46m 02s.xml">
+      <configuration name="LeaveTeamTest.learnMongp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveTeamTest_testLeaveTeamSuccess - 2019.09.18 at 16h 23m 00s.xml">
+      <configuration name="LeaveTeamTest.testLeaveTeamSuccess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveTeamTest_testLeaveTeamSuccess - 2019.09.18 at 16h 23m 23s.xml">
+      <configuration name="LeaveTeamTest.testLeaveTeamSuccess" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
+    <frame x="551" y="37" width="652" height="726" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2097166" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18013468" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32890365" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32890365" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.4551495" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32890365" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33277312" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.20242915" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32890365" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32890365" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.45378152" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.69477236" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="39" lean-forward="true" selection-end-line="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java" />
     <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -352,17 +402,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1528">
+        <state relative-caret-position="102">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/3.141.59/selenium-api-3.141.59.jar!/org/openqa/selenium/WebElement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="28" lean-forward="true" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+        <state relative-caret-position="187">
+          <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2185#2328#0" expanded="true" />
+            <element signature="e#2327#2328#0" expanded="true" />
           </folding>
         </state>
       </provider>

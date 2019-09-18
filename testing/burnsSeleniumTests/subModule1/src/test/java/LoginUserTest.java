@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginUserTest {
     WebDriver driver = new ChromeDriver();
-    final String createUserUrl = "http://localhost:300";
+    final String loginUserUrl = "http://localhost:3000";
     final String email = "DONOTDELETE@purdue.edu";
     final String password = "V4lidPassword$";
     WebDriverWait wait = new WebDriverWait(driver, 10);
 
     @Test
     public void testSuccessfulLogin() {
-        driver.get(createUserUrl);
+        driver.get(loginUserUrl);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.name("loginbutton"));
@@ -33,7 +33,7 @@ public class LoginUserTest {
 
     @Test
     public void testFailedLoginEmail() {
-        driver.get(createUserUrl);
+        driver.get(loginUserUrl);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.name("loginbutton"));
@@ -50,7 +50,7 @@ public class LoginUserTest {
 
     @Test
     public void testFailedLoginPassword() {
-        driver.get(createUserUrl);
+        driver.get(loginUserUrl);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.name("loginbutton"));
@@ -67,7 +67,7 @@ public class LoginUserTest {
 
     @Test
     public void testEmptyEmail() {
-        driver.get(createUserUrl);
+        driver.get(loginUserUrl);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.name("loginbutton"));
@@ -84,7 +84,7 @@ public class LoginUserTest {
 
     @Test
     public void testEmptyPassword() {
-        driver.get(createUserUrl);
+        driver.get(loginUserUrl);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.name("loginbutton"));
