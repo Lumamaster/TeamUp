@@ -10,8 +10,9 @@ const port = process.env.PORT || 8000;
 
 app.use('/login', login);
 app.use('/signup', signup);
-app.use('/user/teams/leave', removeTeam);
-app.use('/user/profile/edit', editProfile);
+app.use('/teams/leave', removeTeam);
+//app.use('/profile/:id', viewProfile);
+app.use('/profile', editProfile);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
 app.listen(port, () => console.log(`Server running on port ${port}`));

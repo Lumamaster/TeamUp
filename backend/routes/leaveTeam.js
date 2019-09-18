@@ -118,5 +118,8 @@ router.post('/', async (req,res) => {
         console.log(err);
     }
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35eb0beb94fb5f21580064a0a29e23675f2f526f
 module.exports = router;
