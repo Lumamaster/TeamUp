@@ -4,7 +4,7 @@ const assert = require('assert');
 const iterator = require('../iterating.js');
 
 // TODO: email, username, and password values need to come from textboxes
-var email = "burns140@purdue.edu";
+var email = "DONOTDELETE@purdue.edu";
 var name = "fdsaa77778";
 var password = "V4lidPassword$";
 

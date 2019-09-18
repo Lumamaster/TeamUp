@@ -34,7 +34,7 @@ router.post('/', async (req,res) => {
                 // The user is not found    
                 } else if (result == 0) {
                     console.log('incorrect username or password');
-                    res.status(400).json({err:"incorrect username or password"});
+                    res.status(400).json({err:"incorrect email or password"});
                     client.close();
                 // More than one user is found    
                 } else {
