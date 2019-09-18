@@ -1,6 +1,6 @@
 // TODO: this should occur on click of a "submit" button
 const express = require('express');
-const router = express.Router;
+const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const cookie = require('../cookies');
@@ -8,11 +8,11 @@ const dbconfig = require('../db_config.json');
 
 router.use(express.json());
 router.post('/user/profile/edit/addskill', async (req, res) => {
-    if (cookie.readCookie("") == null) {
+    /* if (cookie.readCookie("") == null) {
         // TODO: redirect to login page
         res.status(400).json({message:"not logged in"});
         return;
-    }
+    } */
 
     const {email, skill} = req.body;
     try {
@@ -47,11 +47,11 @@ router.post('/user/profile/edit/addskill', async (req, res) => {
 })
 
 router.post('/user/profile/edit/removeskill', async (req, res) => {
-    if (cookie.readCookie("") == null) {
+    /* if (cookie.readCookie("") == null) {
         // TODO: redirect to login page
         res.status(400).json({message:"not logged in"});
         return;
-    }
+    } */
 
     const {email, skill} = req.body;
     try {
@@ -90,3 +90,5 @@ router.post('/user/profile/edit/removeskill', async (req, res) => {
         res.status(400).json({err:error});
     }
 })
+
+module.exports = router;
