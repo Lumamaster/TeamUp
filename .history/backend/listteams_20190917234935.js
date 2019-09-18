@@ -28,26 +28,3 @@ router.post('/listteams', async(req,res) => {
         res.status(400).json({err:error})
     }
 });
-
-router.post('/teamsearch', async(req,res) => {
-    if(cookie.readCookie("") == null) {
-        //Redirect to login page
-        res.status(400).json({message:"not logged in"})
-        return;
-    }
-
-    // Searching team
-    try{
-        MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology:true}, function(err, client){
-            assert.equal(null, err);
-            const db = client.db("Teams");
-
-            res.locals.teamlist = db.collection('team').find({$or: [{teamname: /req.searchteam/},{teamowner: /req.searchteam/},{teammembers: /req.searchteam/}]})
-
-            client.close();
-        });
-    } catch(err){
-        console.log(error);
-        res.status(400).json({err:error});
-    }
-});

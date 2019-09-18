@@ -42,7 +42,7 @@ router.post('/teamsearch', async(req,res) => {
             assert.equal(null, err);
             const db = client.db("Teams");
 
-            res.locals.teamlist = db.collection('team').find({$or: [{teamname: /req.searchteam/},{teamowner: /req.searchteam/},{teammembers: /req.searchteam/}]})
+            res.locals.teamlist = db.collection('team').find({$or: [{teamname: /req.searchteam/},{teamownder: /req.searchteam/}]})
 
             client.close();
         });
