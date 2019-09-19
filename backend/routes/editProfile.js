@@ -100,9 +100,5 @@ router.post('/removeskill', async (req, res) => {
         res.status(400).json({err:error});
     }
 })
-<<<<<<< HEAD
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 35eb0beb94fb5f21580064a0a29e23675f2f526f
