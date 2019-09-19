@@ -1,48 +1,57 @@
+const express = require('express');
+const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const cookie = require('../cookies');
+const dbconfig = require('../db_config.json');
 
-// Get Current User
-var currUser = readCookie(name);
+router.use(express.json());
+router.post('/startteam', async(req,res) => {
+    if(cookie.readCookie("") == null) {
+        // Redirect to login page
+        res.status(400).json({message:"not logged in"})
+        return;
+    }
 
-// Redirect to home page if not logged in
-if(currUser == null){
-    console.log('not logged in');
-    window.location.href = "/"
-}
+    const {teamName, teamMembers, owner, info, requestedSkills, numMembers, open, course, maxMembers} =  req.body;
 
-// Get Team details
-var teamName = document.getElementById("teamname").value;
-var teamOpen = document.getElementById("open").value;
-var teamMax = document.getElementById("maxnum").value;
-var teamSkill = document.getElementById("teamskills").value;
-var teamNotes = document.getElementById("teamnotes").value;
-var teamTags = document.getElementById("teamtag").value;
+    // Add team to database
+    try{
+        MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, function(err,client){
+            assert.equal(null, err);
+            const db = client.db("Teams");
 
-// Url to connect to server
-const url = 'mongodb+srv://sburns:cheebs13@cluster0-wwsap.mongodb.net/test?retryWrites=true&w=majority';
+            // Create team object to be added
+            var team = {
+                teamName: teamName,
+                teamMembers: teamMembers,
+                owner: owner,
+                info: info,
+                requestedSkills: requestedSkills,
+                numMembers: numMembers,
+                open: open,
+                alive: true,
+                course: course,
+                maxMembers: maxMembers
+            };
 
-// Create MongoDB Connection
-MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
-    assert.equal(null, err);
+            var teamadded;
 
-    const db = client.db("Teams");
+            // Insert team object to the database
+            db.collection('team').insertOne(team, function(err, result){
+                if(err) console.log('Could not add team to database')
+                // else team was succesfully added to the database
+                var teamid = result._id;
+                teamadded = {teamName , teamid};
+            });
 
-    // Insert new team in the database
-    db.collection('team').insertOne({
-        name: teamName,
-        open: teamOpen,
-        max: teamMax,
-        skill: teamSkill,
-        notes: teamNotes,
-        tags: teamTags,
-        owner: currUser,
-        members: null
-    }).then(function(){
-        console.log('Team successfully created');
-        client.close();
-    }).catch(function(err){
-        console.log('Team creation failed');
-        console.log(err);
-    });
-       
+            // Update currTeams on owner's database
+            client.db("Users").collection('user').update({email: owner}, {$addToSet: {curTeams: teamadded}});
+
+            client.close();
+        });
+    } catch(err) {
+        console.log(error);
+        res.status(400).json({err:error});
+    }
 });
