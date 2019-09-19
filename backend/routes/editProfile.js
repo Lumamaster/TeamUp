@@ -7,13 +7,8 @@ const cookie = require('../cookies');
 const dbconfig = require('../db_config.json');
 
 router.use(express.json());
-<<<<<<< HEAD
 router.post('/user/profile/edit/addskill', async (req, res) => {
     /* if (cookie.readCookie("") == null) {
-=======
-router.post('/addskill', async (req, res) => {
-    if (cookie.readCookie("") == null) {
->>>>>>> 35eb0beb94fb5f21580064a0a29e23675f2f526f
         // TODO: redirect to login page
         res.status(400).json({message:"not logged in"});
         return;
@@ -51,13 +46,10 @@ router.post('/addskill', async (req, res) => {
     }
 })
 
-<<<<<<< HEAD
-router.post('/user/profile/edit/removeskill', async (req, res) => {
-    /* if (cookie.readCookie("") == null) {
-=======
+
 router.post('/removeskill', async (req, res) => {
-    if (cookie.readCookie("") == null) {
->>>>>>> 35eb0beb94fb5f21580064a0a29e23675f2f526f
+/*    if (cookie.readCookie("") == null) {
+
         // TODO: redirect to login page
         res.status(400).json({message:"not logged in"});
         return;

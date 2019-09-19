@@ -12,7 +12,7 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/teams/leave', removeTeam);
 //app.use('/profile/:id', viewProfile);
-app.use('/profile', editProfile);
+app.use('/profile/edit', editProfile);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
 app.listen(port, () => console.log(`Server running on port ${port}`));

@@ -4,13 +4,14 @@ const router = express.Router();
 const dbconfig = require('../db_config.json');
 const iterator = require('../iterating.js');
 const cookie = require('../cookies.js');
+const assert = require('assert');
 
 router.use(express.json());
 router.post('/', async (req,res) => {
     console.log("Signup", req.body);
     
-    const {email, screenname, password} = req.body;
-    if(!email || !password || !screenname) {
+    const {email, password} = req.body;
+    if(!email || !password) {
         res.status(400).json({err:"Missing email, password, or screenname"});
         return;
     }
@@ -34,17 +35,6 @@ router.post('/', async (req,res) => {
         res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
         return;
     }
-
-    if (screenname.length < 5 || screenname.length > 16) {
-        res.status(400).json({err:'Screen name must be between 5 and 16 characters'});
-        return;
-    }
-
-    var screennameRegex = /^[0-9a-zA-Z@#$%^&*()_]/
-    if (screennameRegex.test(screenname) == false) {
-        res.status(400).json({err:'Invalid screen name'});
-        return;
-    }
     
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
@@ -60,14 +50,14 @@ router.post('/', async (req,res) => {
                 if (result != 0) {
                     console.log('User with that email already exists.');
                     cursor.forEach(iterator.iterateFunc, iterator.errorFunc);
-                    res.status(400).json({err:'User with that email already exists'});
+                    //res.status(200).json({err:'User with that email already exists'});
+                    res.status(400).send("User with that email already exists");
                     client.close();
                 // If the request was empty, create the user    
                 } else {
                     db.collection('user').insertOne({
                         email: email,
                         password: password,
-                        name: name,
                         prevTeams: [],
                         curTeams: [],
                         rating: -1,
@@ -77,8 +67,9 @@ router.post('/', async (req,res) => {
                         invites: []
                     }).then(function(count){
                         console.log('User successfully created');
-                        res.status(200).json({message:'User successfully created'});
-                        cookie.createCookie(name, email, 3);
+                        //res.status(200).json({message:'User successfully created'});
+                        res.status(200).send('User successfully created');
+                        //cookie.createCookie(name, email, 3);
                         client.close();
                     }).catch(function (err) {
                         console.log(err);

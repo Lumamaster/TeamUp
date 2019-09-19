@@ -86,7 +86,7 @@ class LoginPage extends React.Component {
                         autoComplete="current-password"
                     />
                     <br/>
-                    <button onClick={this.handleLogin}>Log In</button>
+                    <button name="loginbutton" onClick={this.handleLogin}>Log In</button>
                 </form>
                 <div id="errors">
                     {this.showErrors()}

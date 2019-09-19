@@ -113,7 +113,7 @@ class SignupPage extends React.Component {
                         autoComplete="current-password"
                     />
                     <br/>
-                    <button onClick={this.handleLogin}>Sign Up</button>
+                    <button name="createbutton" onClick={this.handleLogin}>Sign Up</button>
                 </form>
                 <div id="errors">
                     {this.showErrors()}
