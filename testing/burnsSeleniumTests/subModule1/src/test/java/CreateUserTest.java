@@ -35,19 +35,7 @@ public class CreateUserTest {
 
     @Test
     public void testSuccessCreateUser() {
-        /* driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
 
-        emailEl.sendKeys(email);
-        passEl.sendKeys(password);
-        createButton.click();
-
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        String successmsg = "User successfully created";
-        Assert.assertEquals(successmsg, responseMessage); */
         try {
             URL url = new URL("http://localhost:8000/signup");
             URLConnection con = url.openConnection();
@@ -55,15 +43,7 @@ public class CreateUserTest {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            Map<String,String> arguments = new HashMap<>();
-            arguments.put("email", "tests12@purdue.edu");
-            arguments.put("password", "V4lidPa$$word"); // This is a fake password obviously
-            StringJoiner sj = new StringJoiner("&");
-            for(Map.Entry<String,String> entry : arguments.entrySet())
-                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                        + URLEncoder.encode(entry.getValue(), "UTF-8"));
-            //byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
-            byte[] out = "{\"email\":\"testing@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -98,89 +78,214 @@ public class CreateUserTest {
 
     }
 
-    /*@Test
+    @Test
     public void testInvalidEmail() {
-        driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
+        try {
+            URL url = new URL("http://localhost:8000/signup");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
-        emailEl.sendKeys("invalidemailtho");
-        passEl.sendKeys(password);
-        createButton.click();
+            byte[] out = "{\"email\":\"fdsaeee\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        String successmsg = "Invalid email";
-        Assert.assertEquals(successmsg, responseMessage);
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "Invalid email");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testInvalidPassword() {
-        driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
+        try {
+            URL url = new URL("http://localhost:8000/signup");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
-        emailEl.sendKeys("doesnexist@purdue.edu");
-        passEl.sendKeys("invalidpassword");
-        createButton.click();
+            byte[] out = "{\"email\":\"not@purdue.edu\",\"password\":\"fdsadkkllkei\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        String successmsg = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character";
-        Assert.assertEquals(successmsg, responseMessage);
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testLongPassword() {
-        driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
+        try {
+            URL url = new URL("http://localhost:8000/signup");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
-        emailEl.sendKeys("doesnexist@purdue.edu");
-        passEl.sendKeys("invalidpasswordflklhlkdflkjijidkjslkajfdjlfjadjlkjdfoih");
-        createButton.click();
+            byte[] out = "{\"email\":\"not@purdue.edu\",\"password\":\"fdsafdsasafdsafdsadfF5$ikhjhdkfhjkshkjdhkjhehkejh\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        String successmsg = "password must be between 8 and 20 characters";
-        Assert.assertEquals(successmsg, responseMessage);
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testShortPassword() {
-        driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
+        try {
+            URL url = new URL("http://localhost:8000/signup");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
-        emailEl.sendKeys("doesnexist@purdue.edu");
-        passEl.sendKeys("fds");
-        createButton.click();
+            byte[] out = "{\"email\":\"not@purdue.edu\",\"password\":\"fds\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        String successmsg = "password must be between 8 and 20 characters";
-        Assert.assertEquals(successmsg, responseMessage);
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testUserAlreadyExists() {
-        driver.get(createUserUrl);
-        WebElement emailEl = driver.findElement(By.name("email"));
-        WebElement passEl = driver.findElement(By.name("password"));
-        WebElement createButton = driver.findElement(By.name("createbutton"));
+        try {
+            URL url = new URL("http://localhost:8000/signup");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
-        emailEl.sendKeys("DONOTDELETE@purdue.edu");
-        passEl.sendKeys("V4lidPassword$");
-        createButton.click();
+            byte[] out = "{\"email\":\"DONOTDELETE@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getAttribute("err");
-        String successmsg = "User with that email already exists";
-        Assert.assertEquals(successmsg, responseMessage);
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "User with that email already exists");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
-    */
+
 }

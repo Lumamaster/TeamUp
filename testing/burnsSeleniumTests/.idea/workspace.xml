@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="a8ea0f3a-0e7a-49cd-8a72-200cf5a5142f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../backend/routes/editProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/editProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsCreate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsLogin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../backend/routes/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" afterDir="false" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
@@ -26,62 +24,67 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
-<<<<<<< HEAD
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
-=======
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.opened" value="3" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-<<<<<<< HEAD
-          <entry key="iml" value="1" />
-          <entry key="java" value="1" />
-=======
           <entry key="class" value="1" />
           <entry key="java" value="7" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-<<<<<<< HEAD
-          <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="1" />
-=======
           <entry key="CLASS" value="1" />
           <entry key="JAVA" value="7" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-<<<<<<< HEAD
-          <entry key="txt" value="26" />
-          <entry key="xml" value="2" />
-=======
           <entry key="java" value="3937" />
           <entry key="xml" value="6" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-<<<<<<< HEAD
-          <entry key="PLAIN_TEXT" value="26" />
-          <entry key="XML" value="2" />
-=======
           <entry key="JAVA" value="3937" />
           <entry key="XML" value="6" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="2131059497">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="134" />
+          <entry key="seltests" value="42" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="176" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+          <entry key="selTestsLogin" value="2" />
+          <entry key="seltests" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -91,18 +94,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+            <state relative-caret-position="476">
+              <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java">
-=======
         <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/Main.java">
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="4" selection-start-line="4" selection-end-line="4" />
@@ -110,16 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/burnsSeleniumTests.iml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+            <state relative-caret-position="-40">
+              <caret line="8" lean-forward="true" selection-end-line="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,7 +124,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
+            <state relative-caret-position="153">
               <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -140,13 +134,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/selTestsCreate">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -163,6 +154,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>createUserUrl</find>
+      <find>sj</find>
     </findStrings>
     <replaceStrings>
       <replace>loginUserUrl</replace>
@@ -179,7 +171,9 @@
         <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/selTests/seltests" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsLogin" />
       </list>
     </option>
   </component>
@@ -206,18 +200,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-<<<<<<< HEAD
-    <option name="x" value="807" />
-    <option name="y" value="-28" />
-    <option name="width" value="1300" />
-    <option name="height" value="1450" />
-=======
-    <option name="x" value="955" />
-    <option name="y" value="-50" />
-    <option name="width" value="1630" />
-    <option name="height" value="1815" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="width" value="1297" />
+    <option name="height" value="1448" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -225,14 +211,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
-=======
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -283,24 +264,24 @@
             </path>
             <path>
               <item name="burnsSeleniumTests" type="b2602c69:ProjectViewProjectNode" />
+              <item name="burnsSeleniumTests" type="462c0819:PsiDirectoryNode" />
+              <item name="subModule1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="selTests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="burnsSeleniumTests" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568778102936" />
-=======
-      <pane id="Scope" />
-    </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568928623817" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568931893038" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -314,32 +295,50 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CreateUserTest.testSuccessCreateUser">
-    <configuration name="CreateUserTest.testSuccessCreateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CreateUserTest">
+    <configuration name="CreateUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
-      <option name="METHOD_NAME" value="testSuccessCreateUser" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreateUserTest.testInvalidPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
+      <option name="METHOD_NAME" value="testInvalidPassword" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeaveTeamTest.learnMongp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateUserTest.testLongPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LeaveTeamTest" />
-      <option name="METHOD_NAME" value="learnMongp" />
+      <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
+      <option name="METHOD_NAME" value="testLongPassword" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeaveTeamTest.testLeaveTeamSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateUserTest.testShortPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LeaveTeamTest" />
-      <option name="METHOD_NAME" value="testLeaveTeamSuccess" />
+      <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
+      <option name="METHOD_NAME" value="testShortPassword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreateUserTest.testUserAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
+      <option name="METHOD_NAME" value="testUserAlreadyExists" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -393,15 +392,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.LeaveTeamTest.learnMongp" />
-      <item itemvalue="JUnit.LeaveTeamTest.testLeaveTeamSuccess" />
-      <item itemvalue="JUnit.CreateUserTest.testSuccessCreateUser" />
+      <item itemvalue="JUnit.CreateUserTest.testInvalidPassword" />
+      <item itemvalue="JUnit.CreateUserTest.testLongPassword" />
+      <item itemvalue="JUnit.CreateUserTest.testShortPassword" />
+      <item itemvalue="JUnit.CreateUserTest.testUserAlreadyExists" />
+      <item itemvalue="JUnit.CreateUserTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CreateUserTest.testSuccessCreateUser" />
-        <item itemvalue="JUnit.LeaveTeamTest.testLeaveTeamSuccess" />
-        <item itemvalue="JUnit.LeaveTeamTest.learnMongp" />
+        <item itemvalue="JUnit.CreateUserTest" />
+        <item itemvalue="JUnit.CreateUserTest.testUserAlreadyExists" />
+        <item itemvalue="JUnit.CreateUserTest.testShortPassword" />
+        <item itemvalue="JUnit.CreateUserTest.testLongPassword" />
+        <item itemvalue="JUnit.CreateUserTest.testInvalidPassword" />
       </list>
     </recent_temporary>
   </component>
@@ -427,57 +430,43 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 16m 09s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 16m 30s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 16m 49s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 17m 04s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 18m 13s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 21m 57s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 24m 26s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 25m 59s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 26m 41s.xml">
-      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 17h 27m 14s.xml">
       <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 18h 20m 10s.xml">
+      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testInvalidEmail - 2019.09.19 at 18h 20m 15s.xml">
+      <configuration name="CreateUserTest.testInvalidEmail" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testInvalidPassword - 2019.09.19 at 18h 20m 18s.xml">
+      <configuration name="CreateUserTest.testInvalidPassword" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testLongPassword - 2019.09.19 at 18h 20m 56s.xml">
+      <configuration name="CreateUserTest.testLongPassword" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testLongPassword - 2019.09.19 at 18h 21m 29s.xml">
+      <configuration name="CreateUserTest.testLongPassword" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testShortPassword - 2019.09.19 at 18h 21m 32s.xml">
+      <configuration name="CreateUserTest.testShortPassword" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testUserAlreadyExists - 2019.09.19 at 18h 21m 38s.xml">
+      <configuration name="CreateUserTest.testUserAlreadyExists" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest - 2019.09.19 at 18h 21m 45s.xml">
+      <configuration name="CreateUserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest - 2019.09.19 at 18h 22m 32s.xml">
+      <configuration name="CreateUserTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
-    <frame x="-7" y="-7" width="2062" height="1166" extended-state="6" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22427572" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Learn" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32720232" />
-=======
-    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
+    <frame x="-6" y="0" width="1037" height="1158" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.021862349" />
+      <window_info id="Learn" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2763562" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -486,22 +475,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33222592" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33170733" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-<<<<<<< HEAD
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32913843" />
-=======
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32890365" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32890365" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.45378152" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -509,11 +491,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-<<<<<<< HEAD
-      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.16083916" />
-=======
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.69477236" />
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -524,8 +502,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Created Selenium project" />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-=======
     <entry file="file://$PROJECT_DIR$/subModule1/src/main/java/createUserTest.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/3.141.59/selenium-api-3.141.59.jar!/org/openqa/selenium/WebElement.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -534,11 +510,13 @@
         </state>
       </provider>
     </entry>
->>>>>>> 97e914f1ef177bccf0ee1b36c114d160de0ac842
+    <entry file="file://$PROJECT_DIR$/subModule1/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+        <state relative-caret-position="476">
+          <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -549,19 +527,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/burnsSeleniumTests.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
+        <state relative-caret-position="153">
           <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -571,19 +542,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="457">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-40">
+          <caret line="8" lean-forward="true" selection-end-line="101" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/burnsSeleniumTests.iml">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/selTestsLogin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/selTestsCreate">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
