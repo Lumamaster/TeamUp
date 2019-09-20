@@ -43,7 +43,14 @@ public class CreateUserTest {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            double rand = Math.random() * (500000);
+            rand = rand/1;
+            int randInt = (int) rand;
+            String randString = Integer.toString(randInt);
+            String passString = "{\"email\":\"" + randString + "@purdue.edu\",\"password\":\"V4lidPa$$word\"}";
+
+            //byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = passString.getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -71,6 +78,8 @@ public class CreateUserTest {
             in.close();
 
             Assert.assertEquals("User successfully created", lastString);
+
+            url = new URL("http://localhost:8000/signup");
         } catch (IOException e) {
             System.out.println(e);
         }

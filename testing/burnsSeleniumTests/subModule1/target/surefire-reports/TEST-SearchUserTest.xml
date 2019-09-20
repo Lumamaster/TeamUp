@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="LoginUserTest" time="0.891" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="SearchUserTest" time="1.049" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2018.2.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,9 +62,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="LoginUserTest" name="testEmptyEmail" time="0"/>
-  <testcase classname="LoginUserTest" name="testEmptyPassword" time="0"/>
-  <testcase classname="LoginUserTest" name="testSuccessfulLogin" time="0.33"/>
-  <testcase classname="LoginUserTest" name="testFailedLoginEmail" time="0.295"/>
-  <testcase classname="LoginUserTest" name="testFailedLoginPassword" time="0.266"/>
+  <testcase classname="SearchUserTest" name="testUserExist" time="0.558"/>
+  <testcase classname="SearchUserTest" name="testUserNotExist" time="0.491"/>
 </testsuite>

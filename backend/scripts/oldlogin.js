@@ -33,7 +33,6 @@ router.post('/', async (req,res) => {
                     console.log('logging in');
                     //res.status(200).json({message:"logged in successfully"});
                     res.status(200).send('logged in successfully');
-                    cookie.createCookie(username, email, 3);
                     client.close();
                     /* TODO: Get information about the user to be passed back in response */
                 // The user is not found    

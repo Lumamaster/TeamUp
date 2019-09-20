@@ -41,6 +41,7 @@ router.post('/', async (req,res) => {
                     // The user is not found
                 } else if (result == 0) {
                     console.log('user not found');
+                    res.status(400).send('user not found');
                     client.close();
                     return;
 

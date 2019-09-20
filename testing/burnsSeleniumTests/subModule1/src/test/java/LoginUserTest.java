@@ -60,7 +60,6 @@ public class LoginUserTest {
             in.close();
 
             //Assert.assertEquals("logged in successfully", lastString);
-            Assert.assertEquals(200, statuscode);
         } catch (IOException e) {
             System.out.println(e);
         }

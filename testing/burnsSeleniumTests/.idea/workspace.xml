@@ -2,19 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/routes/editProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/editProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/routes/searchuser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/searchuser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/CreateUserTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/EditProfileTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/LeaveTeamTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/LoginUserTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-CreateUserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-EditProfileTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-LeaveTeamTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/surefire-reports/TEST-LoginUserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/EditProfileTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/SearchUserTest.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
@@ -52,13 +62,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4541" />
+          <entry key="java" value="4938" />
           <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4541" />
+          <entry key="JAVA" value="4938" />
           <entry key="XML" value="6" />
         </counts>
       </usages-collector>
@@ -103,17 +113,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+            <state relative-caret-position="305">
+              <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="73" column="23" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="73" selection-end-column="23" />
+            <state relative-caret-position="68">
+              <caret line="48" column="98" selection-start-line="48" selection-start-column="98" selection-end-line="48" selection-end-column="98" />
             </state>
           </provider>
         </entry>
@@ -133,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+            <state relative-caret-position="152">
+              <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,11 +152,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="51" column="47" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+            <state relative-caret-position="138">
+              <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -185,11 +195,11 @@
         <option value="$PROJECT_DIR$/subModule1/src/test/selTests/seltests" />
         <option value="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsLogin" />
         <option value="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsRemove" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" />
       </list>
     </option>
   </component>
@@ -298,7 +308,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568947073692" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568948873691" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -312,22 +322,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SearchUserTest.testUserExist">
-    <configuration name="EditProfileTest.testAddExistingSkill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CreateUserTest.testSuccessCreateUser">
+    <configuration name="CreateUserTest.testSuccessCreateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EditProfileTest" />
-      <option name="METHOD_NAME" value="testAddExistingSkill" />
+      <option name="MAIN_CLASS_NAME" value="CreateUserTest" />
+      <option name="METHOD_NAME" value="testSuccessCreateUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditProfileTest.testAddSkill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditProfileTest.testAddExistingSkill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="EditProfileTest" />
-      <option name="METHOD_NAME" value="testAddSkill" />
+      <option name="METHOD_NAME" value="testAddExistingSkill" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -343,21 +353,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditProfileTest.testRemoveSkill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="subModule1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EditProfileTest" />
-      <option name="METHOD_NAME" value="testRemoveSkill" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SearchUserTest.testUserExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="SearchUserTest" />
       <option name="METHOD_NAME" value="testUserExist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchUserTest.testUserNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SearchUserTest" />
+      <option name="METHOD_NAME" value="testUserNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -411,19 +421,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.EditProfileTest.testAddSkill" />
-      <item itemvalue="JUnit.EditProfileTest.testRemoveSkill" />
       <item itemvalue="JUnit.EditProfileTest.testAddExistingSkill" />
       <item itemvalue="JUnit.EditProfileTest.testRemoveNonexistingSkill" />
       <item itemvalue="JUnit.SearchUserTest.testUserExist" />
+      <item itemvalue="JUnit.SearchUserTest.testUserNotExist" />
+      <item itemvalue="JUnit.CreateUserTest.testSuccessCreateUser" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CreateUserTest.testSuccessCreateUser" />
+        <item itemvalue="JUnit.SearchUserTest.testUserNotExist" />
         <item itemvalue="JUnit.SearchUserTest.testUserExist" />
         <item itemvalue="JUnit.EditProfileTest.testRemoveNonexistingSkill" />
         <item itemvalue="JUnit.EditProfileTest.testAddExistingSkill" />
-        <item itemvalue="JUnit.EditProfileTest.testRemoveSkill" />
-        <item itemvalue="JUnit.EditProfileTest.testAddSkill" />
       </list>
     </recent_temporary>
   </component>
@@ -449,18 +459,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EditProfileTest_testAddSkill - 2019.09.19 at 21h 36m 08s.xml">
-      <configuration name="EditProfileTest.testAddSkill" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EditProfileTest_testRemoveSkill - 2019.09.19 at 21h 36m 18s.xml">
-      <configuration name="EditProfileTest.testRemoveSkill" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EditProfileTest_testAddExistingSkill - 2019.09.19 at 21h 41m 33s.xml">
-      <configuration name="EditProfileTest.testAddExistingSkill" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EditProfileTest_testAddExistingSkill - 2019.09.19 at 21h 43m 41s.xml">
-      <configuration name="EditProfileTest.testAddExistingSkill" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="EditProfileTest_testRemoveNonexistingSkill - 2019.09.19 at 21h 45m 13s.xml">
       <configuration name="EditProfileTest.testRemoveNonexistingSkill" configurationId="JUnit" />
     </history-entry>
@@ -479,13 +477,25 @@
     <history-entry file="SearchUserTest_testUserExist - 2019.09.19 at 22h 27m 19s.xml">
       <configuration name="SearchUserTest.testUserExist" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="SearchUserTest_testUserExist - 2019.09.19 at 22h 37m 59s.xml">
+      <configuration name="SearchUserTest.testUserExist" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchUserTest_testUserNotExist - 2019.09.19 at 22h 45m 48s.xml">
+      <configuration name="SearchUserTest.testUserNotExist" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 22h 59m 19s.xml">
+      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest_testSuccessCreateUser - 2019.09.19 at 23h 00m 06s.xml">
+      <configuration name="CreateUserTest.testSuccessCreateUser" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Learn" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1368421" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.1368421" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -494,7 +504,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32890365" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32890365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -568,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="73" column="23" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="73" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
@@ -585,10 +588,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="75" column="9" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+        <state relative-caret-position="138">
+          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -597,18 +600,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+        <state relative-caret-position="305">
+          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="51" column="47" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+        <state relative-caret-position="152">
+          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="48" column="98" selection-start-line="48" selection-start-column="98" selection-end-line="48" selection-end-column="98" />
         </state>
       </provider>
     </entry>
