@@ -6,7 +6,7 @@ const cookie = require('../cookies');
 const dbconfig = require('../db_config.json');
 
 router.use(express.json());
-router.post('/listteams', async(req,res) => {
+router.post('/', async(req,res) => {
     if(cookie.readCookie("") == null) {
         // Redirect to login page
         res.status(400).json({message:"not logged in"})
@@ -103,3 +103,5 @@ router.post('/teamsearch', async(req,res) => {
     
 
 });
+
+module.exports = router;

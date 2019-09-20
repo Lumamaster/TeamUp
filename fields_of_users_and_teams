@@ -3,8 +3,8 @@ User {
     name: string; contains name
     skills: string array; skills such as languages and frameworks
     rating: int; rating value from other users
-    prevTeams: object array; pairs of teamnames and ids of teams you've been a part of
-    curTeams: object array; pairs of teamnames and ids of teams you are part of
+    prevTeams: string array; ids of teams you've been a part of
+    curTeams: string array; ids of teams you are part of
     blocked: string array; list of users that you have blocked and have blocked you
     invites: string array; list of teams that you are currently invited to
 }
