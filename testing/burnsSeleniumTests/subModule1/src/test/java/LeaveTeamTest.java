@@ -19,6 +19,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.print.Doc;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class LeaveTeamTest {
@@ -28,38 +36,133 @@ public class LeaveTeamTest {
     final String password = "V4lidPassword$";
     String teamname = "teamname";
     //WebDriverWait wait = new WebDriverWait(driver, 10);
-    MongoClient mongoClient = MongoClients.create("mongodb+srv://sburns:cheebs13@cluster0-wwsap.mongodb.net/test?retryWrites=true&w=majority");
-    MongoCollection<Document> userCollection = mongoClient.getDatabase("Users").getCollection("user");
-    MongoCollection<Document> teamCollection = mongoClient.getDatabase("Teams").getCollection("team");
 
     @Test
     public void testLeaveTeamSuccess() {
-        /*driver.get(userProfileUrl);
-        WebElement teamEl = driver.findElement(By.name("teamname"));
-        teamEl.click();
-
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("loginResponse")));
-        String responseMessage = messElement.getAttribute("err");
-        String successmsg = "incorrect email or password";
-        Assert.assertEquals(successmsg, responseMessage);
-*/
-        MongoCursor<Document> cursor = teamCollection.find(eq("teamName", teamname)).iterator();
-
         try {
-            while (cursor.hasNext()) {
-                System.out.println(cursor.next().toJson());
-                String ans = cursor.next().getString("teamname");
+            URL url = new URL("http://localhost:8000/teams/leave");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"5d8115143d4a534604c7949a\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
+
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
             }
-        } finally {
-            cursor.close();
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals(lastString, "successfully removed from team");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    @Test
+    public void testLeaveFailNoExist() {
+        try {
+            URL url = new URL("http://localhost:8000/teams/leave");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"ffffffffdddl\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
+
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals("no team with that id exists", lastString);
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
-    Block<Document> findTeam = new Block<Document>() {
-        public void apply(final Document document) {
-            System.out.println(document.toJson());
+    @Test
+    public void testLeaveFailNotMember() {
+        try {
+            URL url = new URL("http://localhost:8000/teams/leave");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
+
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"5d840c25607f6e2e3ce30923\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
+
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals("you are not part of a team with that id", lastString);
+        } catch (IOException e) {
+            System.out.println(e);
         }
-    };
+    }
 
 
 

@@ -19,7 +19,8 @@ router.post('/', async (req,res) => {
     var emailRegex = /\@purdue\.edu/
     if (emailRegex.test(email) == false) {
         console.log('must register with a purdue email address');
-        res.status(400).json({err:"Invalid email"});
+        //res.status(400).json({err:"Invalid email"});
+        res.status(400).send("Invalid email");
         return;
     }
 
@@ -27,12 +28,14 @@ router.post('/', async (req,res) => {
     if (password.length < 8 || password.length > 20) {
         // TODO: set popup to say password length is wrong
         console.log('password must be between 8 and 20 characters');
+        res.status(400).send('password must be between 8 and 20 characters');
         return;
     }
     
     var passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/
     if (passwordRegex.test(password) == false) {
-        res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
+        //res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
+        res.status(400).send("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
         return;
     }
     

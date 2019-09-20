@@ -3,6 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 const dbconfig = require('../db_config.json');
 const cookie = require('../cookies.js');
+const assert = require('assert');
 
 
 router.use(express.json());
@@ -34,8 +35,9 @@ router.post('/', async (req,res) => {
         
                 // Check for empty result
                 if (result.length == 0) {
-                    console.log('no team with that name exists');
-                    res.status(400).json({err:"no team with that name exists"});
+                    console.log('no team with that id exists');
+                    //res.status(400).json({err:"no team with that name exists"});
+                    res.status(400).send('no team with that id exists');
                     return;
                 }
         
@@ -64,12 +66,23 @@ router.post('/', async (req,res) => {
         
                 // If the team isn't empty, simply update the array
                 } else {
-                    teamdb.collection('team').updateOne(
-                        { _id: mongoID },
-                        {
-                            $set: { teamMembers: memberArr }
-                        }
-                    )
+                    if (ownerLeft) {
+                        var newOwner = memberArr[0];
+                        teamdb.collection('team').updateOne(
+                            { _id: mongoID },
+                            {
+                                $set: { teamMembers: memberArr, owner: newOwner }
+                            }
+                        )
+                    } else {
+                        teamdb.collection('team').updateOne(
+                            { _id: mongoID },
+                            {
+                                $set: { teamMembers: memberArr }
+                            }
+                        )
+                    }
+                    
                 }
 
 
@@ -96,7 +109,8 @@ router.post('/', async (req,res) => {
             
                     // If you weren't removed from anything, you were never a part of that team
                     if (removed == false) {
-                        console.log('you are not part of a team with that name');
+                        console.log('you are not part of a team with that id');
+                        res.status(400).send('you are not part of a team with that id');
                         return;
                     }
             
@@ -107,7 +121,8 @@ router.post('/', async (req,res) => {
                             $set: { curTeams: teamArr, prevTeams: prevArr }
                         }
                     )
-                    res.status(200).json({message:"successfully removed from team"});
+                    //res.status(200).json({message:"successfully removed from team"});
+                    res.status(200).send('successfully removed from team');
                 }).catch(function (error) {
                     console.log(error);
                     res.status(400).json({err:error});

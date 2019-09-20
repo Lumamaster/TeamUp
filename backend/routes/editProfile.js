@@ -94,4 +94,3 @@ router.post('/removeskill', async (req, res) => {
 })
 
 module.exports = router;
-
