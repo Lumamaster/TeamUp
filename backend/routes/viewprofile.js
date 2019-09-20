@@ -3,13 +3,14 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const router = express.Router();
 const dbconfig = require('../db_config.json');
-const cookie = require('../cookies.js');
+const verify = require('../verifyjwt');
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 
+router.use(verify);
 router.use(express.json());
 router.get('/:id', async (req,res) => {
-    
+    //console.log(req.token)
     const {id} = req.params;
     //console.log(id)
 
@@ -48,13 +49,8 @@ router.get('/:id', async (req,res) => {
 })
 
 router.get('/', (req,res) => {
-    //const id = '5d8261b40dbb7a3e681b286f';  //test user
-    //TODO get id from cookie
-    //console.log(req.header('Authorization'))
-    const token = req.header('Authorization').substr(req.header('Authorization').indexOf(' ') + 1)
-    //console.log(token);
-    const id = jwt.decode(token).data.id
-    console.log(id)
+    
+    const {id} = req.token
 
     if(id.length !== 24){
         res.status(400).json({err:"Invalid user ID"}).send();

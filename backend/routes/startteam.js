@@ -6,14 +6,15 @@ const cookie = require('../cookies');
 const dbconfig = require('../db_config.json');
 
 router.use(express.json());
-router.post('/startteam', async(req,res) => {
-    if(cookie.readCookie("") == null) {
+router.post('/', async(req,res) => {
+    /*if(cookie.readCookie("") == null) {
         // Redirect to login page
         res.status(400).json({message:"not logged in"})
         return;
-    }
+    }*/
 
     const {teamName, teamMembers, owner, info, requestedSkills, numMembers, open, course, maxMembers} =  req.body;
+    var thisteamid;
 
     // Add team to database
     try{
@@ -35,23 +36,36 @@ router.post('/startteam', async(req,res) => {
                 maxMembers: maxMembers
             };
 
-            var teamadded;
+            
 
             // Insert team object to the database
-            db.collection('team').insertOne(team, function(err, result){
-                if(err) console.log('Could not add team to database')
-                // else team was succesfully added to the database
-                var teamid = result._id;
-                teamadded = {teamName , teamid};
+            db.collection('team').insertOne(team).then(function(item){
+                console.log('Team created succesfully');
+                //teamadded = {teamName , item.insertedId};
+                //console.log(team._id);     
+                client.db("Users").collection('user').updateOne(
+                    {email: owner},
+                    {$push:{curTeams: team._id}}
+                ).catch(function(err){
+                    console.log(err);
+                    res.status(400).json({err:err});
+                });
+                res.status(200).send('Team created successfully');
+                client.close();
+            }).catch(function(err){
+                console.log('Could not add team to database');
+                res.status(400).json({err:err});
             });
+            
 
             // Update currTeams on owner's database
-            client.db("Users").collection('user').update({email: owner}, {$addToSet: {curTeams: teamadded}});
-
-            client.close();
+            /*client.db("Users").collection('user').update({email: owner}, {$addToSet: {curTeams: teamadded}});
+            client.close();*/
+                        
         });
     } catch(err) {
-        console.log(error);
-        res.status(400).json({err:error});
-    }
+        console.error(err);
+    } finally{}
 });
+
+module.exports = router;

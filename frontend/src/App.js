@@ -13,7 +13,7 @@ function App() {
       <Route path="/login/" component={LoginPage}/>
       <Route path="/signup/" component={SignupPage}/>
       <Route path="/profile/" component={UserPage}/>
-      <Route path="/teams/" compoennt={TeamPage}/>
+      <Route path="/teams/" component={TeamPage}/>
     </Router>
   );
 }
