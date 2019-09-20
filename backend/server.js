@@ -5,6 +5,7 @@ const signup = require('./routes/signup');
 const viewProfile = require('./routes/viewprofile');
 const removeTeam = require('./routes/leaveTeam');
 const editProfile = require('./routes/editProfile');
+const searchUser = require('./routes/searchuser');
 //const createTeam = require('./routes/createTeam');
 //const joinTeam = require('./routes/joinTeam');
 const port = process.env.PORT || 8000;
