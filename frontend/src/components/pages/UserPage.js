@@ -5,6 +5,7 @@ class UserPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            edit:false,
             email: '',
             name: '',
             skills: '',
@@ -45,18 +46,32 @@ class UserPage extends React.Component {
         });
     }
     
-    edit(){
-
+    edit = () => {
+        this.setState({
+            edit: !this.state.edit
+        })
     }
     render(){
         return(
             <div>
                 <div className="container">
-                    <h1>{this.state.name}</h1>
-                    <h2>{this.state.email}</h2>
-                    <h2>{this.state.skills}</h2>
-                    <h2>{this.state.rating}</h2>
-                    <button onClick={this.edit}>Edit Profile</button>
+                    {!this.state.edit ? 
+                        <React.Fragment>
+                            <h1>{this.state.name}</h1>
+                            <p>Email: {this.state.email}</p>
+                            <p>Skills: {this.state.skills}</p>
+                            <p>Rating: {this.state.rating}</p>
+                        </React.Fragment>
+                        : 
+                        <form>
+                            <input type="text" placeholder={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
+                            <p>Email: {this.state.email}</p>
+                            <p>Skills: {this.state.skills}</p>
+                            <p>Rating: {this.state.rating}</p>
+                        </form>
+                    }
+                    <button onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button>
+                    {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
             </div>
         );
