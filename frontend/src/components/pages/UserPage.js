@@ -20,7 +20,11 @@ class UserPage extends React.Component {
     //TODO: dont know correct fetch argument
     componentDidMount(){
         let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
-        fetch('/profile/' + uid)
+        fetch('/profile/' + uid, {
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            }
+        })
         .then(response => response.json())
         .then(data => {
             this.setState({
