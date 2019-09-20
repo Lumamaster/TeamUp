@@ -27,40 +27,45 @@ class TeamPage extends React.Component {
         }
     }
     componentDidMount(){
-            fetch('/listteams')
+            fetch('/teams')
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 this.setState({
-                    teams: data.teamlist
+                    teams: data
                 })
             })
     }
     renderTableData(){
         return  this.state.teams.map((team, index)=>{
-            const {teamName, owner, info, requestedSkills, numMembers, open, alive, maxMembers, course} = team
+            const {teamname, owner, info, requestedSkills, numMembers, open, alive, maxMembers, course} = team
             return(
                 <tr>
-                    <td>{teamName}</td>
-                    <td>{owner}</td>
-                    <td>{info}</td>
-                    <td>{requestedSkills}</td>
-                    <td>{numMembers}</td>
-                    <td>{open}</td>
-                    <td>{alive}</td>
-                    <td>{maxMembers}</td>
-                    <td>{course}</td>
+                    <td>{teamname || 'Untitled Team'}</td>
+                    <td>{owner || 'None'}</td>
+                    <td>{info || 'None'}</td>
+                    <td>{requestedSkills || 'None'}</td>
+                    <td>{numMembers || 0}</td>
+                    <td>{open ? 'Open' : 'Apply'}</td>
+                    <td>{maxMembers || 'N/A'}</td>
+                    <td>{course || 'N/A'}</td>
                 </tr>
             )
         })
     }
     renderTableHeader(){
-        if(this.state.teams == ''){
-            return
-        }
-        let header = Object.keys(this.state.teams[0])
-            return header.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-      })
+        return(
+            <React.Fragment>
+                <td>Name</td>
+                <td>Owner</td>
+                <td>Info</td>
+                <td>Requested Skills</td>
+                <td># Members</td>
+                <td>Open</td>
+                <td>Member Limit</td>
+                <td>Course</td>
+            </React.Fragment>
+        )
     }
     render(){
         return(
