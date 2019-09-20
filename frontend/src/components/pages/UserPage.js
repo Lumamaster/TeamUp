@@ -17,8 +17,9 @@ class UserPage extends React.Component {
         }
     }
     //TODO: dont know correct fetch argument
-    /*componentDidMount(){
-        fetch('/profile')
+    componentDidMount(){
+        let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
+        fetch('/profile/' + uid)
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -32,7 +33,7 @@ class UserPage extends React.Component {
             invites: data.invites
             })
         })
-    }*/
+    }
     showErrors = () => {
         return this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>)
     }
@@ -50,13 +51,13 @@ class UserPage extends React.Component {
     render(){
         return(
             <div>
-            <div className="container">
-                <h1>{this.state.name}</h1>
-                <h2>{this.state.email}</h2>
-                <h2>{this.state.skills}</h2>
-                <h2>{this.state.rating}</h2>
-            </div>
-            <div className="container"><button onClick={this.edit}>Edit Profile</button></div>
+                <div className="container">
+                    <h1>{this.state.name}</h1>
+                    <h2>{this.state.email}</h2>
+                    <h2>{this.state.skills}</h2>
+                    <h2>{this.state.rating}</h2>
+                    <button onClick={this.edit}>Edit Profile</button>
+                </div>
             </div>
         );
     }
