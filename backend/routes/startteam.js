@@ -43,21 +43,25 @@ router.post('/', async(req,res) => {
                 console.log('Team created succesfully');
                 //teamadded = {teamName , item.insertedId};
                 //console.log(team._id);     
-                       
+                client.db("Users").collection('user').updateOne(
+                    {email: owner},
+                    {$push:{curTeams: team._id}}
+                ).catch(function(err){
+                    console.log(err);
+                    res.status(400).json({err:err});
+                });
                 res.status(200).send('Team created successfully');
                 client.close();
             }).catch(function(err){
                 console.log('Could not add team to database');
                 res.status(400).json({err:err});
             });
-
-
             
 
             // Update currTeams on owner's database
             /*client.db("Users").collection('user').update({email: owner}, {$addToSet: {curTeams: teamadded}});
             client.close();*/
-            
+                        
         });
     } catch(err) {
         console.error(err);

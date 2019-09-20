@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import '../../App.css';
 
 class UserPage extends React.Component {
@@ -56,6 +57,9 @@ class UserPage extends React.Component {
         })
     }
     render(){
+        if(!window.localStorage.getItem('token')) {
+            return <Redirect to="/login/"/>
+        }
         return(
             <div>
                 <div className="container">
