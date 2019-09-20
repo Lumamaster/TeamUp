@@ -5,6 +5,7 @@ import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 import UserPage from './components/pages/UserPage';
 import TeamPage from './components/pages/TeamPage';
+import CreateTeamPage from './components/pages/CreateTeamPage';
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
       <Route path="/signup/" component={SignupPage}/>
       <Route path="/profile/" component={UserPage}/>
       <Route path="/teams/" component={TeamPage}/>
+      <Route path="/newteam/" component={CreateTeamPage}/>
     </Router>
   );
 }
