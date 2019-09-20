@@ -15,7 +15,7 @@ function App() {
       <Route path="/signup/" component={SignupPage}/>
       <Route path="/profile/" component={UserPage}/>
       <Route path="/teams/" component={TeamPage}/>
-      <Route path="/newteam/" component={CreateTeamPage}/>
+      <Route path="/createteam/" component={CreateTeamPage}/>
     </Router>
   );
 }
