@@ -4,12 +4,9 @@ const login = require('./routes/login');
 const signup = require('./routes/signup');
 const viewProfile = require('./routes/viewprofile');
 const removeTeam = require('./routes/leaveTeam');
+const listTeams = require('./routes/listteams')
 const editProfile = require('./routes/editProfile');
-<<<<<<< HEAD
 const startTeam = require('./routes/startteam');
-=======
-const listTeams = require('./routes/listteams');
->>>>>>> 4025138c62398d3c29bce46e0f5e90eaec3c38e8
 //const createTeam = require('./routes/createTeam');
 //const joinTeam = require('./routes/joinTeam');
 const port = process.env.PORT || 8000;
