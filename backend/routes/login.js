@@ -27,24 +27,6 @@ router.post('/', async (req,res) => {
                 password: password
             });
     
-<<<<<<< HEAD
-            cursor.count().then(function(result) {
-                
-                // The user is found
-                if (result == 1) {
-                    console.log('logging in');
-                    //res.status(200).json({message:"logged in successfully"});
-                    res.status(200).send('logged in successfully');
-                    client.close();
-                    /* TODO: Get information about the user to be passed back in response */
-                // The user is not found    
-                } else if (result == 0) {
-                    console.log('incorrect email or password');
-                    //res.status(400).json({err:"incorrect email or password"});
-                    res.status(400).send('incorrect email or password');
-                    client.close();
-                // More than one user is found    
-=======
             cursor.toArray().then(result => {
                 //console.log(result)
                 if(result.length === 0) {
@@ -59,7 +41,6 @@ router.post('/', async (req,res) => {
                     }, dbconfig.jwt_key, { expiresIn: '1d' })
                     res.status(200).send(token)
                     return;
->>>>>>> b7d1a65860888e0cc3b753459a32ee7394fe29e9
                 } else {
                     res.status(500).json({err:"Server error"})
                     return;

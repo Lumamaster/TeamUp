@@ -101,7 +101,8 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals("incorrect email or password", lastString);
+            //Assert.assertEquals("incorrect email or password", lastString);
+            Assert.assertTrue(lastString.contains("Incorrect username or password"));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -143,7 +144,9 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals("incorrect email or password", lastString);
+            //Assert.assertEquals("incorrect email or password", lastString);
+            Assert.assertTrue(lastString.contains("Incorrect username or password"));
+
         } catch (IOException e) {
             System.out.println(e);
         }
