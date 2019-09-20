@@ -4,6 +4,7 @@ const router = express.Router();
 const dbconfig = require('../db_config.json');
 const cookie = require('../cookies.js');
 const assert = require('assert');
+const jwt = require('jsonwebtoken');
 
 router.use(express.json());
 router.post('/', async (req,res) => {
@@ -26,6 +27,7 @@ router.post('/', async (req,res) => {
                 password: password
             });
     
+<<<<<<< HEAD
             cursor.count().then(function(result) {
                 
                 // The user is found
@@ -42,12 +44,27 @@ router.post('/', async (req,res) => {
                     res.status(400).send('incorrect email or password');
                     client.close();
                 // More than one user is found    
+=======
+            cursor.toArray().then(result => {
+                //console.log(result)
+                if(result.length === 0) {
+                    res.status(404).json({err:"Incorrect username or password"})
+                    return;
+                } else if(result.length === 1) {
+                    const token = jwt.sign({
+                        data: {
+                            id: result[0]._id,
+                            username: result[0].username
+                        }
+                    }, dbconfig.jwt_key, { expiresIn: '1d' })
+                    res.status(200).send(token)
+                    return;
+>>>>>>> b7d1a65860888e0cc3b753459a32ee7394fe29e9
                 } else {
-                    console.log('non zero or 1 query value: ' + result);
-                    client.close();
-                    return false;
+                    res.status(500).json({err:"Server error"})
+                    return;
                 }
-            });
+            })
         });
     } catch(err) {
         console.error(err);

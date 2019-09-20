@@ -38,8 +38,12 @@
     <session id="1709136862">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.13" value="1" />
+=======
+          <entry key="project.closed" value="3" />
+>>>>>>> b7d1a65860888e0cc3b753459a32ee7394fe29e9
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.4" value="1" />

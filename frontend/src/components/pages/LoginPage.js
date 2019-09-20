@@ -54,6 +54,9 @@ class LoginPage extends React.Component {
             console.log(res);
             if(res.status === 200) {
                 //Success!
+                let token = await res.text();
+                //console.log(token);
+                window.localStorage.setItem('token', token);
                 alert('Success!')
             } else {
                 const data = await res.json()
