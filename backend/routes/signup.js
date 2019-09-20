@@ -52,7 +52,7 @@ router.post('/', async (req,res) => {
                 // If the request returned another user, it already exists
                 if (result != 0) {
                     console.log('User with that email already exists.');
-                    cursor.forEach(iterator.iterateFunc, iterator.errorFunc);
+                    //cursor.forEach(iterator.iterateFunc, iterator.errorFunc);
                     //res.status(200).json({err:'User with that email already exists'});
                     res.status(400).send("User with that email already exists");
                     client.close();

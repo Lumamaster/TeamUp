@@ -73,7 +73,7 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "successfully removed from team");
+            Assert.assertEquals("successfully removed from team", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }

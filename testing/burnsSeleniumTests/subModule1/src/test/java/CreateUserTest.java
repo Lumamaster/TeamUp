@@ -70,12 +70,10 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "User successfully created");
+            Assert.assertEquals("User successfully created", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
-
-
     }
 
     @Test
@@ -114,7 +112,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "Invalid email");
+            Assert.assertEquals("Invalid email", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -156,7 +154,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+            Assert.assertEquals("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -198,7 +196,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -240,7 +238,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -282,7 +280,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "User with that email already exists");
+            Assert.assertEquals("User with that email already exists", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
