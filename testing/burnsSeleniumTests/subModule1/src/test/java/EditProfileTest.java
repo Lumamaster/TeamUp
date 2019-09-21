@@ -1,24 +1,6 @@
-import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursor;
-import com.mongodb.*;
-import com.mongodb.client.*;
-
-
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.model.CreateCollectionOptions;
-import com.mongodb.client.model.ValidationOptions;
-import org.bson.Document;
-//import com.mongodb.MongoClientOptions;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.json.Json;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.print.Doc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,26 +9,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
-public class LeaveTeamTest {
-    //WebDriver driver = new ChromeDriver();
-    final String userProfileUrl = "http://localhost:3000";
-    final String email = "DONOTDELETE@purdue.edu";
-    final String password = "V4lidPassword$";
-    String teamname = "teamname";
-    //WebDriverWait wait = new WebDriverWait(driver, 10);
+public class EditProfileTest {
 
     @Test
-    public void testLeaveTeamSuccess() {
+    public void testAddSkill() {
         try {
-            URL url = new URL("http://localhost:8000/teams/leave");
+            URL url = new URL("http://localhost:8000/user/profile/edit/addskill");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"5d8115143d4a534604c7949a\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"skill\":\"dying\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -73,23 +48,22 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            Assert.assertEquals("successfully removed from team", lastString);
+            Assert.assertEquals("skill added successfully", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     @Test
-    public void testLeaveFailNoExist() {
+    public void testRemoveSkill() {
         try {
-            URL url = new URL("http://localhost:8000/teams/leave");
+            URL url = new URL("http://localhost:8000/user/profile/edit/removeskill");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"ffffffffdddl\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"skill\":\"dying\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -116,22 +90,22 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            Assert.assertEquals("no team with that id exists", lastString);
+            Assert.assertEquals("skill removed successfully", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     @Test
-    public void testLeaveFailNotMember() {
+    public void testAddExistingSkill() {
         try {
-            URL url = new URL("http://localhost:8000/teams/leave");
+            URL url = new URL("http://localhost:8000/user/profile/edit/addskill");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"5d840c25607f6e2e3ce30923\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"skill\":\"i have no skills\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -158,13 +132,51 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            Assert.assertEquals("you are not part of a team with that id", lastString);
+            Assert.assertEquals("skill already in your profile", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
+    @Test
+    public void testRemoveNonexistingSkill() {
+        try {
+            URL url = new URL("http://localhost:8000/user/profile/edit/removeskill");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection)con;
+            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setDoOutput(true);
 
+            byte[] out = "{\"email\":\"burns140@purdue.edu\",\"skill\":\"fakeskill\"}".getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
 
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.connect();
+            try(OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
 
+            BufferedReader in;
+            int statuscode = ((HttpURLConnection) con).getResponseCode();
+            if (statuscode >= 400) {
+                in = new BufferedReader(new InputStreamReader(((HttpURLConnection) con).getErrorStream()));
+            } else {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            }
+            String decodedString;
+            String lastString = "";
+            while ((decodedString = in.readLine()) != null) {
+                if (decodedString != null) {
+                    lastString = decodedString;
+                }
+                System.out.println(decodedString);
+            }
+            in.close();
+
+            Assert.assertEquals("skill not on your profile", lastString);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 }

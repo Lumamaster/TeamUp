@@ -86,3 +86,33 @@ body {
   background-color:#6d22d7;
   color: white;
 }
+
+.textbox {
+  width: 20%;
+  height: 40px;
+  border-radius: 4px;
+  position: relative;
+  background-color: rgba(255,255,255,0.3);
+  transition: 0.3s all;
+  padding: 0px;
+  margin-bottom:10px;
+}
+.textbox:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.textboxbig {
+  width: 50%;
+  height: 40px;
+  border-radius: 4px;
+  position: relative;
+  background-color: rgba(255,255,255,0.3);
+  transition: 0.3s all;
+  padding: 0px;
+  margin-bottom:10px;
+}
+.textboxbig:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}

@@ -48,9 +48,15 @@ router.get('/', async(req,res) => {
                 //return all teams
                 //console.log("Hello");
                 db.collection('team').find({alive: true}).toArray().then(teams => {
-                    console.log(teams);
+                    //console.log(teams);
                     client.close();
-                    res.status(200).json(teams);
+                    try{
+                        teams.push("All teams displayed successfully");
+                        res.status(200).json(teams);
+                        //res.status(200).send('All teams displayed successfully');
+                    } catch(err){
+                        console.log(err);
+                    }
                     return;
                 })
             } else {

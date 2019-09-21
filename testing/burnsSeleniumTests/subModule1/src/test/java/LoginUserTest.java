@@ -59,7 +59,7 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "logged in successfully");
+            //Assert.assertEquals("logged in successfully", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -101,7 +101,8 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "incorrect email or password");
+            //Assert.assertEquals("incorrect email or password", lastString);
+            Assert.assertTrue(lastString.contains("Incorrect username or password"));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -143,7 +144,9 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "incorrect email or password");
+            //Assert.assertEquals("incorrect email or password", lastString);
+            Assert.assertTrue(lastString.contains("Incorrect username or password"));
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -185,7 +188,7 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "missing email or password");
+            Assert.assertEquals("missing email or password", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -227,7 +230,7 @@ public class LoginUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "missing email or password");
+            Assert.assertEquals("missing email or password", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }

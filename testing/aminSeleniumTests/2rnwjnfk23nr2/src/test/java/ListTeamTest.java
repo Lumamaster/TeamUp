@@ -13,24 +13,24 @@ import java.nio.charset.StandardCharsets;
 public class ListTeamTest {
 
     @Test
-    public void testSuccessCreateUser() {
+    public void testSuccessListTeams() {
 
         try {
-            URL url = new URL("http://localhost:8000/startteam");
+            URL url = new URL("http://localhost:8000/teams");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST"); // PUT is another valid option
-            http.setDoOutput(true);
+            http.setRequestMethod("GET");
+            //http.setDoOutput(true);
 
-            byte[] out = "{\"teamName\":\"Awesome Team\",\"TeamMembers\":\"delete@purdue.edu\", \"owner\":\"delete@purdue.edu\", \"info\":\"information\",\"requestedSkills\":\"Java\",\"numMembers\":\"1\", \"open\":\"true\", \"alive\":\"true\", \"course\": \"CS408\", \"maxMembers\":\"4\" }".getBytes(StandardCharsets.UTF_8);
-            int length = out.length;
+            //byte[] out = "{\"teamName\":\"Awesome Team\",\"TeamMembers\":\"delete@purdue.edu\", \"owner\":\"delete@purdue.edu\", \"info\":\"information\",\"requestedSkills\":\"Java\",\"numMembers\":\"1\", \"open\":\"true\", \"alive\":\"true\", \"course\": \"CS408\", \"maxMembers\":\"4\" }".getBytes(StandardCharsets.UTF_8);
+            //int length = out.length;
 
-            http.setFixedLengthStreamingMode(length);
+            //http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.connect();
-            try(OutputStream os = http.getOutputStream()) {
+            /*try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
-            }
+            }*/
 
             BufferedReader in;
             int statuscode = ((HttpURLConnection) con).getResponseCode();
@@ -49,7 +49,8 @@ public class ListTeamTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "Team created successfully");
+            String[] array = lastString.split("\"");
+            Assert.assertEquals("All teams displayed successfully", array[array.length-2]);
         } catch (IOException e) {
             System.out.println(e);
         }

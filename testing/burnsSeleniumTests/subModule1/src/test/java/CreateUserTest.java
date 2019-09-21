@@ -43,7 +43,14 @@ public class CreateUserTest {
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            double rand = Math.random() * (500000);
+            rand = rand/1;
+            int randInt = (int) rand;
+            String randString = Integer.toString(randInt);
+            String passString = "{\"email\":\"" + randString + "@purdue.edu\",\"password\":\"V4lidPa$$word\"}";
+
+            //byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = passString.getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
@@ -70,12 +77,12 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "User successfully created");
+            Assert.assertEquals("User successfully created", lastString);
+
+            url = new URL("http://localhost:8000/signup");
         } catch (IOException e) {
             System.out.println(e);
         }
-
-
     }
 
     @Test
@@ -114,7 +121,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "Invalid email");
+            Assert.assertEquals("Invalid email", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -156,7 +163,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+            Assert.assertEquals("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -198,7 +205,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -240,7 +247,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "password must be between 8 and 20 characters");
+            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -282,7 +289,7 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals(lastString, "User with that email already exists");
+            Assert.assertEquals("User with that email already exists", lastString);
         } catch (IOException e) {
             System.out.println(e);
         }
