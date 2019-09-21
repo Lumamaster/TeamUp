@@ -76,6 +76,7 @@ class LoginPage extends React.Component {
                     <input 
                         name="email"
                         type="text"
+                        id="email"
                         onChange={this.handleInputChange}
                         placeholder="Email"
                         autoComplete="username"
@@ -84,12 +85,13 @@ class LoginPage extends React.Component {
                     <input
                         name="password"
                         type="password"
+                        id="password"
                         onChange={this.handleInputChange}
                         placeholder="Password"
                         autoComplete="current-password"
                     />
                     <br/>
-                    <button name="loginbutton" onClick={this.handleLogin}>Log In</button>
+                    <button name="loginbutton" id="login" onClick={this.handleLogin}>Log In</button>
                 </form>
                 <div id="errors">
                     {this.showErrors()}
