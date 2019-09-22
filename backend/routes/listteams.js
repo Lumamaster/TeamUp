@@ -51,7 +51,7 @@ router.get('/', async(req,res) => {
                     //console.log(teams);
                     client.close();
                     try{
-                        teams.push("All teams displayed successfully");
+                        //teams.push("All teams displayed successfully");
                         res.status(200).json(teams);
                         //res.status(200).send('All teams displayed successfully');
                     } catch(err){

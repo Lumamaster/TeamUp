@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb')
+const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
-const cookie = require('../cookies');
+const verify = require('../verifyjwt');
 const dbconfig = require('../db_config.json');
 
 router.use(express.json());
+router.use(verify);
 router.post('/', async(req,res) => {
     /*if(cookie.readCookie("") == null) {
         // Redirect to login page
@@ -13,7 +15,9 @@ router.post('/', async(req,res) => {
         return;
     }*/
 
-    const {teamName, teamMembers, owner, info, requestedSkills, numMembers, open, course, maxMembers} =  req.body;
+    const {teamName, teamMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
+    //TODO: Handle sending invites to other team members
+    const owner = req.token //has id and username stored
     var thisteamid;
 
     // Add team to database
@@ -25,11 +29,11 @@ router.post('/', async(req,res) => {
             // Create team object to be added
             var team = {
                 teamName: teamName,
-                teamMembers: teamMembers,
+                teamMembers: [owner],
                 owner: owner,
                 info: info,
                 requestedSkills: requestedSkills,
-                numMembers: numMembers,
+                numMembers: 1,
                 open: open,
                 alive: true,
                 course: course,
@@ -40,12 +44,16 @@ router.post('/', async(req,res) => {
 
             // Insert team object to the database
             db.collection('team').insertOne(team).then(function(item){
-                console.log('Team created succesfully');
-                //teamadded = {teamName , item.insertedId};
-                //console.log(team._id);     
+                //console.log('Team created succesfully');
+                //teamadded = {teamName , item.insertedId};    
                 client.db("Users").collection('user').updateOne(
-                    {email: owner},
-                    {$push:{curTeams: team._id}}
+                    {_id: mongodb.ObjectId(owner.id)},
+                    {$push:{
+                        curTeams: {
+                            id:item.insertedId,
+                            name:item.ops[0].teamName
+                        }
+                    }}
                 ).catch(function(err){
                     console.log(err);
                     res.status(400).json({err:err});

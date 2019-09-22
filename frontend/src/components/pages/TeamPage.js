@@ -2,13 +2,12 @@ import React from 'react';
 import '../../App.css';
 /*Team {
     teamName: string; contains team name
-    teamMembers: string array; contains names of all team teamMembers
-    owner: string; contains email of project owner (team creator)
+    teamMembers: object array; contains ids and usernames of all team team members
+    owner: object; contains id and username of team owner
     info: string; contains notes about project ideas
     requestedSkills: string array; list of skills that the team is looking for
     numMembers: int; number of members in the team
     open: boolean; whether the team is open or restricted. true means open
-    alive: boolean; whether the group is active or project has ended. true means active
     course: string; contains course name/num
     maxMembers: int; maximum number of members for the team
 }*/
@@ -30,7 +29,7 @@ class TeamPage extends React.Component {
             fetch('/teams')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 this.setState({
                     teams: data
                 })
@@ -38,13 +37,13 @@ class TeamPage extends React.Component {
     }
     renderTableData(){
         return  this.state.teams.map((team, index)=>{
-            const {teamname, owner, info, requestedSkills, numMembers, open, alive, maxMembers, course} = team
+            const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course} = team
             return(
-                <tr>
-                    <td>{teamname || 'Untitled Team'}</td>
-                    <td>{owner || 'None'}</td>
+                <tr key={teamName}>
+                    <td>{teamName || 'Untitled Team'}</td>
+                    <td>{owner ? owner.username || 'None' : 'None'}</td>
                     <td>{info || 'None'}</td>
-                    <td>{requestedSkills || 'None'}</td>
+                    <td>{requestedSkills ? requestedSkills.join(', ') || 'None' : 'None'}</td>
                     <td>{numMembers || 0}</td>
                     <td>{open ? 'Open' : 'Apply'}</td>
                     <td>{maxMembers || 'N/A'}</td>

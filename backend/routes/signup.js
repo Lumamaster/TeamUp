@@ -10,7 +10,7 @@ router.use(express.json());
 router.post('/', async (req,res) => {
     console.log("Signup", req.body);
     
-    const {email, password} = req.body;
+    const {email, password, screenname} = req.body;
     if(!email || !password) {
         res.status(400).json({err:"Missing email, password, or screenname"});
         return;
@@ -61,6 +61,7 @@ router.post('/', async (req,res) => {
                     db.collection('user').insertOne({
                         email: email,
                         password: password,
+                        username: screenname,
                         prevTeams: [],
                         curTeams: [],
                         rating: -1,
