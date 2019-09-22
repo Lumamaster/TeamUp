@@ -1,15 +1,17 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectId} = require('mongodb');
 const router = express.Router();
 const dbconfig = require('../db_config.json');
-const cookie = require('../cookies.js');
+const verify = require('../verifyjwt');
 const assert = require('assert');
 
-
+router.use(verify);
 router.use(express.json());
-router.post('/', async (req,res) => {
+router.post('/:id', async (req,res) => {
 
-    const {email, teamID} = req.body;
+    const teamID = req.params.id
+    const userID = req.token.id
+
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
@@ -18,11 +20,11 @@ router.post('/', async (req,res) => {
         
             // TODO: get teamname from button click
             var mongo = require('mongodb');
-            var mongoID = new mongo.ObjectID(teamID);
+            var mongoID = ObjectId(teamID);
         
             // Get array of users with matching email. Should be size 1.
             var user = userdb.collection('user').find({
-                email: email
+                _id:ObjectId(userID)
             }).toArray();
         
             // Get array of users with matching name. Should be size 1.
@@ -36,31 +38,31 @@ router.post('/', async (req,res) => {
                 // Check for empty result
                 if (result.length == 0) {
                     console.log('no team with that id exists');
-                    //res.status(400).json({err:"no team with that name exists"});
-                    res.status(400).send('no team with that id exists');
+                    res.status(400).json({err:"no team with that name exists"});
+                    //res.status(400).send('no team with that id exists');
                     return;
                 }
         
-                var ownerLeft = false;
+                var ownerLeft = result[0].owner.id === userID;
                 // Remove this member's name from that team
-                var memberArr = result[0].teamMembers;
-                for (var i = 0; i < memberArr.length; i++) {
-                    if (memberArr[i] == email) {
-                        if (result[0].owner == email) {
+                var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
+                /*for (var i = 0; i < memberArr.length; i++) {
+                    if (memberArr[i].id === userID) {
+                        if (result[0].owner.id === userID) {
                             ownerLeft = true;
                         }
                         memberArr.splice(i, 1);
                         break;
                     }
-                }
+                }*/
         
                 // After removing this member, if the team is now empty, it no longer exists
                 // However, it needs to be kept in database for prevTeams
-                if (memberArr.length == 0) {
+                if (memberArr.length === 0) {
                     teamdb.collection('team').updateOne(
                         { _id: mongoID },
                         {
-                            $set: { teamMembers: memberArr, alive: false }
+                            $set: { teamMembers: memberArr, owner:null, alive: false }
                         }
                     )
         
@@ -68,6 +70,7 @@ router.post('/', async (req,res) => {
                 } else {
                     if (ownerLeft) {
                         var newOwner = memberArr[0];
+                        console.log(newOwner)
                         teamdb.collection('team').updateOne(
                             { _id: mongoID },
                             {
@@ -95,12 +98,12 @@ router.post('/', async (req,res) => {
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
                         if (teamArr[i].id == teamID) {
-                            var name = teamArr[i].teamName;
+                            /*var name = teamArr[i].teamName;
                             var teamPair = {
                                 teamName: name,
                                 id: teamID
-                            }
-                            prevArr.push(teamPair);
+                            }*/
+                            prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;
                             break;
@@ -110,13 +113,13 @@ router.post('/', async (req,res) => {
                     // If you weren't removed from anything, you were never a part of that team
                     if (removed == false) {
                         console.log('you are not part of a team with that id');
-                        res.status(400).send('you are not part of a team with that id');
+                        res.status(400).json({err:'You are not part of that team'});
                         return;
                     }
             
                     // Update both the current and prev arrays
                     userdb.collection('user').updateOne(
-                        { email: email },
+                        { _id:ObjectId(userID) },
                         {
                             $set: { curTeams: teamArr, prevTeams: prevArr }
                         }
