@@ -26,7 +26,19 @@ class UserPage extends React.Component {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status === 200) return response.json()
+            if(response.status === 401) {
+                this.props.history.push('/login')
+                return Promise.reject('Unauthorized; redirecting to login page')
+            }
+            if(response.status > 500 && response.status < 600) {
+                console.log(response)
+                return Promise.reject('Server error')
+            }
+            console.log(response)
+            return Promise.reject('Got an unexpected status code from the server')
+        })
         .then(data => {
             this.setState({
             email: data.email,
@@ -39,6 +51,7 @@ class UserPage extends React.Component {
             invites: data.invites
             })
         })
+        .catch(err => {})
     }
     showErrors = () => {
         return this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>)
