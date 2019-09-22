@@ -8,14 +8,14 @@ const listTeams = require('./routes/listteams')
 const editProfile = require('./routes/editProfile');
 const searchUser = require('./routes/searchuser');
 const startTeam = require('./routes/startteam');
-//const createTeam = require('./routes/createTeam');
-//const joinTeam = require('./routes/joinTeam');
+const joinTeam = require('./routes/jointeam');
+
 const port = process.env.PORT || 8000;
 
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/teams/leave', removeTeam);
-//app.use('/profile/:id', viewProfile);
+app.use('/teams/join', joinTeam);
 app.use('/user/profile/edit', editProfile);
 app.use('/search', searchUser);
 app.use('/teams', listTeams);
