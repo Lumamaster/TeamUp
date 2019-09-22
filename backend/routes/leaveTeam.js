@@ -7,7 +7,7 @@ const assert = require('assert');
 
 router.use(verify);
 router.use(express.json());
-router.post('/:id', async (req,res) => {
+router.get('/:id', async (req,res) => {
 
     const teamID = req.params.id
     const userID = req.token.id
@@ -62,6 +62,7 @@ router.post('/:id', async (req,res) => {
                     teamdb.collection('team').updateOne(
                         { _id: mongoID },
                         {
+                            $inc: {numMembers: -1},
                             $set: { teamMembers: memberArr, owner:null, alive: false }
                         }
                     )
@@ -74,6 +75,7 @@ router.post('/:id', async (req,res) => {
                         teamdb.collection('team').updateOne(
                             { _id: mongoID },
                             {
+                                $inc: {numMembers: -1},
                                 $set: { teamMembers: memberArr, owner: newOwner }
                             }
                         )
@@ -81,6 +83,7 @@ router.post('/:id', async (req,res) => {
                         teamdb.collection('team').updateOne(
                             { _id: mongoID },
                             {
+                                $inc: {numMembers: -1},
                                 $set: { teamMembers: memberArr }
                             }
                         )
