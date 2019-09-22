@@ -10,8 +10,8 @@ module.exports = (req,res,next) => {
     try {
         const decoded = jwt.verify(token, config.jwt_key)
         req.token = decoded.data
+        next()
     } catch(err) {
         res.status(401).json({err:'Invalid token'})
     }
-    next()
 }
