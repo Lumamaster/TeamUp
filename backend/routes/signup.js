@@ -66,7 +66,7 @@ router.post('/', async (req,res) => {
                         curTeams: [],
                         rating: -1,
                         skills: [],
-                        bio: [],
+                        bio: "",
                         blockedUsers: [],
                         invites: []
                     }).then(function(count){
