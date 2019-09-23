@@ -46,6 +46,10 @@ router.get('/:id', async (req,res) => {
                 var ownerLeft = result[0].owner.id === userID;
                 // Remove this member's name from that team
                 var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
+                if(memberArr.length === result[0].teamMembers.length) {
+                    //Nothing was removed therefore the user was not part of the team
+                    res.status(400).json({err:'You are not part of that team'});
+                }
                 /*for (var i = 0; i < memberArr.length; i++) {
                     if (memberArr[i].id === userID) {
                         if (result[0].owner.id === userID) {
