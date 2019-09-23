@@ -25,6 +25,27 @@ class TeamPage extends React.Component {
             errors: []
         }
     }
+    joinTeam = async e => {
+        const {id} = e.target
+        const url = `/teams/join/${id}`
+        const fetchParams = {
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            },
+            method:'GET'
+        }
+        const res = await fetch(url, fetchParams)
+        if(res.status === 200) {
+            //Success
+            alert("Successfully joined team")
+        } else if(res.status >= 500) {
+            alert("Server error")
+        } else {
+            //Bad request, team full, etc.
+            const body = await res.json()
+            alert(body.err)
+        }
+    }
     componentDidMount(){
             fetch('/teams')
             .then(response => response.json())
@@ -37,7 +58,7 @@ class TeamPage extends React.Component {
     }
     renderTableData(){
         return  this.state.teams.map((team, index)=>{
-            const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course} = team
+            const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course, _id} = team
             return(
                 <tr key={teamName}>
                     <td>{teamName || 'Untitled Team'}</td>
@@ -48,6 +69,7 @@ class TeamPage extends React.Component {
                     <td>{open ? 'Open' : 'Apply'}</td>
                     <td>{maxMembers || 'N/A'}</td>
                     <td>{course || 'N/A'}</td>
+                    <td><button onClick={this.joinTeam} id={_id}>Join</button></td>
                 </tr>
             )
         })
@@ -63,6 +85,7 @@ class TeamPage extends React.Component {
                 <td>Open</td>
                 <td>Member Limit</td>
                 <td>Course</td>
+                <td></td>
             </React.Fragment>
         )
     }
