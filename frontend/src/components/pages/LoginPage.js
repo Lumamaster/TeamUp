@@ -51,13 +51,15 @@ class LoginPage extends React.Component {
                 body: JSON.stringify(payload)
             }
             const res = await fetch('/login',fetchParams);
-            console.log(res);
+            //console.log(res);
             if(res.status === 200) {
                 //Success!
                 let token = await res.text();
+                document.dispatchEvent(new Event('login'))
                 //console.log(token);
                 window.localStorage.setItem('token', token);
-                alert('Success!')
+                //alert('Success!')
+                this.props.history.push('/profile')
             } else {
                 const data = await res.json()
                 if(data.err) errors.push(data.err);

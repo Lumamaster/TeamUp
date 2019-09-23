@@ -43,11 +43,13 @@ body {
   color: white;
   align-items: center;
   margin-bottom:20px;
+  justify-content: space-between;
 }
 #top-border a {
   color:white;
   text-decoration: none;
-  margin-left: 15px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .container {
@@ -115,4 +117,14 @@ body {
 .textboxbig:hover {
   background-color: rgba(255, 255, 255, 0.45);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}
+.flexstart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flexend {
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
 }
