@@ -15,6 +15,7 @@ class TeamPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            joinedteams: JSON.parse(window.localStorage.getItem('teams')),
             email: "",
             password: "",
             teams: [
@@ -27,7 +28,8 @@ class TeamPage extends React.Component {
     }
     joinTeam = async e => {
         const {id} = e.target
-        const url = `/teams/join/${id}`
+        const joined = this.state.joinedteams.map(team => team.id).indexOf(id) !== -1
+        const url = `/teams/${joined ? 'leave' : 'join'}/${id}`
         const fetchParams = {
             headers: {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
@@ -37,7 +39,28 @@ class TeamPage extends React.Component {
         const res = await fetch(url, fetchParams)
         if(res.status === 200) {
             //Success
-            alert("Successfully joined team")
+            alert(`Successfully ${joined ? 'left':'joined'} team`)
+            let {joinedteams, teams} = this.state;
+            if(joined) {
+                joinedteams.splice(joinedteams.map(team => team.id).indexOf(id),1)
+                teams.map(team => {
+                    if(team._id === id) team.numMembers--;
+                    return team;
+                })
+            } else {
+                teams.map(team => {
+                    if(team._id === id) {
+                        team.numMembers++;
+                        joinedteams.push({id:id, name:team.teamName})
+                    }
+                    return team;
+                })
+            }
+            this.setState({
+                joinedteams:joinedteams,
+                teams:teams
+            })
+            window.localStorage.setItem('teams', JSON.stringify(joinedteams))
         } else if(res.status >= 500) {
             alert("Server error")
         } else {
@@ -57,8 +80,10 @@ class TeamPage extends React.Component {
             })
     }
     renderTableData(){
+        const joinedteamIds = this.state.joinedteams.map(team => team.id)
         return  this.state.teams.map((team, index)=>{
             const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course, _id} = team
+            const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
             return(
                 <tr key={teamName}>
                     <td>{teamName || 'Untitled Team'}</td>
@@ -69,7 +94,7 @@ class TeamPage extends React.Component {
                     <td>{open ? 'Open' : 'Apply'}</td>
                     <td>{maxMembers || 'N/A'}</td>
                     <td>{course || 'N/A'}</td>
-                    <td><button onClick={this.joinTeam} id={_id}>Join</button></td>
+                    <td><button onClick={this.joinTeam} id={_id}>{joined ? 'Leave' : 'Join'}</button></td>
                 </tr>
             )
         })

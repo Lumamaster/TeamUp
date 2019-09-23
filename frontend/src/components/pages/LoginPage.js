@@ -54,10 +54,11 @@ class LoginPage extends React.Component {
             //console.log(res);
             if(res.status === 200) {
                 //Success!
-                let token = await res.text();
+                let {token, teams} = await res.json();
                 document.dispatchEvent(new Event('login'))
                 //console.log(token);
                 window.localStorage.setItem('token', token);
+                window.localStorage.setItem('teams', JSON.stringify(teams))
                 //alert('Success!')
                 this.props.history.push('/profile')
             } else {
