@@ -1,18 +1,34 @@
 User {
     email: string; contains email
-    name: string; contains name
+    username: string; contains name
     skills: string array; skills such as languages and frameworks
     rating: int; rating value from other users
-    prevTeams: string array; ids of teams you've been a part of
-    curTeams: string array; ids of teams you are part of
-    blocked: string array; list of users that you have blocked and have blocked you
-    invites: string array; list of teams that you are currently invited to
+    prevTeams: object array; ids of teams you've been a part of {
+        id: string; the database id of the team. Query using {_id:ObjectId([id])}
+        name: string; the team's teamName
+    }
+    curTeams: object array; ids of teams you are part of {
+        id: string; the database id of the team. Query using {_id:ObjectId([id])}
+        name: string; the team's teamName
+    }
+    bio: string; contains human-readable information about the user
+    blockedUsers: string array; list of ids of users that you have blocked and have blocked you
+    invites: object array; list of teams that you are currently invited to {
+        id: string; the database id of the team. Query using {_id:ObjectId([id])}
+        name: string; the team's teamName
+    }
 }
 
 Team {
     teamName: string; contains team name
-    teamMembers: string array; contains names of all team teamMembers
-    owner: string; contains email of project owner (team creator)
+    teamMembers: object array; contains information about all team team members {
+        id: string; the database id of the user. Query using {_id:ObjectId([id])}
+        username: string; the user's screen name
+    }
+    owner: object; contains id and username of project owner (team creator) {
+        id: string; the database id of the user. Query using {_id:ObjectId([id])}
+        username: string; the user's screen name
+    }
     info: string; contains notes about project ideas
     requestedSkills: string array; list of skills that the team is looking for
     numMembers: int; number of members in the team
