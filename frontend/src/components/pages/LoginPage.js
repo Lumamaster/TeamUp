@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../App.css';
+import {PRODUCTION, production_url} from '../../env.json';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class LoginPage extends React.Component {
                 },
                 body: JSON.stringify(payload)
             }
-            const res = await fetch('/login',fetchParams);
+            const res = await fetch((PRODUCTION ? production_url : '') + '/login',fetchParams);
             //console.log(res);
             if(res.status === 200) {
                 //Success!

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import {Redirect} from 'react-router-dom';
+import {PRODUCTION, production_url} from '../../env.json';
 
 
 class CreateTeamPage extends React.Component {
@@ -27,7 +28,7 @@ class CreateTeamPage extends React.Component {
     /*TODO: need to get token and set logged in email to owner*/
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/startteam', {
+        fetch((PRODUCTION ? production_url : '') + '/startteam', {
             method: "POST",
             headers: {
               'Content-Type': 'application/json'
