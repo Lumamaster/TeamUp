@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const login = require('./routes/login');
 const signup = require('./routes/signup');
 const viewProfile = require('./routes/viewprofile');
@@ -11,6 +12,7 @@ const startTeam = require('./routes/startteam');
 const joinTeam = require('./routes/jointeam');
 
 const port = process.env.PORT || 8000;
+app.use(cors())
 
 app.use('/login', login);
 app.use('/signup', signup);

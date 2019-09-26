@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import '../../App.css';
-import {PRODUCTION, production_url} from '../../env.json';
+import {PRODUCTION, production_url, local_url} from '../../env.json';
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class UserPage extends React.Component {
     //TODO: dont know correct fetch argument
     componentDidMount(){
         let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
-        fetch((PRODUCTION ? production_url : '') + '/profile/' + uid, {
+        fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
             headers: {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
             }

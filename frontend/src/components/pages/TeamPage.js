@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import {PRODUCTION, production_url} from '../../env.json';
+import {PRODUCTION, production_url, local_url} from '../../env.json';
 /*Team {
     teamName: string; contains team name
     teamMembers: object array; contains ids and usernames of all team team members
@@ -37,7 +37,7 @@ class TeamPage extends React.Component {
             },
             method:'GET'
         }
-        const res = await fetch((PRODUCTION ? production_url : '') + url, fetchParams)
+        const res = await fetch((PRODUCTION ? production_url : local_url) + url, fetchParams)
         if(res.status === 200) {
             //Success
             alert(`Successfully ${joined ? 'left':'joined'} team`)
@@ -71,7 +71,7 @@ class TeamPage extends React.Component {
         }
     }
     componentDidMount(){
-            fetch((PRODUCTION ? production_url : '') + '/teams')
+            fetch((PRODUCTION ? production_url : local_url) + '/teams')
             .then(response => response.json())
             .then(data => {
                 //console.log(data);
