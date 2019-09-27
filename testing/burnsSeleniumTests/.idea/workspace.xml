@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/CreateUserTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/EditProfileTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/EditProfileTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LeaveTeamTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/LoginUserTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/SearchUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/SearchUserTest.class" afterDir="false" />
-    </list>
+    <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,7 +51,7 @@
     <session id="2131059497">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -117,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+            <state relative-caret-position="134">
+              <caret line="77" column="25" lean-forward="true" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -261,7 +253,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569603292461" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569606362407" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -402,24 +394,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 39m 14s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 40m 04s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 41m 41s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 42m 06s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 42m 58s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 47m 09s.xml">
-      <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LeaveTeamTest_testLeaveFailNotMember - 2019.09.27 at 12h 51m 41s.xml">
       <configuration name="LeaveTeamTest.testLeaveFailNotMember" configurationId="JUnit" />
     </history-entry>
@@ -435,12 +409,29 @@
     <history-entry file="LeaveTeamTest_testLeaveFailNoExist - 2019.09.27 at 12h 53m 08s.xml">
       <configuration name="LeaveTeamTest.testLeaveFailNoExist" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CreateUserTest - 2019.09.27 at 12h 54m 17s.xml">
+      <configuration name="CreateUserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CreateUserTest - 2019.09.27 at 12h 54m 22s.xml">
+      <configuration name="CreateUserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EditProfileTest - 2019.09.27 at 12h 54m 32s.xml">
+      <configuration name="EditProfileTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveTeamTest - 2019.09.27 at 12h 54m 41s.xml">
+      <configuration name="LeaveTeamTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LoginUserTest - 2019.09.27 at 12h 54m 46s.xml">
+      <configuration name="LoginUserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchUserTest - 2019.09.27 at 12h 54m 55s.xml">
+      <configuration name="SearchUserTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="1018" y="0" width="1037" height="1158" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25997952" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25997952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -450,7 +441,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33170733" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33170733" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -549,8 +540,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+        <state relative-caret-position="134">
+          <caret line="77" column="25" lean-forward="true" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
         </state>
       </provider>
     </entry>
