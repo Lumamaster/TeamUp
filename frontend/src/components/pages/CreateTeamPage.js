@@ -31,16 +31,12 @@ class CreateTeamPage extends React.Component {
     /*TODO: need to get token and set logged in email to owner*/
     handleSubmit(event) {
         event.preventDefault();
-        const fetchParams = {
-            headers: {
-                Authorization: 'Bearer ' + window.localStorage.getItem('token')
-            },
-            method:'GET'
-        }
+    
         fetch((PRODUCTION ? production_url : local_url) + '/startteam', {
             method: "POST",
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
             },
             body: JSON.stringify({
                 teamName: this.state.teamName,
@@ -49,7 +45,7 @@ class CreateTeamPage extends React.Component {
                 open: true, 
                 course: this.state.course, 
                 maxMembers: this.state.maxMembers
-            }),fetchParams
+            })
           }).then(response => response.ok).then(success => (success ? alert("Team successfully created") : alert("Failed to create team")))
     }
     handleText = i => e => {
