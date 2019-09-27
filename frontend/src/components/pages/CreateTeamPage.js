@@ -12,11 +12,11 @@ class CreateTeamPage extends React.Component {
             teamMembers: '',
             owner: '', 
             info: '', 
-            requestedSkills: '', 
+            requestedSkills: [''], 
             numMembers: '', 
             open: false, 
             course: '', 
-            maxMembers: '',
+            maxMembers: 1,
             errors: []
         }
         this.handleChange = this.handleChange.bind(this);
@@ -31,10 +31,12 @@ class CreateTeamPage extends React.Component {
     /*TODO: need to get token and set logged in email to owner*/
     handleSubmit(event) {
         event.preventDefault();
+    
         fetch((PRODUCTION ? production_url : local_url) + '/startteam', {
             method: "POST",
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
             },
             body: JSON.stringify({
                 teamName: this.state.teamName,
@@ -46,6 +48,34 @@ class CreateTeamPage extends React.Component {
             })
           }).then(response => response.ok).then(success => (success ? alert("Team successfully created") : alert("Failed to create team")))
     }
+    handleText = i => e => {
+        let requestedSkills = [...this.state.requestedSkills]
+        requestedSkills[i] = e.target.value
+        this.setState({
+            requestedSkills
+        })
+      }
+    
+      handleDelete = i => e => {
+        e.preventDefault()
+        let requestedSkills = [
+          ...this.state.requestedSkills.slice(0, i),
+          ...this.state.requestedSkills.slice(i + 1)
+        ]
+        this.setState({
+            requestedSkills
+        })
+      }
+    
+      addQuestion = e => {
+        e.preventDefault()
+        console.log(this.state.requestedSkills);
+        let requestedSkills = this.state.requestedSkills.concat([''])
+        this.setState({
+            requestedSkills
+        })
+      }
+
     render(){
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
@@ -64,9 +94,20 @@ class CreateTeamPage extends React.Component {
                     <div><label>
                         <input type="text" placeholder="Project Overview" className="textboxbig" onChange={this.handleChange} name="info" id="info" value={this.state.info} /> 
                     </label></div>
-                    <div><label>
-                        <input type="text" placeholder="Prefered Skills" className="textboxbig" onChange={this.handleChange} name="requestedSkills" id="requestedSkills" value={this.state.requestedSkills} /> 
-                    </label></div>
+                    <React.Fragment>
+                        Requested Skills
+                        {this.state.requestedSkills.map((requestedSkills, index) => (
+                        <span key={index}>
+                        <input
+                            type="text"
+                            onChange={this.handleText(index)}
+                            value={requestedSkills}
+                        />
+                        <button onClick={this.handleDelete(index)}>X</button>
+                        </span>
+                        ))}
+                        <button onClick={this.addQuestion}>Add New Skill</button>
+                    </React.Fragment>
                     <div><label>
                         Max Number of Members
                         <select value={this.state.maxMembers} onChange={this.onChangeFunc}>
