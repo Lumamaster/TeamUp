@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import * as jwt from 'jsonwebtoken';
 import '../../App.css';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
 
@@ -7,6 +8,7 @@ class UserPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isMe: false,
             edit:false,
             email: '',
             name: '',
@@ -22,6 +24,11 @@ class UserPage extends React.Component {
     //TODO: dont know correct fetch argument
     componentDidMount(){
         let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
+        let isMe = false;
+        if(window.localStorage.getItem('token')) {
+            const {id} = jwt.decode(window.localStorage.getItem('token'))
+            isMe = uid === id || uid === '';
+        }
         fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
             headers: {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
@@ -42,6 +49,7 @@ class UserPage extends React.Component {
         })
         .then(data => {
             this.setState({
+            isMe: isMe,
             email: data.email,
             name: data.name,
             skills: data.skills,
@@ -92,7 +100,7 @@ class UserPage extends React.Component {
                             <p>Rating: {this.state.rating}</p>
                         </form>
                     }
-                    <button onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button>
+                    {this.state.isMe ? <button onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
             </div>
