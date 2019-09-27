@@ -26,7 +26,9 @@ class UserPage extends React.Component {
         let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
         let isMe = false;
         if(window.localStorage.getItem('token')) {
-            const {id} = jwt.decode(window.localStorage.getItem('token'))
+            const {id} = jwt.decode(window.localStorage.getItem('token')).data
+            console.log(uid);
+            console.log(id);
             isMe = uid === id || uid === '';
         }
         fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
@@ -72,8 +74,70 @@ class UserPage extends React.Component {
             [name]:value
         });
     }
+
+    removeSkill = async e => {
+        //console.log('Remove Skill:', e.target.id)
+        let newSkills = this.state.skills.filter(skill => skill !== e.target.id)
+        //console.log(newSkills.join(', '))
+        this.setState({
+            skills:newSkills
+        })
+
+        const url = (PRODUCTION ? production_url : local_url) + '/user/profile/edit/removeskill'
+        const fetchParams = {
+            method:'POST',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                "content-type":"application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({skill:e.target.id})
+        }
+        //console.log(fetchParams)
+        const res = await fetch(url, fetchParams)
+        if(res.status !== 200) {
+            const text = await res.text();
+            console.log('Error:', text)
+            alert("Error; could not remove skill")
+        }
+    }
+
+    addSkill = async e => {
+        e.preventDefault();
+        let newSkills = this.state.skills
+        let skill = this.state.addSkillText;
+        if(skill && skill !== '' && !this.state.skills.includes(skill)) {
+            newSkills.push(skill);
+        } else {
+            return;
+        }
+
+        this.setState({
+            skills:newSkills,
+            addSkillText:''
+        })
+
+        const url = (PRODUCTION ? production_url : local_url) + '/user/profile/edit/addskill'
+        const fetchParams = {
+            method:'POST',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                "content-type":"application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({skill:skill})
+        }
+        console.log(fetchParams)
+        const res = await fetch(url, fetchParams)
+        if(res.status !== 200) {
+            const text = await res.text();
+            console.log('Error:', text)
+            alert("Error; could not add skill")
+        }
+    }
     
     edit = () => {
+        if(this.state.edit) {
+            console.log("Save changes")
+        }
         this.setState({
             edit: !this.state.edit
         })
@@ -89,14 +153,19 @@ class UserPage extends React.Component {
                         <React.Fragment>
                             <h1>{this.state.name}</h1>
                             <p>Email: {this.state.email}</p>
-                            <p>Skills: {this.state.skills}</p>
+                            <p>Skills: {this.state.skills ? this.state.skills.join(', ') : null}</p>
                             <p>Rating: {this.state.rating}</p>
                         </React.Fragment>
                         : 
                         <form>
                             <input type="text" placeholder={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
                             <p>Email: {this.state.email}</p>
-                            <p>Skills: {this.state.skills}</p>
+                            <p>Skills: </p>
+                                <React.Fragment>
+                                    {this.state.skills.map(skill => <SkillButton key={skill} skill={skill} delete={this.removeSkill}/>)}
+                                    <input type="text" value={this.state.addSkillText || ''} placeholder="Add a skill" name="addSkillText" id="add-skill-text" onChange={this.handleInputChange}/>
+                                    <button onClick={this.addSkill} id="add-skill-button">Add Skill</button>
+                                </React.Fragment>
                             <p>Rating: {this.state.rating}</p>
                         </form>
                     }
@@ -105,6 +174,17 @@ class UserPage extends React.Component {
                 </div>
             </div>
         );
+    }
+}
+
+class SkillButton extends React.Component {
+    render() {
+        return (
+            <div>
+                <span>{this.props.skill}    </span>
+                <span id={this.props.skill} onClick={this.props.delete} style={{color:'red', fontWeight:'bold'}}>X</span>
+            </div>
+        )
     }
 }
 export default UserPage;
