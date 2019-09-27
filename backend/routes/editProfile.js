@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 const assert = require('assert');
 const dbconfig = require('../db_config.json');
 const verify = require('../verifyjwt');
@@ -57,14 +58,15 @@ router.post('/'), async (req, res) => {
 
 router.post('/addskill', async (req, res) => {
 
-    const {email, skill} = req.body;
+    const {skill} = req.body;
+    const {id} = req.token;
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
             const db = client.db("Users");
         
             var user = db.collection('user').find({
-                email: email
+                _id:ObjectId(id)
             }).toArray();
     
             user.then(function (result) {
@@ -82,7 +84,7 @@ router.post('/addskill', async (req, res) => {
                 console.log(skill);
                 console.log(skillArr);
                 db.collection('user').updateOne(
-                    { email: email },
+                    { _id:ObjectId(id) },
                     {
                         $set: { skills: skillArr }
                     }
@@ -112,20 +114,23 @@ router.post('/addskill', async (req, res) => {
 
 router.post('/removeskill', async (req, res) => {
 
-    const {email, skill} = req.body;
+    console.log(req.body)
+    const {skill} = req.body;
+    const {id} = req.token;
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
             const db = client.db("Users");
         
             var user = db.collection('user').find({
-                email: email
+                _id:ObjectId(id)
             }).toArray();
     
             var removed = false;
             user.then(function (result) {
                 var skillArr = result[0].skills;
                 for (var i = 0; i < skillArr.length; i++) {
+                    //console.log(skill, skillArr[i])
                     if (skillArr[i] == skill) {
                         skillArr.splice(i, 1);
                         removed = true;
@@ -138,7 +143,7 @@ router.post('/removeskill', async (req, res) => {
                     return;
                 }
                 db.collection('user').updateOne(
-                    { email: email },
+                    { _id:ObjectId(id) },
                     {
                         $set: { skills: skillArr }
                     }
