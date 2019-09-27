@@ -16,7 +16,7 @@ class CreateTeamPage extends React.Component {
             numMembers: '', 
             open: false, 
             course: '', 
-            maxMembers: '',
+            maxMembers: 1,
             errors: []
         }
         this.handleChange = this.handleChange.bind(this);
