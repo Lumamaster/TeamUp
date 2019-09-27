@@ -25,6 +25,9 @@ class CreateTeamPage extends React.Component {
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     };
+    onChangeFunc = (event) => {
+        this.setState({maxMembers: event.target.value});
+    }
     /*TODO: need to get token and set logged in email to owner*/
     handleSubmit(event) {
         event.preventDefault();
@@ -35,11 +38,8 @@ class CreateTeamPage extends React.Component {
             },
             body: JSON.stringify({
                 teamName: this.state.teamName,
-                teamMembers: this.state.teamMembers,
-                owner: this.state.owner, 
                 info: this.state.info, 
                 requestedSkills: this.state.requestedSkills, 
-                numMembers: this.state.numMembers, 
                 open: true, 
                 course: this.state.course, 
                 maxMembers: this.state.maxMembers
@@ -62,32 +62,14 @@ class CreateTeamPage extends React.Component {
                         <input type="text" placeholder="Course" className="textbox" onChange={this.handleChange} name="course" id="course" value={this.state.course} /> 
                     </label></div>
                     <div><label>
-                        <input type="text" placeholder="Existing Team Members" className="textbox" onChange={this.handleChange} name="teamMembers" id="teamMembers" value={this.state.teamMembers} /> 
-                    </label></div>
-                    <div><label>
-                        <input type="text" placeholder="Owner" className="textbox" onChange={this.handleChange} name="owner" id="owner" value={this.state.owner} /> 
-                    </label></div>
-                    <div><label>
                         <input type="text" placeholder="Project Overview" className="textboxbig" onChange={this.handleChange} name="info" id="info" value={this.state.info} /> 
                     </label></div>
                     <div><label>
                         <input type="text" placeholder="Prefered Skills" className="textboxbig" onChange={this.handleChange} name="requestedSkills" id="requestedSkills" value={this.state.requestedSkills} /> 
                     </label></div>
-                   
-                    <div><label>
-                        Current Number of Members
-                        <select value={this.state.numMembers} onChange={this.handleChange}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </label></div>
                     <div><label>
                         Max Number of Members
-                        <select value={this.state.maxMembers} onChange={this.handleChange}>
+                        <select value={this.state.maxMembers} onChange={this.onChangeFunc}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
