@@ -37,20 +37,23 @@ router.get('/:id', async (req,res) => {
         
                 // Check for empty result
                 if (result.length == 0) {
+                    console.log(result);
                     console.log('no team with that id exists');
                     res.status(400).json({err:"no team with that name exists"});
                     //res.status(400).send('no team with that id exists');
                     return;
                 }
         
+                console.log(result);
                 var ownerLeft = result[0].owner.id === userID;
                 // Remove this member's name from that team
                 var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
                 if(memberArr.length === result[0].teamMembers.length) {
                     //Nothing was removed therefore the user was not part of the team
                     res.status(400).json({err:'You are not part of that team'});
+                    return;
                 }
-                /*for (var i = 0; i < memberArr.length; i++) {
+                for (var i = 0; i < memberArr.length; i++) {
                     if (memberArr[i].id === userID) {
                         if (result[0].owner.id === userID) {
                             ownerLeft = true;
@@ -58,7 +61,7 @@ router.get('/:id', async (req,res) => {
                         memberArr.splice(i, 1);
                         break;
                     }
-                }*/
+                }
         
                 // After removing this member, if the team is now empty, it no longer exists
                 // However, it needs to be kept in database for prevTeams
@@ -67,7 +70,7 @@ router.get('/:id', async (req,res) => {
                         { _id: mongoID },
                         {
                             $inc: {numMembers: -1},
-                            $set: { teamMembers: memberArr, owner:null, alive: false }
+                            $set: { teamMembers: memberArr, owner:"-1", alive: false }
                         }
                     )
         
@@ -105,11 +108,11 @@ router.get('/:id', async (req,res) => {
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
                         if (teamArr[i].id == teamID) {
-                            /*var name = teamArr[i].teamName;
+                            var name = teamArr[i].teamName;
                             var teamPair = {
                                 teamName: name,
                                 id: teamID
-                            }*/
+                            }
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;
@@ -131,8 +134,8 @@ router.get('/:id', async (req,res) => {
                             $set: { curTeams: teamArr, prevTeams: prevArr }
                         }
                     )
-                    //res.status(200).json({message:"successfully removed from team"});
-                    res.status(200).send('successfully removed from team');
+                    res.status(200).json({message:"successfully removed from team"});
+                    //res.status(200).send('successfully removed from team');
                 }).catch(function (error) {
                     console.log(error);
                     res.status(400).json({err:error});
