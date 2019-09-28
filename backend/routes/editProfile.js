@@ -10,9 +10,9 @@ const verify = require('../verifyjwt');
 router.use(verify);
 router.use(express.json());
 
-router.post('/'), async (req, res) => {
+router.post('/update', async (req, res) => {
     const name = req.body.name;
-    const email = req.token.email;
+    const id = req.token.id;
     const bio = req.body.bio;
 
     try {
@@ -21,15 +21,15 @@ router.post('/'), async (req, res) => {
             const db = client.db("Users");
         
             var user = db.collection('user').find({
-                email: email
+                _id:ObjectId(id)
             }).toArray();
     
             user.then(function (result) {
-                skillArr.push(skill);
+                /*skillArr.push(skill);
                 console.log(skill);
-                console.log(skillArr);
+                console.log(skillArr);*/
                 db.collection('user').updateOne(
-                    { email: email },
+                    { _id:ObjectId(id) },
                     {
                         $set: { name: name, bio: bio }
                     }
@@ -54,7 +54,7 @@ router.post('/'), async (req, res) => {
         console.log(error);
         res.status(400).json({err:error});
     }
-}
+})
 
 router.post('/addskill', async (req, res) => {
 

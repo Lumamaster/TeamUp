@@ -12,13 +12,16 @@ class UserPage extends React.Component {
             edit:false,
             email: '',
             name: '',
+            bio: '',
             skills: '',
             rating: '',
             prevTeams: [],
             curTeams: [],
             blocked: [],
             invites: [],
-            errors: []
+            errors: [],
+            prevName: '',
+            prevBio: '',
         }
     }
     //TODO: dont know correct fetch argument
@@ -52,6 +55,7 @@ class UserPage extends React.Component {
         .then(data => {
             this.setState({
             isMe: isMe,
+            bio: data.bio,
             email: data.email,
             name: data.name,
             skills: data.skills,
@@ -59,7 +63,9 @@ class UserPage extends React.Component {
             prevTeams: data.prevTeams,
             curTeams: data.curTeams,
             blocked: data.blocked,
-            invites: data.invites
+            invites: data.invites,
+            prevName: data.name,
+            prevBio: data.bio
             })
         })
         .catch(err => {})
@@ -134,9 +140,40 @@ class UserPage extends React.Component {
         }
     }
     
-    edit = () => {
+    edit = async () => {
         if(this.state.edit) {
-            console.log("Save changes")
+            const bio = this.state.bio !== '' ? this.state.bio : this.state.prevBio;
+            const name = this.state.name !== '' ? this.state.name : this.state.prevName;
+
+            if(name === this.state.prevName && bio === this.state.prevBio) {
+                this.setState({
+                    edit: !this.state.edit
+                })
+                return;
+            }
+
+            const url = (PRODUCTION ? production_url : local_url) + '/user/profile/edit/update'
+            const fetchParams = {
+                method:'POST',
+                headers: {
+                    Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                    "content-type":"application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({name:name, bio:bio})
+            }
+            console.log(fetchParams)
+            const res = await fetch(url, fetchParams)
+            if(res.status !== 200) {
+                const text = await res.text();
+                console.log('Error:', text)
+                alert("Error; could not edit profile")
+            }
+            this.setState({
+                prevBio:bio,
+                prevName:name,
+                name:name,
+                bio:bio,
+            })
         }
         this.setState({
             edit: !this.state.edit
@@ -153,13 +190,16 @@ class UserPage extends React.Component {
                         <React.Fragment>
                             <h1>{this.state.name}</h1>
                             <p>Email: {this.state.email}</p>
+                            <p>Bio: {this.state.bio}</p>
                             <p>Skills: {this.state.skills ? this.state.skills.join(', ') : null}</p>
                             <p>Rating: {this.state.rating}</p>
                         </React.Fragment>
                         : 
                         <form>
-                            <input type="text" placeholder={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
+                            <input type="text" placeholder={this.state.prevName} value={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
                             <p>Email: {this.state.email}</p>
+                            <p>Bio: </p>
+                            <input type="textarea" placeholder={this.state.prevBio} value={this.state.bio} name="bio" id="edit-bio" onChange={this.handleInputChange}/>
                             <p>Skills: </p>
                                 <React.Fragment>
                                     {this.state.skills.map(skill => <SkillButton key={skill} skill={skill} delete={this.removeSkill}/>)}
