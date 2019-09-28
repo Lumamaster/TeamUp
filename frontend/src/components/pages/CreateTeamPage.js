@@ -86,13 +86,13 @@ class CreateTeamPage extends React.Component {
                     <h1>Create New Team</h1>
                     <form onSubmit={this.handleSubmit}>
                     <div><label>
-                        <input type="text" placeholder="Team Name" className="textbox" onChange={this.handleChange} name="teamName" id="teamName" value={this.state.teamName} /> 
+                        <input type="text" maxLength="70" placeholder="Team Name" className="textbox" onChange={this.handleChange} name="teamName" id="teamName" value={this.state.teamName} /> 
                     </label></div>
                     <div><label>
-                        <input type="text" placeholder="Course" className="textbox" onChange={this.handleChange} name="course" id="course" value={this.state.course} /> 
+                        <input type="text" maxLength="70" placeholder="Course" className="textbox" onChange={this.handleChange} name="course" id="course" value={this.state.course} /> 
                     </label></div>
                     <div><label>
-                        <input type="text" placeholder="Project Overview" className="textboxbig" onChange={this.handleChange} name="info" id="info" value={this.state.info} /> 
+                        <input type="text" maxLength="200" placeholder="Project Overview" className="textboxbig" onChange={this.handleChange} name="info" id="info" value={this.state.info} /> 
                     </label></div>
                     <React.Fragment>
                         Requested Skills
