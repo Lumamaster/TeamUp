@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../App.css';
+import {Link} from 'react-router-dom';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
 /*Team {
     teamName: string; contains team name
@@ -87,8 +88,8 @@ class TeamPage extends React.Component {
             const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
             return(
                 <tr key={teamName}>
-                    <td>{teamName || 'Untitled Team'}</td>
-                    <td>{owner ? owner.username || 'None' : 'None'}</td>
+                    <td><Link to={`/teams/${_id}`}>{teamName || 'Untitled Team'}</Link></td>
+                    <td><Link to={owner ? `/profile/${owner.id}` : '#'}>{owner ? owner.username || owner.name || 'None' : 'None'}</Link></td>
                     <td>{info || 'None'}</td>
                     <td>{requestedSkills ? requestedSkills.join(', ') || 'None' : 'None'}</td>
                     <td>{numMembers || 0}</td>

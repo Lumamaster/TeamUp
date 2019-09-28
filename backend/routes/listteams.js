@@ -23,6 +23,30 @@ router.use(express.urlencoded({extended:false}));
         res.status(400).json({err:error})
     }
 });*/
+router.get('/:id', async (req,res) => {
+    const {id} = req.params;
+    try {
+        const client = await MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology:true})
+        const db = client.db('Teams');
+        const cursor = db.collection('team').find({ _id:ObjectId(id) });
+        let result = await cursor.toArray();
+        if(result.length <= 0) {
+            //couldn't find team
+            res.status(404).json({err:"Team not found"});
+            return;
+        }
+        if(result.length > 1) {
+            //found >1 team with that id
+            res.status(500).json({err:"Server Error"});
+            return;
+        }
+        //res.length === 1
+        result = result[0];
+        res.status(200).json(result);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
 
 router.get('/', async(req,res) => {
     // Searching team

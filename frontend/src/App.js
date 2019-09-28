@@ -6,6 +6,7 @@ import SignupPage from './components/pages/SignupPage';
 import UserPage from './components/pages/UserPage';
 import TeamPage from './components/pages/TeamPage';
 import CreateTeamPage from './components/pages/CreateTeamPage';
+import TeamDashboard from './components/pages/TeamDashboard';
 function App() {
   return (
     <Router>
@@ -14,7 +15,8 @@ function App() {
       <Route path="/login/" component={LoginPage}/>
       <Route path="/signup/" component={SignupPage}/>
       <Route path="/profile/" component={UserPage}/>
-      <Route path="/teams/" component={TeamPage}/>
+      <Route path="/teams/:id" component={TeamDashboard}/>
+      <Route exact path="/teams/" component={TeamPage}/>
       <Route path="/createteam/" component={CreateTeamPage}/>
     </Router>
   );
