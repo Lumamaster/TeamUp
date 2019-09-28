@@ -196,7 +196,7 @@ class UserPage extends React.Component {
                         </React.Fragment>
                         : 
                         <form>
-                            <input type="text" placeholder={this.state.prevName} value={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
+                            <input type="text" maxLength="70" placeholder={this.state.prevName} value={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
                             <p>Email: {this.state.email}</p>
                             <p>Bio: </p>
                             <input type="textarea" placeholder={this.state.prevBio} value={this.state.bio} name="bio" id="edit-bio" onChange={this.handleInputChange}/>
