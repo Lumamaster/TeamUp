@@ -17,6 +17,7 @@ User {
         id: string; the database id of the team. Query using {_id:ObjectId([id])}
         name: string; the team's teamName
     }
+    reviews: string array; list of reviews from other users about you
 }
 
 Team {

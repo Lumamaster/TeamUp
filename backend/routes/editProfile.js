@@ -25,9 +25,6 @@ router.post('/update', async (req, res) => {
             }).toArray();
     
             user.then(function (result) {
-                /*skillArr.push(skill);
-                console.log(skill);
-                console.log(skillArr);*/
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {

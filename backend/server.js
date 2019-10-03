@@ -10,6 +10,7 @@ const editProfile = require('./routes/editProfile');
 const searchUser = require('./routes/searchuser');
 const startTeam = require('./routes/startteam');
 const joinTeam = require('./routes/jointeam');
+const leaveReview = require('./routes/leavereview');
 
 const port = process.env.PORT || 8000;
 app.use(cors())
@@ -24,6 +25,7 @@ app.use('/teams', listTeams);
 app.use('/profile', viewProfile);
 //app.use('/profile/edit', editProfile);
 app.use('/startteam',startTeam);
+app.use('/leavereview', leaveReview);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
 app.listen(port, () => console.log(`Server running on port ${port}`));
