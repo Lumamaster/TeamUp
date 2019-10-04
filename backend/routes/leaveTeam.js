@@ -12,6 +12,12 @@ router.get('/:id', async (req,res) => {
     const teamID = req.params.id
     const userID = req.token.id
 
+    const {teamId} = req.params;
+    if(teamId.length !== 24){
+        res.status(400).json({err:"Invalid team ID"}).send();
+        return;
+    }
+
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
@@ -28,7 +34,6 @@ router.get('/:id', async (req,res) => {
             }).toArray();
         
             // Get array of users with matching name. Should be size 1.
-            // TODO: change to use team _id
             var team = teamdb.collection('team').find({
                 _id: mongoID
             }).toArray();
@@ -40,7 +45,7 @@ router.get('/:id', async (req,res) => {
                     console.log(result);
                     console.log('no team with that id exists');
                     res.status(400).json({err:"no team with that name exists"});
-                    //res.status(400).send('no team with that id exists');
+                    client.close();
                     return;
                 }
         
@@ -51,6 +56,7 @@ router.get('/:id', async (req,res) => {
                 if(memberArr.length === result[0].teamMembers.length) {
                     //Nothing was removed therefore the user was not part of the team
                     res.status(400).json({err:'You are not part of that team'});
+                    client.close();
                     return;
                 }
                 for (var i = 0; i < memberArr.length; i++) {
@@ -124,6 +130,7 @@ router.get('/:id', async (req,res) => {
                     if (removed == false) {
                         console.log('you are not part of a team with that id');
                         res.status(400).json({err:'You are not part of that team'});
+                        client.close();
                         return;
                     }
             
@@ -135,15 +142,17 @@ router.get('/:id', async (req,res) => {
                         }
                     )
                     res.status(200).json({message:"successfully removed from team"});
-                    //res.status(200).send('successfully removed from team');
+                    client.close();
                 }).catch(function (error) {
                     console.log(error);
                     res.status(400).json({err:error});
+                    client.close();
                 });
             });
         });
     } catch (err) {
         console.log(err);
+        client.close();
     }
 })
 

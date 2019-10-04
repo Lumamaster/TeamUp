@@ -11,58 +11,51 @@ router.use(verify);
 router.use(express.json());
 router.get('/:id', async (req,res) => {
 
+    /* Check that the team id is valid */
     const {teamId} = req.params;
     if(teamId.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
     }
 
-    const reviewText = req.body.review;
-
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
             const userdb = client.db("Users");
-            const teamdb
+            const teamdb = client.db("Teams");
 
             var team = teamdb.collection('team').findOne({
                 "_id":ObjectID(teamId)
             }).toArray();
 
-            team.then(function (result) {
-                var memberArr = result[0].teamMembers;
-                var totalSkillArr = [];
-                for (curMember of memberArr) {
-                    var user = db.collection('user').findOne({
-                        "_id":ObjectID(curMember.id)
-                    }).toArray();
+            /* Find all users that have an element with this teamID in their curTeams array */
+            var users = userdb.collection('user').find({
+                curTeams: { $all: [
+                    { "$elemMatch" : { id: teamId} }
+                ] }
+            }).toArray();
 
-                    user.then(function (userResult) {
-                        userSkillArr = userResult[0].skills
-                    })
-                }
-            })
-
-            
-
-            user.then(function (result) {
-                var reviewArr = result[0].reviews;
-                reviewArr.push(reviewText);
-                db.collection('user').updateOne(
-                    { _id:ObjectId(theirId) },
-                    {
-                        $set: { reviews: reviewArr }
+            /* Iterate through all the skills of each member and add them to an array. 
+               To avoid the case of duplicates if two users share common skills, only add skills 
+               that are not already in the array */
+            users.then(function (membersArr) {
+                var allSkills = [];
+                for (member of membersArr) {
+                    var curSkills = member.skills;
+                    for (skill of curSkills) {
+                        if (!allSkills.includes(skill)) {
+                            allSkills.push(skill);
+                        }
                     }
-                ).then(function (r) {
-                    res.status(200).send("review added successfully");
-                    client.close();
-                    return;
-                }).catch(function (error) {
-                    console.log(error);
-                    res.status(400).send(error);
-                    client.close();
-                    return;
-                });
+                }
+
+                console.log('skill array returned');
+                res.status(200).json({allSkills:allSkills});        /* Send the array that has all distinct skills in it */
+                client.close();
+            }).catch(function (err) {
+                console.log(err);
+                res.status(400).json({err:err});
+                client.close();
             });
             
         });

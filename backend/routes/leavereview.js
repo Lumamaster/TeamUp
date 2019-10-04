@@ -11,6 +11,7 @@ router.use(verify);
 router.use(express.json());
 router.get('/:id', async (req,res) => {
 
+    /* Check that the team id is valid */
     const {theirId} = req.params;
     if(theirId.length !== 24){
         res.status(400).json({err:"Invalid user ID"}).send();
@@ -28,16 +29,17 @@ router.get('/:id', async (req,res) => {
                 "_id":ObjectID(theirId)
             }).toArray();
 
+            /* Push the new review onto the array of reviews */
             user.then(function (result) {
-                var reviewArr = result[0].reviews;
-                reviewArr.push(reviewText);
                 db.collection('user').updateOne(
                     { _id:ObjectId(theirId) },
                     {
-                        $set: { reviews: reviewArr }
+                        $push: { reviews: reviewText }
                     }
                 ).then(function (r) {
-                    res.status(200).send("review added successfully");
+                    var success = 'review added';
+                    console.log(success);
+                    res.status(200).json({message: success});
                     client.close();
                     return;
                 }).catch(function (error) {
