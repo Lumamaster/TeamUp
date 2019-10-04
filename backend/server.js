@@ -13,6 +13,7 @@ const joinTeam = require('./routes/jointeam');
 const leaveReview = require('./routes/leavereview');
 const viewTeamSkills = require('./routes/viewteamskills');
 const kickUser = require('./routes/kickUser');
+const block = require('./routes/blockuser');
 
 const port = process.env.PORT || 8000;
 app.use(cors())
@@ -29,7 +30,8 @@ app.use('/profile', viewProfile);
 app.use('/startteam',startTeam);
 app.use('/leavereview', leaveReview);
 app.use('/teamskills', viewTeamSkills);
-app.use('/kickuser',kickUser);
+app.use('/kickuser', kickUser);
+app.use('/blk', block);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
 app.listen(port, () => console.log(`Server running on port ${port}`));

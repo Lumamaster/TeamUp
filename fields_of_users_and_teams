@@ -12,7 +12,8 @@ User {
         name: string; the team's teamName
     }
     bio: string; contains human-readable information about the user
-    blockedUsers: string array; list of ids of users that you have blocked and have blocked you
+    blockedUsers: string array; list of ids of users that you have blocked
+    blockedBy: string array; list of ids of users that have blocked me
     invites: object array; list of teams that you are currently invited to {
         id: string; the database id of the team. Query using {_id:ObjectId([id])}
         name: string; the team's teamName

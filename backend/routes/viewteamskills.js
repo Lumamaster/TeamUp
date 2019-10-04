@@ -22,11 +22,6 @@ router.get('/:id', async (req,res) => {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
             const userdb = client.db("Users");
-            const teamdb = client.db("Teams");
-
-            var team = teamdb.collection('team').findOne({
-                "_id":ObjectID(teamId)
-            }).toArray();
 
             /* Find all users that have an element with this teamID in their curTeams array */
             var users = userdb.collection('user').find({
@@ -63,6 +58,6 @@ router.get('/:id', async (req,res) => {
         console.error(err);
     } finally{}
 
-})
+});
 
 module.exports = router;
