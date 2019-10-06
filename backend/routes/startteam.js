@@ -9,15 +9,10 @@ const dbconfig = require('../db_config.json');
 router.use(express.json());
 router.use(verify);
 router.post('/', async(req,res) => {
-    /*if(cookie.readCookie("") == null) {
-        // Redirect to login page
-        res.status(400).json({message:"not logged in"})
-        return;
-    }*/
 
     const {teamName, teamMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
     //TODO: Handle sending invites to other team members
-    const owner = req.token //has id and username stored
+    const owner = req.token.id //has id and username stored
     var thisteamid;
 
     // Add team to database

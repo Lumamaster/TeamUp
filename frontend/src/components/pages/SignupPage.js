@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../App.css';
+import {PRODUCTION, production_url, local_url} from '../../env.json';
 
 class SignupPage extends React.Component {
     constructor(props) {
@@ -61,7 +62,7 @@ class SignupPage extends React.Component {
                 },
                 body: JSON.stringify(payload)
             }
-            const res = await fetch('/signup',fetchParams);
+            const res = await fetch((PRODUCTION ? production_url : local_url) + '/signup',fetchParams);
             console.log(res);
             if(res.status === 201) {
                 //Success!

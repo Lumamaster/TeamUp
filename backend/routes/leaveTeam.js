@@ -12,6 +12,12 @@ router.get('/:id', async (req,res) => {
     const teamID = req.params.id
     const userID = req.token.id
 
+    const {teamId} = req.params;
+    if(teamId.length !== 24){
+        res.status(400).json({err:"Invalid team ID"}).send();
+        return;
+    }
+
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
@@ -28,7 +34,6 @@ router.get('/:id', async (req,res) => {
             }).toArray();
         
             // Get array of users with matching name. Should be size 1.
-            // TODO: change to use team _id
             var team = teamdb.collection('team').find({
                 _id: mongoID
             }).toArray();
@@ -37,20 +42,24 @@ router.get('/:id', async (req,res) => {
         
                 // Check for empty result
                 if (result.length == 0) {
+                    console.log(result);
                     console.log('no team with that id exists');
                     res.status(400).json({err:"no team with that name exists"});
-                    //res.status(400).send('no team with that id exists');
+                    client.close();
                     return;
                 }
         
+                console.log(result);
                 var ownerLeft = result[0].owner.id === userID;
                 // Remove this member's name from that team
                 var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
                 if(memberArr.length === result[0].teamMembers.length) {
                     //Nothing was removed therefore the user was not part of the team
                     res.status(400).json({err:'You are not part of that team'});
+                    client.close();
+                    return;
                 }
-                /*for (var i = 0; i < memberArr.length; i++) {
+                for (var i = 0; i < memberArr.length; i++) {
                     if (memberArr[i].id === userID) {
                         if (result[0].owner.id === userID) {
                             ownerLeft = true;
@@ -58,7 +67,7 @@ router.get('/:id', async (req,res) => {
                         memberArr.splice(i, 1);
                         break;
                     }
-                }*/
+                }
         
                 // After removing this member, if the team is now empty, it no longer exists
                 // However, it needs to be kept in database for prevTeams
@@ -67,7 +76,7 @@ router.get('/:id', async (req,res) => {
                         { _id: mongoID },
                         {
                             $inc: {numMembers: -1},
-                            $set: { teamMembers: memberArr, owner:null, alive: false }
+                            $set: { teamMembers: memberArr, owner:"-1", alive: false }
                         }
                     )
         
@@ -105,11 +114,11 @@ router.get('/:id', async (req,res) => {
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
                         if (teamArr[i].id == teamID) {
-                            /*var name = teamArr[i].teamName;
+                            var name = teamArr[i].teamName;
                             var teamPair = {
                                 teamName: name,
                                 id: teamID
-                            }*/
+                            }
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;
@@ -121,6 +130,7 @@ router.get('/:id', async (req,res) => {
                     if (removed == false) {
                         console.log('you are not part of a team with that id');
                         res.status(400).json({err:'You are not part of that team'});
+                        client.close();
                         return;
                     }
             
@@ -131,16 +141,18 @@ router.get('/:id', async (req,res) => {
                             $set: { curTeams: teamArr, prevTeams: prevArr }
                         }
                     )
-                    //res.status(200).json({message:"successfully removed from team"});
-                    res.status(200).send('successfully removed from team');
+                    res.status(200).json({message:"successfully removed from team"});
+                    client.close();
                 }).catch(function (error) {
                     console.log(error);
                     res.status(400).json({err:error});
+                    client.close();
                 });
             });
         });
     } catch (err) {
         console.log(err);
+        client.close();
     }
 })
 

@@ -36,7 +36,7 @@ router.post('/', async (req,res) => {
                     const token = jwt.sign({
                         data: {
                             id: result[0]._id,
-                            username: result[0].username,
+                            username: result[0].name || result[0].username,
                         }
                     }, dbconfig.jwt_key, { expiresIn: '1d' })
                     res.status(200).json({token:token,teams:result[0].curTeams})

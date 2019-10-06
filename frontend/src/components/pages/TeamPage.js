@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../App.css';
+import {Link} from 'react-router-dom';
+import {PRODUCTION, production_url, local_url} from '../../env.json';
 /*Team {
     teamName: string; contains team name
     teamMembers: object array; contains ids and usernames of all team team members
@@ -36,7 +38,7 @@ class TeamPage extends React.Component {
             },
             method:'GET'
         }
-        const res = await fetch(url, fetchParams)
+        const res = await fetch((PRODUCTION ? production_url : local_url) + url, fetchParams)
         if(res.status === 200) {
             //Success
             alert(`Successfully ${joined ? 'left':'joined'} team`)
@@ -70,7 +72,7 @@ class TeamPage extends React.Component {
         }
     }
     componentDidMount(){
-            fetch('/teams')
+            fetch((PRODUCTION ? production_url : local_url) + '/teams')
             .then(response => response.json())
             .then(data => {
                 //console.log(data);
@@ -86,8 +88,8 @@ class TeamPage extends React.Component {
             const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
             return(
                 <tr key={teamName}>
-                    <td>{teamName || 'Untitled Team'}</td>
-                    <td>{owner ? owner.username || 'None' : 'None'}</td>
+                    <td><Link to={`/teams/${_id}`}>{teamName || 'Untitled Team'}</Link></td>
+                    <td><Link to={owner ? `/profile/${owner.id}` : '#'}>{owner ? owner.username || owner.name || 'None' : 'None'}</Link></td>
                     <td>{info || 'None'}</td>
                     <td>{requestedSkills ? requestedSkills.join(', ') || 'None' : 'None'}</td>
                     <td>{numMembers || 0}</td>
