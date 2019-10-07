@@ -19,23 +19,20 @@ router.post('/', async (req,res) => {
     var emailRegex = /\@purdue\.edu/
     if (emailRegex.test(email) == false) {
         console.log('must register with a purdue email address');
-        //res.status(400).json({err:"Invalid email"});
-        res.status(400).send("Invalid email");
+        res.status(400).json({err:"Invalid email"});
         return;
     }
 
     // Check password length
     if (password.length < 8 || password.length > 20) {
-        // TODO: set popup to say password length is wrong
         console.log('password must be between 8 and 20 characters');
-        res.status(400).send('password must be between 8 and 20 characters');
+        res.status(400).json({err:'password must be between 8 and 20 characters'});
         return;
     }
     
     var passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/
     if (passwordRegex.test(password) == false) {
-        //res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
-        res.status(400).send("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+        res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
         return;
     }
     
@@ -52,9 +49,7 @@ router.post('/', async (req,res) => {
                 // If the request returned another user, it already exists
                 if (result != 0) {
                     console.log('User with that email already exists.');
-                    //cursor.forEach(iterator.iterateFunc, iterator.errorFunc);
-                    //res.status(200).json({err:'User with that email already exists'});
-                    res.status(400).send("User with that email already exists");
+                    res.status(400).json({err:'User with that email already exists'});
                     client.close();
                 // If the request was empty, create the user    
                 } else {
@@ -71,9 +66,7 @@ router.post('/', async (req,res) => {
                         invites: []
                     }).then(function(count){
                         console.log('User successfully created');
-                        //res.status(200).json({message:'User successfully created'});
-                        res.status(200).send('User successfully created');
-                        //cookie.createCookie(name, email, 3);
+                        res.status(200).json({message:'User successfully created'});
                         client.close();
                     }).catch(function (err) {
                         console.log(err);

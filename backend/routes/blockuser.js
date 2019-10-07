@@ -127,7 +127,7 @@ router.get('/block/:id', async (req,res) => {
             userdb.collection('user').updateOne(
                 { _id: ObjectID(theirId) },
                 {
-                    $push: {blockedBy: myId }
+                    $addToSet: {blockedBy: myId }
                 }
             ).then(function (result) {
                 console.log('succesfully added to their blockedby');
@@ -136,7 +136,7 @@ router.get('/block/:id', async (req,res) => {
                 userdb.collection('user').updateOne(
                     { _id: ObjectID(myId) },
                     {
-                        $push: {blockedUsers: theirId }
+                        $addToSet: {blockedUsers: theirId }
                     }
                 ).then(function (r) {
                     console.log('successfully added them to blockedUsers');

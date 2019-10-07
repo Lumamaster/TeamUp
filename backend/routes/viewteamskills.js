@@ -45,7 +45,7 @@ router.get('/:id', async (req,res) => {
                 }
 
                 console.log('skill array returned');
-                res.status(200).json({allSkills:allSkills});        /* Send the array that has all distinct skills in it */
+                res.status(200).json({allSkills:allSkills, message:'skill array returned'});        /* Send the array that has all distinct skills in it */
                 client.close();
             }).catch(function (err) {
                 console.log(err);

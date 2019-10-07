@@ -1,5 +1,8 @@
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,9 +13,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EditProfileTest {
 
     @Test
+    @Order(1)
     public void testAddSkill() {
         try {
             URL url = new URL("http://localhost:8000/user/profile/edit/addskill");
@@ -26,6 +31,7 @@ public class EditProfileTest {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
             try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
@@ -48,13 +54,15 @@ public class EditProfileTest {
             }
             in.close();
 
-            Assert.assertEquals("skill added successfully", lastString);
+            boolean exists = lastString.contains("Skill added successfully");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     @Test
+    @Order(2)
     public void testRemoveSkill() {
         try {
             URL url = new URL("http://localhost:8000/user/profile/edit/removeskill");
@@ -68,6 +76,7 @@ public class EditProfileTest {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
             try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
@@ -90,7 +99,8 @@ public class EditProfileTest {
             }
             in.close();
 
-            Assert.assertEquals("skill removed successfully", lastString);
+            boolean exists = lastString.contains("Skill removed successfully");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -110,6 +120,7 @@ public class EditProfileTest {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
             try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
@@ -132,7 +143,8 @@ public class EditProfileTest {
             }
             in.close();
 
-            Assert.assertEquals("skill already in your profile", lastString);
+            boolean exists = lastString.contains("Skill already in your profile");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -174,7 +186,8 @@ public class EditProfileTest {
             }
             in.close();
 
-            Assert.assertEquals("skill not on your profile", lastString);
+            boolean exists = lastString.contains("Skill not on your profile");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }

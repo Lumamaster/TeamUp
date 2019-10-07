@@ -4,11 +4,13 @@ const router = express.Router();
 const dbconfig = require('../db_config.json');
 const cookie = require('../cookies.js');
 const assert = require('assert');
+const verify = require('../verifyjwt');
 
 router.use(express.json());
+router.use(verify);
 router.post('/', async (req,res) => {
 
-    const {email, teamID} = req.body;
+    const id = req.token.id;
     try {
         // Create Connection
         MongoClient.connect(dbconfig.url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, client) {
@@ -16,7 +18,7 @@ router.post('/', async (req,res) => {
             const db = client.db("Users");
 
             var cursor = db.collection('user').find({
-                email: email,
+                id: id,
             });
 
             var arr = cursor.toArray();

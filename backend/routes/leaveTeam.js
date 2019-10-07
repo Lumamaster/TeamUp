@@ -28,12 +28,12 @@ router.get('/:id', async (req,res) => {
             var mongo = require('mongodb');
             var mongoID = ObjectId(teamID);
         
-            // Get array of users with matching email. Should be size 1.
+            // Get array of users with matching id
             var user = userdb.collection('user').find({
                 _id:ObjectId(userID)
             }).toArray();
         
-            // Get array of users with matching name. Should be size 1.
+            // Get array of teams with matching id
             var team = teamdb.collection('team').find({
                 _id: mongoID
             }).toArray();
@@ -44,7 +44,7 @@ router.get('/:id', async (req,res) => {
                 if (result.length == 0) {
                     console.log(result);
                     console.log('no team with that id exists');
-                    res.status(400).json({err:"no team with that name exists"});
+                    res.status(400).json({err:"no team with that id exists"});
                     client.close();
                     return;
                 }
@@ -114,11 +114,6 @@ router.get('/:id', async (req,res) => {
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
                         if (teamArr[i].id == teamID) {
-                            var name = teamArr[i].teamName;
-                            var teamPair = {
-                                teamName: name,
-                                id: teamID
-                            }
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;

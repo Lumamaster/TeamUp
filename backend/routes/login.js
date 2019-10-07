@@ -2,7 +2,6 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 const dbconfig = require('../db_config.json');
-const cookie = require('../cookies.js');
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 
@@ -10,9 +9,9 @@ router.use(express.json());
 router.post('/', async (req,res) => {
     
     const {email, password} = req.body;
-    //if(!email || !password) res.status(400).json({err:"Missing email or password"});
     if (!email || !password) {
-        res.status(400).send('missing email or password');
+        res.status(400).json({err:'missing email or password'});
+        client.close();
         return;
     }
 
@@ -30,7 +29,7 @@ router.post('/', async (req,res) => {
             cursor.toArray().then(result => {
                 //console.log(result)
                 if(result.length === 0) {
-                    res.status(404).json({err:"Incorrect username or password"})
+                    res.status(404).json({err:"Incorrect username or password"});
                     return;
                 } else if(result.length === 1) {
                     const token = jwt.sign({
@@ -39,7 +38,7 @@ router.post('/', async (req,res) => {
                             username: result[0].name || result[0].username,
                         }
                     }, dbconfig.jwt_key, { expiresIn: '1d' })
-                    res.status(200).json({token:token,teams:result[0].curTeams})
+                    res.status(200).json({token:token,teams:result[0].curTeams,message:'successfully logged in'});
                     return;
                 } else {
                     res.status(500).json({err:"Server error"})

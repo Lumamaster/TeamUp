@@ -72,7 +72,7 @@ router.post('/addskill', async (req, res) => {
                     console.log('cur ' + curSkill);
                     console.log('ski ' + skill);
                     if (curSkill == skill) {
-                        res.status(400).send("skill already in your profile");
+                        res.status(400).json({message:'Skill already in your profile'});
                         client.close();
                         return;
                     }
@@ -86,12 +86,13 @@ router.post('/addskill', async (req, res) => {
                         $set: { skills: skillArr }
                     }
                 ).then(function (r) {
-                    res.status(200).send("skill added successfully");
+                    var success = 'Skill added successfully';
+                    res.status(200).json({message:success});
                     client.close();
                     return;
                 }).catch(function (error) {
                     console.log(error);
-                    res.status(400).send(error);
+                    res.status(400).json({err:error});
                     client.close();
                     return;
                 });
@@ -135,7 +136,7 @@ router.post('/removeskill', async (req, res) => {
                     }
                 }
                 if (!removed) {
-                    res.status(400).send("skill not on your profile");
+                    res.status(400).json({err:'Skill not on your profile'});
                     client.close();
                     return;
                 }
@@ -145,12 +146,14 @@ router.post('/removeskill', async (req, res) => {
                         $set: { skills: skillArr }
                     }
                 )
-                res.status(200).send("skill removed successfully");
+                res.status(200).json({message:'Skill removed successfully'});
                 client.close();
+                return;
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
                 client.close();
+                return;
             });
         });
     } catch (err) {

@@ -8,8 +8,9 @@ import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.ValidationOptions;
 import org.bson.Document;
 //import com.mongodb.MongoClientOptions;
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,21 +41,15 @@ public class LeaveTeamTest {
     @Test
     public void testLeaveTeamSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/teams/leave");
+            URL url = new URL("http://localhost:8000/teams/leave/5d840c25607f6e2e3ce30923");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            //byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"5d8115143d4a534604c7949a\"}".getBytes(StandardCharsets.UTF_8);
-            //int length = out.length;
-
-            //http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
-            /*try(OutputStream os = http.getOutputStream()) {
-                os.write(out);
-            }*/
 
             BufferedReader in;
             int statuscode = ((HttpURLConnection) con).getResponseCode();
@@ -73,7 +68,8 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            Assert.assertEquals("successfully removed from team", lastString);
+            boolean exists = lastString.contains("successfully removed from team");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -89,17 +85,10 @@ public class LeaveTeamTest {
             http.setRequestMethod("GET"); // PUT is another valid option
             http.setDoOutput(true);
 
-            //byte[] out = "{\"email\":\"burns140@purdue.edu\",\"teamID\":\"ffffffffdddl\"}".getBytes(StandardCharsets.UTF_8);
-            //int length = out.length;
-
-            //http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
 
             http.connect();
-            /*try(OutputStream os = http.getOutputStream()) {
-                os.write(out);
-            }*/
 
             BufferedReader in;
             int statuscode = ((HttpURLConnection) con).getResponseCode();
@@ -119,7 +108,7 @@ public class LeaveTeamTest {
             in.close();
 
             boolean exists = lastString.contains("no team with that name exists");
-            Assert.assertTrue(exists);
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -162,9 +151,8 @@ public class LeaveTeamTest {
             }
             in.close();
 
-            //Assert.assertEquals("you are not part of a team with that id", lastString);
             boolean exists = lastString.contains("You are not part of that team");
-            Assert.assertTrue(exists);
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }

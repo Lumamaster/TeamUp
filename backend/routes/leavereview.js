@@ -48,6 +48,11 @@ router.get('/:id', async (req,res) => {
                     client.close();
                     return;
                 });
+            }).catch(function (err) {
+                console.log(err);
+                res.status(400).json({err:err});
+                client.close();
+                return;
             });
             
         });

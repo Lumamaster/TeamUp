@@ -10,24 +10,25 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
-public class SearchUserTest {
+public class KickUsersTest {
 
     @Test
-    public void testUserExist() {
+    public void testKickUserSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/search");
+            URL url = new URL("http://localhost:8000/kickuser/5d84569de4ff8a0ce88b3720");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"burns140@purdue.edu\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"kick\":\"5d801f4c19b44a12a023bf2a\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
+
             try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
             }
@@ -49,29 +50,31 @@ public class SearchUserTest {
             }
             in.close();
 
-            boolean exists = lastString.contains("user found");
+            boolean exists = lastString.contains("successfully changed cur and prev teams");
             Assertions.assertTrue(exists);
+            Assertions.assertEquals(200, statuscode);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     @Test
-    public void testUserNotExist() {
+    public void testUserNotInTeam() {
         try {
-            URL url = new URL("http://localhost:8000/search");
+            URL url = new URL("http://localhost:8000/kickuser/5d84569de4ff8a0ce88b3720");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"email\":\"yeet@purdue.edu\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"kick\":\"notinteamnotinteamnotint\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
             http.connect();
+
             try(OutputStream os = http.getOutputStream()) {
                 os.write(out);
             }
@@ -93,11 +96,11 @@ public class SearchUserTest {
             }
             in.close();
 
-            boolean exists = lastString.contains("user not found");
+            boolean exists = lastString.contains("user with that id not in that team");
             Assertions.assertTrue(exists);
+            Assertions.assertEquals(statuscode, 400);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
-
 }

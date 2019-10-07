@@ -2,8 +2,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,7 +50,6 @@ public class CreateUserTest {
             String randString = Integer.toString(randInt);
             String passString = "{\"email\":\"" + randString + "@purdue.edu\",\"password\":\"V4lidPa$$word\"}";
 
-            //byte[] out = "{\"email\":\"delete@purdue.edu\",\"password\":\"V4lidPa$$word\"}".getBytes(StandardCharsets.UTF_8);
             byte[] out = passString.getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
@@ -77,9 +77,9 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("User successfully created", lastString);
+            boolean exists = (lastString.contains("User successfully created"));
+            Assertions.assertTrue(exists);
 
-            url = new URL("http://localhost:8000/signup");
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -121,7 +121,8 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("Invalid email", lastString);
+            boolean exists = lastString.contains("Invalid email");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -163,7 +164,8 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character", lastString);
+            boolean exists = lastString.contains("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -205,7 +207,8 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
+            boolean exists = lastString.contains("password must be between 8 and 20 characters");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -247,7 +250,8 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("password must be between 8 and 20 characters", lastString);
+            boolean exists = lastString.contains("password must be between 8 and 20 characters");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -289,7 +293,8 @@ public class CreateUserTest {
             }
             in.close();
 
-            Assert.assertEquals("User with that email already exists", lastString);
+            boolean exists = lastString.contains("User with that email already exists");
+            Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
         }
