@@ -22,6 +22,7 @@ class UserPage extends React.Component {
             errors: [],
             prevName: '',
             prevBio: '',
+            uid: '',
         }
     }
     //TODO: dont know correct fetch argument
@@ -32,6 +33,7 @@ class UserPage extends React.Component {
             const {id} = jwt.decode(window.localStorage.getItem('token')).data
             console.log(uid);
             console.log(id);
+            this.state.uid = uid;
             isMe = uid === id || uid === '';
         }
         fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
@@ -179,6 +181,45 @@ class UserPage extends React.Component {
             edit: !this.state.edit
         })
     }
+    //Need way to tell if profile is blocked or not
+    block(e) {
+        e.preventDefault();
+        console.log(this.state.uid);
+        fetch((PRODUCTION ? production_url : local_url) + '/block/' + this.state.uid, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            },
+            body: JSON.stringify(this.state.uid)
+          }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
+        /*const fetchParams = {
+            method:'POST',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                "content-type":"application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(this.state.uid)
+        }
+        console.log(fetchParams)
+        const res = await fetch(, fetchParams)
+        if(res.status !== 200) {
+            const text = await res.text();
+            console.log('Error:', text)
+            alert("Error; could not block user")
+        }*/
+    }
+    unblock(e) {
+        e.preventDefault();
+        fetch((PRODUCTION ? production_url : local_url) + '/unblock/' + this.state.uid, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            },
+            body: JSON.stringify(this.state.uid)
+          }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
+    }
     render(){
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
@@ -210,6 +251,7 @@ class UserPage extends React.Component {
                         </form>
                     }
                     {this.state.isMe ? <button onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
+                    {this.state.isMe ?  null : <button onCLick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
             </div>
