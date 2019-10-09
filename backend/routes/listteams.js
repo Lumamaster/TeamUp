@@ -7,7 +7,7 @@ const verify = require('../verifyjwt');
 const dbconfig = require('../db_config.json');
 
 router.use(express.urlencoded({extended:false}));
-router.use(verify);
+//router.use(verify);
 
 /*router.get('/', async(req,res) => {
     // Listing all active teams

@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const jwt = require('jsonwebtoken');
+const mongo = require('mongodb');
+const config = require('./db_config.json')
 const login = require('./routes/login');
 const signup = require('./routes/signup');
 const viewProfile = require('./routes/viewprofile');
@@ -36,4 +41,59 @@ app.use('/kickuser', kickUser);
 app.use('/blk', block);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
-app.listen(port, () => console.log(`Server running on port ${port}`));
+
+http.listen(port, () => console.log(`Server running on port ${port}`));
+
+io.use(async (socket, next) => {
+    if(socket.user) return next();
+    try {
+        const user = await jwt.verify(socket.handshake.query.token, config.jwt_key)
+        socket.user = {
+            id: user.data.id,
+            name: user.data.name || user.data.username || user.data.id
+        }
+        return next();
+    } catch(err) {
+        socket.disconnect();
+    }
+})
+
+io.on('connection', async socket => {
+    //console.log(socket.user.name,"connected!")
+    const {room} = socket.handshake.query
+    //console.log(room)
+    try {
+        const client = await mongo.MongoClient.connect(config.url, { useNewUrlParser: true, useUnifiedTopology: true });
+        const team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(room)});
+        //console.log(team)
+        let isInTeam = false;
+        team.teamMembers.forEach(member => {
+            if(!isInTeam && member.id === socket.user.id) {
+                //console.log(socket.user.name, 'joins', room);
+                isInTeam = true;
+                socket.join(room);
+                socket.on('message', msg => {
+                    //console.log("Send message to", room)
+                    io.to(room).emit('message', {
+                        sender: socket.user.name,
+                        senderId: socket.user.id,
+                        body: msg
+                    })
+
+                    //TODO log message in database
+                })
+                socket.emit('ready', {
+                    myId: socket.user.id,
+                    messages: []
+                })    //TODO send messages from database in place of empty array
+            }
+        })
+        if(!isInTeam) {
+            console.log("Not in team");
+            socket.disconnect();
+        }
+    } catch(err) {
+        console.log(err)
+        socket.disconnect();
+    }
+})
