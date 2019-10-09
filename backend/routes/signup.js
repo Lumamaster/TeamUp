@@ -2,8 +2,6 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 const dbconfig = require('../db_config.json');
-const iterator = require('../iterating.js');
-const cookie = require('../cookies.js');
 const assert = require('assert');
 
 router.use(express.json());

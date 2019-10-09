@@ -2,6 +2,7 @@ import React from 'react';
 import '../../App.css';
 import {Link} from 'react-router-dom';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
+import io from 'socket.io-client';
 
 class TeamDashboard extends React.Component {
     constructor(props) {
@@ -10,8 +11,36 @@ class TeamDashboard extends React.Component {
             team: null,
             chatmsg:'',
             notetext:'',
-            errors: []
+            errors: [], 
+            disableChat: true
         }
+        const roomId = window.location.href.substr(window.location.href.indexOf('/teams/') + 7)
+        this.myId = null;
+        this.socket = io.connect((PRODUCTION ? production_url : local_url), {
+            query: {
+                room: roomId,
+                token: window.localStorage.getItem('token')
+            }
+        })
+        this.socket.on('message', msg => this.showMessage(msg));
+        this.socket.on('ready', data => this.prepareChat(data));
+    }
+
+    showMessage = msg => {
+        console.log("Got a message", msg);
+        if(msg.senderId !== this.myId) {
+            let {messages} = this.state;
+            messages.push(msg);
+            this.setState({messages})
+        }
+    }
+
+    prepareChat = data => {
+        this.setState({
+            messages: data.messages,
+            disableChat: false
+        })
+        this.myId = data.myId;
     }
     async componentDidMount() {
         if(!window.localStorage.getItem('token')) {
@@ -55,8 +84,20 @@ class TeamDashboard extends React.Component {
         })
     }
     sendChatMsg = () => {
-        console.log("Send chat message:",this.state.chatmsg);
+        //console.log("Send chat message:",this.state.chatmsg);
+        if(!this.state.chatmsg || this.state.chatmsg.length === 0 || this.state.chatmsg.length > 560) {
+            alert("Please enter a chat message between 1 and 560 characters long")
+            return;
+        }
+        let {messages} = this.state;
+        messages.push({
+            sender:"You",
+            senderId:"",
+            body:this.state.chatmsg
+        })
+        this.socket.emit('message', this.state.chatmsg)
         this.setState({
+            messages:messages,
             chatmsg:''
         })
     }
@@ -88,18 +129,20 @@ class TeamDashboard extends React.Component {
                 </div>
                 <div id="right" style={{minWidth:200, flexGrow:1}}>
                     <div id="chat-log" style={{width:'100%', padding:'0px 8px', border:'1px solid #555', backgroundColor:'#eee', height:window.innerHeight * 0.6, overflowY:'scroll'}}>
-                        <p>Chat has not been implemented yet, try again later.</p>
-                        {this.state.team && this.state.team.chat ? this.state.team.chat.map((msg,i) => {
-                            return <p key={"msg"+i}><span style={{fontWeight:'bold'}}>{msg.author}:  </span>{msg.body}</p>
+                        {this.state.team && this.state.messages ? this.state.messages.map((msg,i) => {
+                            return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.sender}</Link>:  </span>{msg.body}</p>
                         }) : null}
                     </div>
                     <div style={{display:'flex'}}>
-                        <input disabled style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
-                        <button style={{width:50}} disabled onClick={this.sendChatMsg}>Send</button>
+                        <input disabled={this.state.disableChat} style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
+                        <button style={{width:50}} disabled={this.state.disableChat} onClick={this.sendChatMsg}>Send</button>
                     </div>
                 </div>
             </div>
         );
+    }
+    componentWillUnmount() {
+        this.socket.disconnect();
     }
 }
 
