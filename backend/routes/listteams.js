@@ -3,7 +3,6 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const assert = require('assert');
-const cookie = require('../cookies');
 const verify = require('../verifyjwt');
 const dbconfig = require('../db_config.json');
 
@@ -55,7 +54,7 @@ router.get('/', async(req,res) => {
     // Searching team
     //console.log(req.query);
     const {name, owner, members, info, skills, open, course} = req.query;
-    const owner = req.token //has id and username stored
+    //const owner = req.token //has id and username stored
 
     try{
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology:true}, function(err, client){
