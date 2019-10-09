@@ -54,6 +54,7 @@ io.use(async (socket, next) => {
         }
         return next();
     } catch(err) {
+        console.log(err)
         socket.disconnect();
     }
 })
