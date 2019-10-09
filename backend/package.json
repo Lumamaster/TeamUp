@@ -14,7 +14,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.2"
+    "mongodb": "^3.3.2",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
