@@ -7,6 +7,7 @@ const verify = require('../verifyjwt');
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 
+router.use(express.urlencoded({extended:false}));
 router.use(verify);
 router.use(express.json());
 router.get('/unblock/:id', async (req,res) => {
@@ -110,6 +111,9 @@ router.get('/block/:id', async (req,res) => {
 
     const {theirId} = req.params;
     const myId = req.token.id;
+
+    console.log(theirId);
+    console.log(myId);
 
     /* Check that the ids are valid */
     if(theirId.length !== 24 || myId.length != 24){

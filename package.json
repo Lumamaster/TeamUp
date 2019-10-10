@@ -1,0 +1,19 @@
+{
+  "name": "teamup",
+  "version": "1.0.0",
+  "description": "CS 408 Software Testing project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lumamaster/TeamUp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lumamaster/TeamUp/issues"
+  },
+  "homepage": "https://github.com/Lumamaster/TeamUp#readme"
+}
