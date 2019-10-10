@@ -6,6 +6,7 @@ const assert = require('assert');
 const verify = require('../verifyjwt');
 const dbconfig = require('../db_config.json');
 
+router.use(express.urlencoded({extended:false}));
 router.use(verify);
 router.use(express.json());
 router.post('/:id', async(req,res) => {

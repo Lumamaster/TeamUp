@@ -9,11 +9,13 @@ const jwt = require('jsonwebtoken');
 
 router.use(verify);
 router.use(express.json());
+router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
 
     /* Check that the team id is valid */
     const {teamId} = req.params;
     if(teamId.length !== 24){
+        console.log("invalid team ID");
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
     }

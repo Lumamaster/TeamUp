@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 
 router.use(verify);
 router.use(express.json());
+router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
 
     /* Check that the team id is valid */

@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/subModule1/src/test/java/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/routes/blockuser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/blockuser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/java/UserReviewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/java/UserReviewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/BlockUserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/BlockUserTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
@@ -95,27 +104,28 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="1" />
+          <entry key="java" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="1" />
+          <entry key="JAVA" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="133" />
+          <entry key="java" value="245" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="133" />
+          <entry key="JAVA" value="245" />
         </counts>
       </usages-collector>
     </session>
@@ -125,7 +135,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
+            <state relative-caret-position="-1061">
               <caret line="63" selection-start-line="63" selection-end-line="63" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -137,8 +147,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="32" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="-72">
+              <caret line="73" selection-start-line="73" selection-end-line="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,10 +157,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/UserReviewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="33" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="47">
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,8 +180,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
+            <state relative-caret-position="-51">
+              <caret line="75" selection-start-line="75" selection-end-line="75" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-109">
+              <caret line="131" selection-start-line="131" selection-end-line="131" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="142" column="46" selection-start-line="142" selection-end-line="143" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -171,13 +214,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="67" column="19" lean-forward="true" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="283" column="33" lean-forward="true" selection-start-line="283" selection-start-column="33" selection-end-line="283" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-72">
+              <caret line="166" column="89" selection-start-line="166" selection-start-column="89" selection-end-line="166" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -220,15 +278,16 @@
         <option value="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsLogin" />
         <option value="$PROJECT_DIR$/subModule1/src/test/selTests/selTestsRemove" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/Constants.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java" />
+        <option value="$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java" />
         <option value="$PROJECT_DIR$/subModule1/src/test/java/UserReviewTest.java" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java" />
-        <option value="$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java" />
       </list>
     </option>
   </component>
@@ -255,10 +314,11 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-15" />
-    <option name="width" value="1628" />
-    <option name="height" value="1815" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="210" />
+    <option name="y" value="250" />
+    <option name="width" value="1635" />
+    <option name="height" value="1835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -266,8 +326,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -305,11 +363,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570726296969" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570730638006" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -324,7 +384,17 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BlockUserTest.testBlockInvalidId">
+  <component name="RunManager" selected="JUnit.BlockUserTest.testUnblockUserSuccess">
+    <configuration name="BlockUserTest.testBlockAlreadyBlocked" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="subModule1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BlockUserTest" />
+      <option name="METHOD_NAME" value="testBlockAlreadyBlocked" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BlockUserTest.testBlockInvalidId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
@@ -345,18 +415,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeaveTeamTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BlockUserTest.testUnblockUserSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="subModule1" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LeaveTeamTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LoginUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="subModule1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LoginUserTest" />
+      <option name="MAIN_CLASS_NAME" value="BlockUserTest" />
+      <option name="METHOD_NAME" value="testUnblockUserSuccess" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -370,19 +434,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.LeaveTeamTest" />
-      <item itemvalue="JUnit.LoginUserTest" />
       <item itemvalue="JUnit.SearchUserTest" />
       <item itemvalue="JUnit.BlockUserTest.testBlockInvalidId" />
       <item itemvalue="JUnit.BlockUserTest.testBlockUserSuccess" />
+      <item itemvalue="JUnit.BlockUserTest.testBlockAlreadyBlocked" />
+      <item itemvalue="JUnit.BlockUserTest.testUnblockUserSuccess" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BlockUserTest.testBlockInvalidId" />
+        <item itemvalue="JUnit.BlockUserTest.testUnblockUserSuccess" />
+        <item itemvalue="JUnit.BlockUserTest.testBlockAlreadyBlocked" />
         <item itemvalue="JUnit.BlockUserTest.testBlockUserSuccess" />
+        <item itemvalue="JUnit.BlockUserTest.testBlockInvalidId" />
         <item itemvalue="JUnit.SearchUserTest" />
-        <item itemvalue="JUnit.LoginUserTest" />
-        <item itemvalue="JUnit.LeaveTeamTest" />
       </list>
     </recent_temporary>
   </component>
@@ -408,45 +472,45 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LeaveTeamTest - 2019.09.27 at 12h 54m 41s.xml">
-      <configuration name="LeaveTeamTest" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 06m 52s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LoginUserTest - 2019.09.27 at 12h 54m 46s.xml">
-      <configuration name="LoginUserTest" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 08m 10s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SearchUserTest - 2019.09.27 at 12h 54m 55s.xml">
-      <configuration name="SearchUserTest" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 10m 17s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockInvalidId - 2019.10.10 at 12h 15m 37s.xml">
-      <configuration name="BlockUserTest.testBlockInvalidId" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 11m 13s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockUserSuccess - 2019.10.10 at 12h 28m 19s.xml">
-      <configuration name="BlockUserTest.testBlockUserSuccess" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 13m 20s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockUserSuccess - 2019.10.10 at 12h 29m 25s.xml">
-      <configuration name="BlockUserTest.testBlockUserSuccess" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 15m 15s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockUserSuccess - 2019.10.10 at 12h 29m 47s.xml">
-      <configuration name="BlockUserTest.testBlockUserSuccess" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 17m 33s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockUserSuccess - 2019.10.10 at 12h 32m 42s.xml">
-      <configuration name="BlockUserTest.testBlockUserSuccess" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 18m 53s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockUserSuccess - 2019.10.10 at 12h 38m 40s.xml">
-      <configuration name="BlockUserTest.testBlockUserSuccess" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testBlockAlreadyBlocked - 2019.10.10 at 13h 19m 52s.xml">
+      <configuration name="BlockUserTest.testBlockAlreadyBlocked" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockInvalidId - 2019.10.10 at 12h 49m 50s.xml">
-      <configuration name="BlockUserTest.testBlockInvalidId" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testBlockAlreadyBlocked - 2019.10.10 at 13h 20m 59s.xml">
+      <configuration name="BlockUserTest.testBlockAlreadyBlocked" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BlockUserTest_testBlockInvalidId - 2019.10.10 at 12h 50m 24s.xml">
-      <configuration name="BlockUserTest.testBlockInvalidId" configurationId="JUnit" />
+    <history-entry file="BlockUserTest_testUnblockUserSuccess - 2019.10.10 at 13h 21m 07s.xml">
+      <configuration name="BlockUserTest.testUnblockUserSuccess" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="651" height="726" extended-state="0" />
+    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14333895" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27611336" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -454,10 +518,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3647059" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3604651" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -465,6 +528,7 @@
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -472,7 +536,7 @@
       <window_info anchor="right" id="Ant Build" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.059021924" />
+      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.058299594" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -520,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="167" column="45" lean-forward="true" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -534,34 +591,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="44" column="20" lean-forward="true" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/pom.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-end-line="12" />
+        <state relative-caret-position="17">
+          <caret line="142" column="46" selection-start-line="142" selection-end-line="143" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/EditProfileTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        <state relative-caret-position="-72">
+          <caret line="166" column="89" selection-start-line="166" selection-start-column="89" selection-end-line="166" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LoginUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
+        <state relative-caret-position="-1061">
           <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/LeaveTeamTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-109">
+          <caret line="131" selection-start-line="131" selection-end-line="131" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -570,41 +643,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SearchUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="32" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="32" selection-end-column="13" />
+        <state relative-caret-position="-72">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/SeeAllSkillsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/UserReviewTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="13" selection-start-line="23" selection-start-column="12" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="47">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/KickUsersTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="34">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/BlockUserTest.java">
+    <entry file="file://$PROJECT_DIR$/subModule1/src/test/java/CreateUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="67" column="19" lean-forward="true" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="283" column="33" lean-forward="true" selection-start-line="283" selection-start-column="33" selection-end-line="283" selection-end-column="33" />
         </state>
       </provider>
     </entry>

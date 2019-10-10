@@ -12,7 +12,7 @@ router.use(verify);
 router.use(express.json());
 router.get('/unblock/:id', async (req,res) => {
 
-    const {theirId} = req.params;
+    const theirId = req.params.id;
     const myId = req.token.id;
 
     /* Check that the ids are valid */
@@ -27,11 +27,11 @@ router.get('/unblock/:id', async (req,res) => {
             assert.equal(null, err);
             const userdb = client.db("Users");
 
-            var them = userdb.collection('user').findOne({
+            var them = userdb.collection('user').find({
                 "_id":ObjectID(theirId)
             }).toArray();
 
-            var me = userdb.collection('user').findOne({
+            var me = userdb.collection('user').find({
                 "_id":ObjectID(myId)
             }).toArray();
 
@@ -41,11 +41,12 @@ router.get('/unblock/:id', async (req,res) => {
 
                 /* remove me from their blockedby array */
                 for (var i = 0; i < theirBlocked.length; i++) {
-                    if (theirBlocked[i].id == myId) {
+                    if (theirBlocked[i] == myId) {
                         theirBlocked.splice(i, 1);
                         break;
                     }
                 }
+
                 userdb.collection('user').updateOne(            
                     { _id: ObjectID(theirId) },
                     {
@@ -57,7 +58,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                         /* remove them from my blockedusers array */
                         for (var i = 0; i < myBlocked.length; i++) {
-                            if (myBlocked[i].id == theirId) {
+                            if (myBlocked[i] == theirId) {
                                 myBlocked.splice(i, 1);
                                 break;
                             }
@@ -109,7 +110,7 @@ router.get('/unblock/:id', async (req,res) => {
 
 router.get('/block/:id', async (req,res) => {
 
-    const {theirId} = req.params;
+    const theirId = req.params.id;
     const myId = req.token.id;
 
     console.log(theirId);
@@ -134,7 +135,7 @@ router.get('/block/:id', async (req,res) => {
                     $addToSet: {blockedBy: myId }
                 }
             ).then(function (result) {
-                console.log('succesfully added to their blockedby');
+                console.log('successfully accessed their blockedby');
 
                 /* Add them to the list of people that I have blocked */
                 userdb.collection('user').updateOne(
@@ -143,8 +144,8 @@ router.get('/block/:id', async (req,res) => {
                         $addToSet: {blockedUsers: theirId }
                     }
                 ).then(function (r) {
-                    console.log('successfully added them to blockedUsers');
-                    res.status(200).json({message:'successfully added to lists'});
+                    console.log('successfully accessed my blockedusers');
+                    res.status(200).json({message:'successfully accessed both lists'});
                     client.close();
                     return;
                 }).catch(function (err) {
