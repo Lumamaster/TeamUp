@@ -93,7 +93,7 @@ io.on('connection', async socket => {
                 socket.emit('ready', {
                     myId: socket.user.id,
                     messages: team.chat || []
-                })    //TODO send messages from database in place of empty array
+                })
             }
         })
         if(!isInTeam) {
