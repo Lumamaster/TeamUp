@@ -36,11 +36,11 @@ class TeamDashboard extends React.Component {
     }
 
     prepareChat = data => {
+        this.myId = data.myId;
         this.setState({
             messages: data.messages,
-            disableChat: false
+            disableChat: false,
         })
-        this.myId = data.myId;
     }
     async componentDidMount() {
         if(!window.localStorage.getItem('token')) {
@@ -130,7 +130,7 @@ class TeamDashboard extends React.Component {
                 <div id="right" style={{minWidth:200, flexGrow:1}}>
                     <div id="chat-log" style={{width:'100%', padding:'0px 8px', border:'1px solid #555', backgroundColor:'#eee', height:window.innerHeight * 0.6, overflowY:'scroll'}}>
                         {this.state.team && this.state.messages ? this.state.messages.map((msg,i) => {
-                            return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.sender}</Link>:  </span>{msg.body}</p>
+                            return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>:  </span>{msg.body}</p>
                         }) : null}
                     </div>
                     <div style={{display:'flex'}}>

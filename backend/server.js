@@ -68,7 +68,7 @@ io.on('connection', async socket => {
         const team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(room)});
         //console.log(team)
         let isInTeam = false;
-        team.teamMembers.forEach(member => {
+        team.teamMembers.forEach(async member => {
             if(!isInTeam && member.id === socket.user.id) {
                 //console.log(socket.user.name, 'joins', room);
                 isInTeam = true;
@@ -80,13 +80,20 @@ io.on('connection', async socket => {
                         senderId: socket.user.id,
                         body: msg
                     })
-
-                    //TODO log message in database
+                    client.db('Teams').collection('team').findOneAndUpdate({_id:mongo.ObjectId(room)},{
+                        $push: {
+                            chat: {
+                                sender: socket.user.name,
+                                senderId: socket.user.id,
+                                body: msg
+                            }
+                        }
+                    })
                 })
                 socket.emit('ready', {
                     myId: socket.user.id,
-                    messages: []
-                })    //TODO send messages from database in place of empty array
+                    messages: team.chat || []
+                })
             }
         })
         if(!isInTeam) {
