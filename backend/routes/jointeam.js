@@ -78,6 +78,46 @@ router.get('/:id', async (req,res) => {
                         username:user.username
                     }}
                 })
+                // Checking if team is full and sending email if it is
+                let teamcheck = teamdb.collection('team').findOne({_id:ObjectId(teamID)})
+                if(teamcheck.numMembers == teamcheck.maxMembers){
+                    try{
+                        // Generate test SMTP service account from ethereal.email
+                        // Only needed if you don't have a real mail account for testing
+                        var testAccount = await nodemailer.createTestAccount();
+
+                        // create reusable transporter object using the default SMTP transport
+                        var transporter = nodemailer.createTransport({
+                            host: 'smtp.ethereal.email',
+                            port: 587,
+                            secure: false, // true for 465, false for other ports
+                            auth: {
+                                user: testAccount.user, // generated ethereal user
+                                pass: testAccount.pass // generated ethereal password
+                            }
+                        })
+                        var mailOptions = {
+                            from: 'example@gmail.com>', // sender address
+                            to: teamcheck.owner.email, // list of receivers
+                            subject: 'Your team is now full!', // Subject line
+                            text: 'Please check your profile to find who joined' //, // plaintext body
+                            // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+                        };
+
+                        transporter.sendMail(mailOptions, function(error, info){
+                            if(error){
+                                console.log(error);
+                                res.json({yo: 'error'});
+                            }else{
+                                console.log('Message sent: ' + info.response);
+                                res.json({yo: info.response});
+                            };
+                        });
+
+                    }catch(error){
+                        console.log(error);
+                    }
+                }
                 let userupdate = userdb.collection('user').findOneAndUpdate({_id:ObjectId(userID)},{
                     $pull: {prevTeams: {
                         id:teamID,
@@ -88,11 +128,61 @@ router.get('/:id', async (req,res) => {
                         name:team.teamName
                     }}
                 })
+                
                 await Promise.all([teamupdate,userupdate])
                 res.status(200).send();
                 return;
             } else {
                 //Request to join the team
+                let userupdate = userdb.collection('user').findOneAndUpdate({_id:ObjectId(userID)},{
+                    $push:{
+                        reqReceived: {
+                            userid: team.owner.id,
+                            teamid: teamID
+                        }
+                    }
+                })
+                // Sending request email
+                try{
+                    // Generate test SMTP service account from ethereal.email
+                    // Only needed if you don't have a real mail account for testing
+                    var testAccount = await nodemailer.createTestAccount();
+
+                    // create reusable transporter object using the default SMTP transport
+                    var transporter = nodemailer.createTransport({
+                        host: 'smtp.ethereal.email',
+                        port: 587,
+                        secure: false, // true for 465, false for other ports
+                        auth: {
+                            user: testAccount.user, // generated ethereal user
+                            pass: testAccount.pass // generated ethereal password
+                        }
+                    })
+                    var mailOptions = {
+                        from: 'example@gmail.com>', // sender address
+                        to: team.owner.email, // list of receivers
+                        subject: 'Your team' + team.teamName + 'has a new request!', // Subject line
+                        text: 'Please check your profile to find who requested' //, // plaintext body
+                        // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+                    };
+
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if(error){
+                            console.log(error);
+                            res.json({yo: 'error'});
+                        }else{
+                            console.log('Message sent: ' + info.response);
+                            res.json({yo: info.response});
+                        };
+                    });
+
+                }catch(error){
+                    console.log(error);
+                }
+                
+                await Promise.all([teamupdate,userupdate])
+                res.status(200).send();
+                return;
             }
         });
     } catch (err) {
