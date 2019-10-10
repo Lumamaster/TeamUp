@@ -68,7 +68,7 @@ io.on('connection', async socket => {
         const team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(room)});
         //console.log(team)
         let isInTeam = false;
-        team.teamMembers.forEach(member => {
+        team.teamMembers.forEach(async member => {
             if(!isInTeam && member.id === socket.user.id) {
                 //console.log(socket.user.name, 'joins', room);
                 isInTeam = true;
@@ -92,7 +92,7 @@ io.on('connection', async socket => {
                 })
                 socket.emit('ready', {
                     myId: socket.user.id,
-                    messages: []
+                    messages: team.chat || []
                 })    //TODO send messages from database in place of empty array
             }
         })
