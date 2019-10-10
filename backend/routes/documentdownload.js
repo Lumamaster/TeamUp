@@ -32,8 +32,8 @@ router.get('/:fileID', (req, res) => {
         var readstream = GridFS.createReadStream({_id: req.params.id});
         readstream.pipe(res);
     } catch (err) {
-        log.error(err);
-        return next(errors.create(404, "File not found."));
+        mongodb.error(err);
+        return res.status(404).json({ message: "File not found" });
     }
 });
 

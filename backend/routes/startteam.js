@@ -10,7 +10,7 @@ router.use(express.json());
 router.use(verify);
 router.post('/', async(req,res) => {
 
-    const {teamName, teamMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
+    const {teamName, teamMembers, info, requestedSkills, tags, open, course, maxMembers} =  req.body;
     //TODO: Handle sending invites to other team members
     const owner = req.token.id //has id and username stored
     var thisteamid;
@@ -28,6 +28,7 @@ router.post('/', async(req,res) => {
                 owner: owner,
                 info: info,
                 requestedSkills: requestedSkills,
+                tags: tags,
                 numMembers: 1,
                 open: open,
                 alive: true,
