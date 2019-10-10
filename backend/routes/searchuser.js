@@ -18,7 +18,9 @@ router.post('/', async (req,res) => {
 
             var cursor = db.collection('user').find({
                 email: email,
-            });
+            }, {projection: {
+                password: false
+            }});
 
             var arr = cursor.toArray();
 

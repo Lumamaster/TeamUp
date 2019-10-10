@@ -29,7 +29,9 @@ router.get('/:id', async (req,res) => {
     
             var cursor = db.collection('user').findOne({
                 "_id":ObjectID(id)
-            }, (err, result) => {
+            }, {projection: {
+                password: false
+            }}, (err, result) => {
                 if(err) {
                     res.status(500).send();
                     console.error(err);
@@ -64,7 +66,9 @@ router.get('/', (req,res) => {
     
             var cursor = db.collection('user').findOne({
                 "_id":ObjectID(id)
-            }, (err, result) => {
+            }, {projection: {
+                password: false
+            }}, (err, result) => {
                 if(err) {
                     res.status(500).send();
                     console.error(err);
