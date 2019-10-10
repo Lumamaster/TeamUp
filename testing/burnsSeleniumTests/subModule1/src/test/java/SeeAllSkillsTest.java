@@ -13,7 +13,7 @@ public class SeeAllSkillsTest {
     @Test
     public void testAllSkillsSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/teamskills/5d87f70fa0edab324400693c");
+            URL url = new URL("http://localhost:8000/teamskills/5d8e868816243b778894c248");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("GET");

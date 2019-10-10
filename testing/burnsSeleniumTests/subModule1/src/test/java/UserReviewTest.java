@@ -45,12 +45,12 @@ public class UserReviewTest {
             while ((decodedString = in.readLine()) != null) {
                 if (decodedString != null) {
                     lastString = decodedString;
+                    System.out.println(lastString);
                 }
-                System.out.println(decodedString);
             }
             in.close();
 
-            boolean exists = lastString.contains("successfully added to lists");
+            boolean exists = lastString.contains("review added");
             Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);

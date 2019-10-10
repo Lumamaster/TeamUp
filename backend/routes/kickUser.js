@@ -10,10 +10,10 @@ const jwt = require('jsonwebtoken');
 router.use(verify);
 router.use(express.json());
 router.use(express.urlencoded({extended:false}));
-router.get('/:id', async (req,res) => {
+router.post('/:id', async (req,res) => {
 
     // Confirm a valid team ID
-    const {teamId} = req.params;
+    const teamId = req.params.id;
     if(teamId.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
@@ -27,11 +27,11 @@ router.get('/:id', async (req,res) => {
             const userdb = client.db("Users");
             const teamdb = client.db("Teams");
 
-            var team = teamdb.collection('team').findOne({
+            var team = teamdb.collection('team').find({
                 "_id":ObjectID(teamId)
             }).toArray();
 
-            var user = userdb.collection('user').findOne({
+            var user = userdb.collection('user').find({
                 "_id":ObjectID(userToKick)
             }).toArray();
 
@@ -83,7 +83,7 @@ router.get('/:id', async (req,res) => {
                             { _id: ObjectID(userToKick) },
                             {
                                 $set: { curTeams: curArr },
-                                $push: { prevTeams: { oldteam } } 
+                                $push: { prevTeams: oldteam } 
                             }
                         ).then(function (result) {
                             console.log('successfully changed cur and prev teams');
