@@ -19,6 +19,10 @@ User {
         name: string; the team's teamName
     }
     reviews: string array; list of reviews from other users about you
+    reqReceived: object array; {
+        userid: user id who requested to join a team
+        teamid: the team id the user requested to join
+    }
 }
 
 Team {
