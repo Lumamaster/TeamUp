@@ -26,7 +26,7 @@ public class UserReviewTest {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             try(OutputStream os = http.getOutputStream()) {
@@ -45,12 +45,12 @@ public class UserReviewTest {
             while ((decodedString = in.readLine()) != null) {
                 if (decodedString != null) {
                     lastString = decodedString;
+                    System.out.println(lastString);
                 }
-                System.out.println(decodedString);
             }
             in.close();
 
-            boolean exists = lastString.contains("successfully added to lists");
+            boolean exists = lastString.contains("review added");
             Assertions.assertTrue(exists);
         } catch (IOException e) {
             System.out.println(e);
@@ -67,7 +67,7 @@ public class UserReviewTest {
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;

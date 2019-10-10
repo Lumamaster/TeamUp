@@ -15,18 +15,18 @@ public class KickUsersTest {
     @Test
     public void testKickUserSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/kickuser/5d84569de4ff8a0ce88b3720");
+            URL url = new URL("http://localhost:8000/kickuser/5d8e868816243b778894c248");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"kick\":\"5d801f4c19b44a12a023bf2a\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"kick\":\"5d9f86fa34d0cd1c307af061\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             try(OutputStream os = http.getOutputStream()) {
@@ -50,7 +50,7 @@ public class KickUsersTest {
             }
             in.close();
 
-            boolean exists = lastString.contains("successfully changed cur and prev teams");
+            boolean exists = lastString.contains("successfully kicked user");
             Assertions.assertTrue(exists);
             Assertions.assertEquals(200, statuscode);
         } catch (IOException e) {
@@ -61,18 +61,18 @@ public class KickUsersTest {
     @Test
     public void testUserNotInTeam() {
         try {
-            URL url = new URL("http://localhost:8000/kickuser/5d84569de4ff8a0ce88b3720");
+            URL url = new URL("http://localhost:8000/kickuser/5d8e868816243b778894c248");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
-            byte[] out = "{\"kick\":\"notinteamnotinteamnotint\"}".getBytes(StandardCharsets.UTF_8);
+            byte[] out = "{\"kick\":\"aaaaaaaaaaaaaaaaaaaaaaaa\"}".getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             try(OutputStream os = http.getOutputStream()) {

@@ -13,14 +13,14 @@ public class SeeAllSkillsTest {
     @Test
     public void testAllSkillsSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/teamskills/5d87f70fa0edab324400693c");
+            URL url = new URL("http://localhost:8000/teamskills/5d8e868816243b778894c248");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setRequestMethod("GET");
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;
@@ -57,7 +57,7 @@ public class SeeAllSkillsTest {
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;

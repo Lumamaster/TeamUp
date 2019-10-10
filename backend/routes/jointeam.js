@@ -7,6 +7,7 @@ const assert = require('assert');
 
 router.use(verify);
 router.use(express.json());
+router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
 
     const teamID = req.params.id

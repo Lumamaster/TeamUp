@@ -12,19 +12,20 @@ import java.net.URLConnection;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BlockUserTest {
 
+
     @Test
     @Order(1)
     public void testBlockUserSuccess() {
 
         try {
-            URL url = new URL("http://localhost:8000/block/5d9b85a482e25440bcdd3235");
+            URL url = new URL("http://localhost:8000/blk/block/5d9b85a482e25440bcdd3235");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("GET"); // PUT is another valid option
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;
@@ -39,6 +40,7 @@ public class BlockUserTest {
             while ((decodedString = in.readLine()) != null) {
                 if (decodedString != null) {
                     lastString = decodedString;
+                    System.out.println(lastString);
                 }
                 System.out.println(decodedString);
             }
@@ -55,14 +57,14 @@ public class BlockUserTest {
     @Test
     public void testBlockInvalidId() {
         try {
-            URL url = new URL("http://localhost:8000/block/fdsalkjeid");
+            URL url = new URL("http://localhost:8000/blk/block/fdsalkjeid");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("GET"); // PUT is another valid option
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;
@@ -77,12 +79,13 @@ public class BlockUserTest {
             while ((decodedString = in.readLine()) != null) {
                 if (decodedString != null) {
                     lastString = decodedString;
+                    System.out.println(lastString);
                 }
                 System.out.println(decodedString);
             }
             in.close();
 
-            Assertions.assertEquals(statuscode, 400);
+            Assertions.assertEquals(400, statuscode);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -92,14 +95,14 @@ public class BlockUserTest {
     @Order(2)
     public void testBlockAlreadyBlocked() {
         try {
-            URL url = new URL("http://localhost:8000/block/5d9b85a482e25440bcdd3235");
+            URL url = new URL("http://localhost:8000/blk/block/5d9b85a482e25440bcdd3235");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("GET"); // PUT is another valid option
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;
@@ -114,6 +117,7 @@ public class BlockUserTest {
             while ((decodedString = in.readLine()) != null) {
                 if (decodedString != null) {
                     lastString = decodedString;
+                    System.out.println(lastString);
                 }
                 System.out.println(decodedString);
             }
@@ -129,14 +133,14 @@ public class BlockUserTest {
     @Order(3)
     public void testUnblockUserSuccess() {
         try {
-            URL url = new URL("http://localhost:8000/unblock/5d9b85a482e25440bcdd3235");
+            URL url = new URL("http://localhost:8000/blk/unblock/5d9b85a482e25440bcdd3235");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("GET"); // PUT is another valid option
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;

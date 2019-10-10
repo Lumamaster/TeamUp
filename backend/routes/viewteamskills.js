@@ -9,11 +9,13 @@ const jwt = require('jsonwebtoken');
 
 router.use(verify);
 router.use(express.json());
+router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
 
     /* Check that the team id is valid */
-    const {teamId} = req.params;
+    const teamId = req.params.id;
     if(teamId.length !== 24){
+        console.log("invalid team ID");
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
     }
@@ -26,7 +28,7 @@ router.get('/:id', async (req,res) => {
             /* Find all users that have an element with this teamID in their curTeams array */
             var users = userdb.collection('user').find({
                 curTeams: { $all: [
-                    { "$elemMatch" : { id: teamId} }
+                    { "$elemMatch" : { id: ObjectID(teamId) } }
                 ] }
             }).toArray();
 
@@ -34,8 +36,10 @@ router.get('/:id', async (req,res) => {
                To avoid the case of duplicates if two users share common skills, only add skills 
                that are not already in the array */
             users.then(function (membersArr) {
+                console.log(users);
                 var allSkills = [];
                 for (member of membersArr) {
+                    console.log(member.curTeams);
                     var curSkills = member.skills;
                     for (skill of curSkills) {
                         if (!allSkills.includes(skill)) {
@@ -45,6 +49,7 @@ router.get('/:id', async (req,res) => {
                 }
 
                 console.log('skill array returned');
+                console.log(allSkills);
                 res.status(200).json({allSkills:allSkills, message:'skill array returned'});        /* Send the array that has all distinct skills in it */
                 client.close();
             }).catch(function (err) {

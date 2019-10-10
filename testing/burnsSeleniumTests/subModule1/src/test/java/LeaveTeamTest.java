@@ -48,7 +48,7 @@ public class LeaveTeamTest {
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
 
             BufferedReader in;
@@ -86,7 +86,7 @@ public class LeaveTeamTest {
             http.setDoOutput(true);
 
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
 
             http.connect();
 
@@ -128,7 +128,7 @@ public class LeaveTeamTest {
 
             //http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            http.setRequestProperty("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNWQ4MDFmNGMxOWI0NGExMmEwMjNiZjJhIn0sImlhdCI6MTU2OTYwMDQ5OCwiZXhwIjoxNTY5Njg2ODk4fQ.3L7Fg7_Rj7kbIEGUTIKkU5Edt0SRnUNExr0hvPau314");
+            http.setRequestProperty("Authorization", "Bearer " + Constants.BEARER_TOKEN);
             http.connect();
             /*try(OutputStream os = http.getOutputStream()) {
                 os.write(out);

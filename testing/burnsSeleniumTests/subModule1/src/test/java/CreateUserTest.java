@@ -30,7 +30,7 @@ public class CreateUserTest {
     //WebDriver driver = new ChromeDriver();
     final String createUserUrl = "http://localhost:300";
     final String email = "burns140@purdue.edu";
-    final String password = "V4lidPa44word";
+    final String password = "Pa$$w0rd";
 
     //WebDriverWait wait = new WebDriverWait(driver, 10);
 
