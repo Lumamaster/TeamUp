@@ -80,8 +80,15 @@ io.on('connection', async socket => {
                         senderId: socket.user.id,
                         body: msg
                     })
-
-                    //TODO log message in database
+                    client.db('Teams').collection('team').findOneAndUpdate({_id:mongo.ObjectId(room)},{
+                        $push: {
+                            chat: {
+                                sender: socket.user.name,
+                                senderId: socket.user.id,
+                                body: msg
+                            }
+                        }
+                    })
                 })
                 socket.emit('ready', {
                     myId: socket.user.id,
