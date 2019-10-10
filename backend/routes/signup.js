@@ -34,6 +34,18 @@ router.post('/', async (req,res) => {
         return;
     }
     
+    var times = new Array(7);
+    var sections = 48;
+    for (var i = 0; i < times.length; i++) {
+        times[i] = new Array(sections);
+    }
+
+    for (var i = 0; i < times.length; i ++) {
+        for (var k = 0; k < sections; k++) {
+            times[i][k] = 0;
+        }
+    }
+
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
@@ -52,6 +64,7 @@ router.post('/', async (req,res) => {
                 // If the request was empty, create the user    
                 } else {
                     db.collection('user').insertOne({
+                        times: times,
                         email: email,
                         password: password,
                         username: screenname,
