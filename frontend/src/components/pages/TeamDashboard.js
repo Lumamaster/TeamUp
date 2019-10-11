@@ -24,15 +24,15 @@ class TeamDashboard extends React.Component {
         })
         this.socket.on('message', msg => this.showMessage(msg));
         this.socket.on('ready', data => this.prepareChat(data));
+
+        this.fileRef = React.createRef();
     }
 
     showMessage = msg => {
         console.log("Got a message", msg);
-        if(msg.senderId !== this.myId) {
-            let {messages} = this.state;
-            messages.push(msg);
-            this.setState({messages})
-        }
+        let {messages} = this.state;
+        messages.push(msg);
+        this.setState({messages})
     }
 
     prepareChat = data => {
@@ -89,20 +89,30 @@ class TeamDashboard extends React.Component {
             alert("Please enter a chat message between 1 and 560 characters long")
             return;
         }
-        let {messages} = this.state;
-        messages.push({
-            sender:"You",
-            senderId:"",
-            body:this.state.chatmsg
-        })
         this.socket.emit('message', this.state.chatmsg)
         this.setState({
-            messages:messages,
             chatmsg:''
         })
     }
     showErrors = () => {
         return this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>)
+    }
+    upload = async e => {
+        e.preventDefault();
+        const data = new FormData(e.target)
+        const filename = this.fileRef.current.value.substr(this.fileRef.current.value.lastIndexOf('\\') + 1)
+        data.set('name', filename)
+        const fetchParams = {
+            method:'POST',
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            },
+            body:data
+        }
+        const url = (PRODUCTION ? production_url : local_url) + '/documents/' + this.state.team._id
+        //console.log("Fetch", url, "with parameters:", fetchParams)
+        const res = await fetch(url, fetchParams);
+        console.log(res.status)
     }
     render() {
         return (
@@ -130,6 +140,17 @@ class TeamDashboard extends React.Component {
                 <div id="right" style={{minWidth:200, flexGrow:1}}>
                     <div id="chat-log" style={{width:'100%', padding:'0px 8px', border:'1px solid #555', backgroundColor:'#eee', height:window.innerHeight * 0.6, overflowY:'scroll'}}>
                         {this.state.team && this.state.messages ? this.state.messages.map((msg,i) => {
+                            if(msg.type === 'file') {
+                                return <p key={"msg"+i}>
+                                    <span style={{fontWeight:'bold'}}>
+                                        <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;
+                                    </span>
+                                    uploaded&nbsp;
+                                    <a target='_blank' href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
+                                        {msg.filename}
+                                    </a>
+                                </p>
+                            }
                             return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>:  </span>{msg.body}</p>
                         }) : null}
                     </div>
@@ -137,6 +158,7 @@ class TeamDashboard extends React.Component {
                         <input disabled={this.state.disableChat} style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
                         <button style={{width:50}} disabled={this.state.disableChat} onClick={this.sendChatMsg}>Send</button>
                     </div>
+                    <form encType='multipart/form-data' onSubmit={this.upload}><input type="file" required ref={this.fileRef} name="doc" onChange={e => console.log(e.target.value)}/><button>Upload File</button></form>
                 </div>
             </div>
         );
