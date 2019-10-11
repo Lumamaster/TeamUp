@@ -134,12 +134,9 @@ router.get('/:id', async (req,res) => {
                 return;
             } else {
                 //Request to join the team
-                let userupdate = userdb.collection('user').findOneAndUpdate({_id:ObjectId(userID)},{
-                    $push:{
-                        reqReceived: {
-                            userid: team.owner.id,
-                            teamid: teamID
-                        }
+                let teamrequest = teamdb.collection('team').findOneAndUpdate({_id: teamID},{
+                    $addToSet:{
+                        reqReceived: userID
                     }
                 })
                 // Sending request email
