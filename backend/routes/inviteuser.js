@@ -124,3 +124,5 @@ router.get('/:id/invite/:teamid', async (req, res) => {
     }
 
 })
+
+module.exports = router;
