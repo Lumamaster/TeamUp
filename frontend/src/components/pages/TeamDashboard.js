@@ -146,4 +146,17 @@ class TeamDashboard extends React.Component {
     }
 }
 
+const FileSelectModal = props => {
+    return (
+        <div id="modal-background">
+            <div id="modal-body">
+                <h4>Upload File</h4>
+                <form>
+                    <input type="file" />
+                </form>
+            </div>
+        </div>
+    )
+}
+
 export default TeamDashboard;

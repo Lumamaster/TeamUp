@@ -7,9 +7,8 @@ const verify = require('../verifyjwt');
 
 router.use(express.json());
 router.use(verify);
-router.post('/', async (req,res) => {
+router.get('/:search', async (req,res) => {
 
-    const {email} = req.body;
     try {
         // Create Connection
         MongoClient.connect(dbconfig.url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, client) {
@@ -17,7 +16,11 @@ router.post('/', async (req,res) => {
             const db = client.db("Users");
 
             var cursor = db.collection('user').find({
-                email: email,
+                $or: [
+                    {email:{$regex: req.params.search}},
+                    {username:{$regex: req.params.search}},
+                    {name:{$regex: req.params.search}}
+                ]
             }, {projection: {
                 password: false
             }});
@@ -27,11 +30,11 @@ router.post('/', async (req,res) => {
             cursor.count().then(function (result) {
 
                 // The user is found
-                if (result == 1) {
-                    console.log('user found');
+                if (result > 0) {
+                    //console.log('user found');
                     arr.then(function (result2) {
-                        console.log(result2[0]);
-                        res.status(200).json({message:'user found', user:result2[0]});
+                        //console.log(result2[0]);
+                        res.status(200).json(result2);
                         client.close();
                         return;
                     }).catch(function (err2) {
@@ -40,18 +43,10 @@ router.post('/', async (req,res) => {
                         client.close();
                         return;
                     });
-                    
-
                     // The user is not found
-                } else if (result == 0) {
-                    console.log('user not found');
-                    res.status(400).json({err:'user not found'});
-                    client.close();
-                    return;
-
-                    // More than one user is found
                 } else {
-                    console.log('multiple users found: ' + result);
+                    //console.log('user not found');
+                    res.status(400).json({err:'user not found'});
                     client.close();
                     return;
                 }
@@ -61,8 +56,52 @@ router.post('/', async (req,res) => {
         console.log(err);
         res.status(400).send(err);
     }
-    
-
 })
 
+
+router.get('/', async (req,res) => {
+
+    try {
+        // Create Connection
+        MongoClient.connect(dbconfig.url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, client) {
+            assert.equal(null, err);
+            const db = client.db("Users");
+
+            var cursor = db.collection('user').find({},
+                {projection: {
+                    password: false
+            }});
+
+            var arr = cursor.toArray();
+
+            cursor.count().then(function (result) {
+
+                // The user is found
+                if (result > 0) {
+                    //console.log('user found');
+                    arr.then(function (result2) {
+                        //console.log(result2[0]);
+                        res.status(200).json(result2);
+                        client.close();
+                        return;
+                    }).catch(function (err2) {
+                        console.log(err2);
+                        res.status(400).send(err2);
+                        client.close();
+                        return;
+                    });
+                    // The user is not found
+                } else {
+                    //console.log('user not found');
+                    res.status(400).json({err:'no users'});
+                    client.close();
+                    return;
+                }
+            });
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+})
 module.exports = router;
