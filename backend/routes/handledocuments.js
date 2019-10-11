@@ -8,7 +8,7 @@ const {Readable} = require('stream');
 router.use(verify);
 
 //Upload a file
-//request body should contain the file
+//request body be multipart form data with attributes 'name' (the filename) and 'doc' (the file)
 router.post('/:teamId', async (req,res) => {
     try {
         const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -72,7 +72,7 @@ router.post('/:teamId', async (req,res) => {
                     senderId: req.token.id,
                     fileId: uploadStream.id
                 })
-                console.log(uploadStream.id);
+                //console.log(uploadStream.id);
                 client.close();
                 return;
             })

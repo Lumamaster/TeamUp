@@ -24,6 +24,8 @@ class TeamDashboard extends React.Component {
         })
         this.socket.on('message', msg => this.showMessage(msg));
         this.socket.on('ready', data => this.prepareChat(data));
+
+        this.fileRef = React.createRef();
     }
 
     showMessage = msg => {
@@ -104,6 +106,23 @@ class TeamDashboard extends React.Component {
     showErrors = () => {
         return this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>)
     }
+    upload = async e => {
+        e.preventDefault();
+        const data = new FormData(e.target)
+        const filename = this.fileRef.current.value.substr(this.fileRef.current.value.lastIndexOf('\\') + 1)
+        data.set('name', filename)
+        const fetchParams = {
+            method:'POST',
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            },
+            body:data
+        }
+        const url = (PRODUCTION ? production_url : local_url) + '/documents/' + this.state.team._id
+        //console.log("Fetch", url, "with parameters:", fetchParams)
+        const res = await fetch(url, fetchParams);
+        console.log(res.status)
+    }
     render() {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
@@ -137,6 +156,7 @@ class TeamDashboard extends React.Component {
                         <input disabled={this.state.disableChat} style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
                         <button style={{width:50}} disabled={this.state.disableChat} onClick={this.sendChatMsg}>Send</button>
                     </div>
+                    <form encType='multipart/form-data' onSubmit={this.upload}><input type="file" required ref={this.fileRef} name="doc" onChange={e => console.log(e.target.value)}/><button>Upload File</button></form>
                 </div>
             </div>
         );
