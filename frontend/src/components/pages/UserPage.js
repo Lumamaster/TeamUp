@@ -188,36 +188,20 @@ class UserPage extends React.Component {
         fetch((PRODUCTION ? production_url : local_url) + '/block/' + this.state.uid, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
             },
-            body: JSON.stringify(this.state.uid)
           }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
-        /*const fetchParams = {
-            method:'POST',
-            headers: {
-                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
-                "content-type":"application/json; charset=UTF-8"
-            },
-            body: JSON.stringify(this.state.uid)
-        }
-        console.log(fetchParams)
-        const res = await fetch(, fetchParams)
-        if(res.status !== 200) {
-            const text = await res.text();
-            console.log('Error:', text)
-            alert("Error; could not block user")
-        }*/
     }
     unblock(e) {
         e.preventDefault();
         fetch((PRODUCTION ? production_url : local_url) + '/unblock/' + this.state.uid, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                
             },
-            body: JSON.stringify(this.state.uid)
           }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
     }
     render(){
