@@ -15,7 +15,10 @@ User {
     blockedUsers: string array; list of ids of users that you have blocked
     blockedBy: string array; list of ids of users that have blocked me
     reviews: string array; list of reviews from other users about you
-    invites: string array of user id that are invited
+    invites: object array; {
+        userid: user id who is invited
+        teamid: the team id the user is invited to
+    }
 }
 
 Team {
@@ -35,8 +38,5 @@ Team {
     alive: boolean; whether the group is active or project has ended. true means active
     course: string; contains course name/num
     maxMembers: int; maximum number of members for the team
-    reqReceived: object array; {
-        userid: user id who requested to join a team
-        teamid: the team id the user requested to join
-    }
+    reqReceived: string array of user id
 }
