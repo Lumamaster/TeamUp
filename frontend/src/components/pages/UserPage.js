@@ -185,7 +185,7 @@ class UserPage extends React.Component {
     block(e) {
         e.preventDefault();
         console.log(this.state.uid);
-        fetch((PRODUCTION ? production_url : local_url) + '/block/' + this.state.uid, {
+        fetch((PRODUCTION ? production_url : local_url) + '/blk', {
             method: "POST",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
@@ -195,7 +195,7 @@ class UserPage extends React.Component {
     }
     unblock(e) {
         e.preventDefault();
-        fetch((PRODUCTION ? production_url : local_url) + '/unblock/' + this.state.uid, {
+        fetch((PRODUCTION ? production_url : local_url) + '/unblk/', {
             method: "POST",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
