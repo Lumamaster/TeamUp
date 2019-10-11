@@ -7,6 +7,7 @@ import UserPage from './components/pages/UserPage';
 import TeamPage from './components/pages/TeamPage';
 import CreateTeamPage from './components/pages/CreateTeamPage';
 import TeamDashboard from './components/pages/TeamDashboard';
+import UserSearch from './components/pages/UserSearch';
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
       <Route path="/teams/:id" component={TeamDashboard}/>
       <Route exact path="/teams/" component={TeamPage}/>
       <Route path="/createteam/" component={CreateTeamPage}/>
+      <Route path="/users/" component={UserSearch}/>
     </Router>
   );
 }
