@@ -2,14 +2,13 @@ const mongo = require('mongodb');
 const router = require('express').Router();
 const multer = require('multer');
 const verify = require('../verifyjwt');
-const {url} = require('../db_config.json');
+const {url, jwt_key} = require('../db_config.json');
 const {Readable} = require('stream');
-
-router.use(verify);
+const jwt = require('jsonwebtoken');
 
 //Upload a file
 //request body be multipart form data with attributes 'name' (the filename) and 'doc' (the file)
-router.post('/:teamId', async (req,res) => {
+router.post('/:teamId', verify, async (req,res) => {
     try {
         const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -67,12 +66,25 @@ router.post('/:teamId', async (req,res) => {
 
             uploadStream.on('finish', () => {
                 res.sendStatus(200);
-                req.app.io.to(req.params.teamId).emit('file', {
+                req.app.io.to(req.params.teamId).emit('message', {
                     sender: req.token.name || req.token.username || req.token.id,
                     senderId: req.token.id,
-                    fileId: uploadStream.id
+                    fileId: uploadStream.id,
+                    filename: req.body.name,
+                    type:'file'
                 })
                 //console.log(uploadStream.id);
+                client.db('Teams').collection('team').findOneAndUpdate({_id:mongo.ObjectId(req.params.teamId)},{
+                    $push: {
+                        chat:{
+                            sender: req.token.name || req.token.username || req.token.id,
+                            senderId: req.token.id,
+                            fileId: uploadStream.id,
+                            filename: req.body.name,
+                            type:'file'
+                        }
+                    }
+                })
                 client.close();
                 return;
             })
@@ -89,7 +101,12 @@ router.post('/:teamId', async (req,res) => {
 //User should be part of the team that the file was uploaded to
 router.get('/:id', async (req,res) => {
     try {
-        const userId = req.token.id;
+        const {token} = req.query;
+        const decoded = (await jwt.verify(token, jwt_key)).data
+        const userId = decoded && decoded.id;
+        if(!decoded || !userId) {
+            res.status(401).send()
+        }
         const docId = mongo.ObjectId(req.params.id);
         const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
         let bucket = new mongo.GridFSBucket(client.db('Grid'), {
@@ -118,6 +135,7 @@ router.get('/:id', async (req,res) => {
             return;
         }
         let downloadStream = bucket.openDownloadStream(docId);
+        res.attachment(file.filename);
 
         downloadStream.on('data', chunk => {
             res.write(chunk);

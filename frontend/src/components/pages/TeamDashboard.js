@@ -30,11 +30,9 @@ class TeamDashboard extends React.Component {
 
     showMessage = msg => {
         console.log("Got a message", msg);
-        if(msg.senderId !== this.myId) {
-            let {messages} = this.state;
-            messages.push(msg);
-            this.setState({messages})
-        }
+        let {messages} = this.state;
+        messages.push(msg);
+        this.setState({messages})
     }
 
     prepareChat = data => {
@@ -91,15 +89,8 @@ class TeamDashboard extends React.Component {
             alert("Please enter a chat message between 1 and 560 characters long")
             return;
         }
-        let {messages} = this.state;
-        messages.push({
-            sender:"You",
-            senderId:"",
-            body:this.state.chatmsg
-        })
         this.socket.emit('message', this.state.chatmsg)
         this.setState({
-            messages:messages,
             chatmsg:''
         })
     }
@@ -149,6 +140,17 @@ class TeamDashboard extends React.Component {
                 <div id="right" style={{minWidth:200, flexGrow:1}}>
                     <div id="chat-log" style={{width:'100%', padding:'0px 8px', border:'1px solid #555', backgroundColor:'#eee', height:window.innerHeight * 0.6, overflowY:'scroll'}}>
                         {this.state.team && this.state.messages ? this.state.messages.map((msg,i) => {
+                            if(msg.type === 'file') {
+                                return <p key={"msg"+i}>
+                                    <span style={{fontWeight:'bold'}}>
+                                        <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;
+                                    </span>
+                                    uploaded&nbsp;
+                                    <a target='_blank' href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
+                                        {msg.filename}
+                                    </a>
+                                </p>
+                            }
                             return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>:  </span>{msg.body}</p>
                         }) : null}
                     </div>
