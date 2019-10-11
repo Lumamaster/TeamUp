@@ -15,10 +15,7 @@ User {
     blockedUsers: string array; list of ids of users that you have blocked
     blockedBy: string array; list of ids of users that have blocked me
     reviews: string array; list of reviews from other users about you
-    invites: object array; {
-        userid: user id who is invited
-        teamid: the team id the user is invited to
-    }
+    invites: string array of team id invited to
 }
 
 Team {
