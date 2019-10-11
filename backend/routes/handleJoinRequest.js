@@ -12,9 +12,10 @@ router.use(express.json());
 router.use(express.urlencoded({extended:false}));
 
 // Accept invite
-router.get('/acceptinvite/:id', (req, res) => {
+router.get('/acceptrequest/:id/:teamid', (req, res) => {
     
-    const teamId = req.params.id; // the team id to join by accepting invite
+    const reqUserId = req.param.id;  // the user id that sent the request
+    const teamId = req.params.teamid; // the team id that has the request
     const userId = req.token.id; // the user id of the current user
 
     try {
@@ -23,19 +24,19 @@ router.get('/acceptinvite/:id', (req, res) => {
             const userdb = client.db("Users");
             const teamdb = client.db("Teams");
 
-            // Removing the invite
-            userdb.collection('user').update(
-                {"_id":ObjectID(userId)},
-                {$pull: {invites: {$eq: teamId}}}
+            // Removing the request
+            teamdb.collection('team').update(
+                {"_id":ObjectID(teamId)},
+                {$pull: {reqReceived: {$eq: reqUserId }}}
             )
 
             // Adding user to teamMembers, updating numMembers
             userdb.collection('user').findOne({
-                "_id":ObjectID(userId)
+                "_id":ObjectID(reqUserId)
             }).then(function(result){
                 teamdb.collection('team').update(
                     {"_id": ObjectID(teamId)},
-                    {$addToSet: {teamMembers: {id: userId, username: result.userName}}}, 
+                    {$addToSet: {teamMembers: {id: reqUserId, username: result.userName}}}, 
                     {$inc: {numMembers: 1}}
                 );
             });
@@ -50,9 +51,10 @@ router.get('/acceptinvite/:id', (req, res) => {
 
 // Decline Invite
 
-router.get('/declineinvite/:id', (req, res) => {
+router.get('/declinerequest/:id/:teamid', (req, res) => {
     
-    const teamId = req.params.id; // the team id invite to decline
+    const reqUserId = req.param.id;  // the user id that sent the request
+    const teamId = req.params.teamid; // the team id that has the request
     const userId = req.token.id; // the user id of the current user
 
     try {
@@ -61,10 +63,10 @@ router.get('/declineinvite/:id', (req, res) => {
             const userdb = client.db("Users");
             const teamdb = client.db("Teams");
 
-            // Removing the invite
+            // Removing the join request
             userdb.collection('user').update(
-                {"_id":ObjectID(userId)},
-                {$pull: {invites: {$eq: teamId}}}
+                {"_id":ObjectID(teamId)},
+                {$pull: {reqReceived: {$eq: reqUserId}}}
             )
             
             client.close();
