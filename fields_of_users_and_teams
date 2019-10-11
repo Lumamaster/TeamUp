@@ -14,25 +14,18 @@ User {
     bio: string; contains human-readable information about the user
     blockedUsers: string array; list of ids of users that you have blocked
     blockedBy: string array; list of ids of users that have blocked me
-    invites: object array; list of teams that you are currently invited to {
-        id: string; the database id of the team. Query using {_id:ObjectId([id])}
-        name: string; the team's teamName
-    }
     reviews: string array; list of reviews from other users about you
-    reqReceived: object array; {
-        userid: user id who requested to join a team
-        teamid: the team id the user requested to join
-    }
+    invites: string array of user id that are invited
 }
 
 Team {
     teamName: string; contains team name
     teamMembers: object array; contains information about all team team members {
-        id: string; the database id of the user. Query using {_id:ObjectId([id])}
+        id: objectID; the database id of the user. Query using {_id:ObjectId([id])}
         username: string; the user's screen name
     }
     owner: object; contains id and username of project owner (team creator) {
-        id: string; the database id of the user. Query using {_id:ObjectId([id])}
+        id: objectID; the database id of the user. Query using {_id:ObjectId([id])}
         username: string; the user's screen name
     }
     info: string; contains notes about project ideas
@@ -42,4 +35,8 @@ Team {
     alive: boolean; whether the group is active or project has ended. true means active
     course: string; contains course name/num
     maxMembers: int; maximum number of members for the team
+    reqReceived: object array; {
+        userid: user id who requested to join a team
+        teamid: the team id the user requested to join
+    }
 }
