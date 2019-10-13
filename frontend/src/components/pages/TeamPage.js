@@ -21,9 +21,6 @@ class TeamPage extends React.Component {
             email: "",
             password: "",
             teams: [
-                //{ teamName: 'team1', owner: 'owner1', info: 'this is info', requestedSkills: 'skills', numMembers: 1, open: 1, alive: 1, maxMembers: 6, course: 'cs180' },
-                //{ teamName: 'team2', owner: 'owner2', info: 'stuff', requestedSkills: 'good skills', numMembers: 5, open: 1, alive: 1, maxMembers: 6, course: 'cs354' },
-                //{ teamName: 'team3', owner: 'owner3', info: 'this is info', requestedSkills: 'skills', numMembers: 1, open: 1, alive: 1, maxMembers: 6, course: 'cs180' },
             ],
             errors: []
         }

@@ -204,6 +204,34 @@ class UserPage extends React.Component {
             },
           }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
     }
+//need to get invite id from button
+    acceptInvite(e){
+        e.preventDefault();
+        /*fetch((PRODUCTION ? production_url : local_url) + '/acceptinvite/', {
+            method: "POST",
+            headers: {
+                "content-type":"application/json; charset=UTF-8",
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                
+            },
+          }).then(response => response.ok).then(success => (success ? alert("Team successfully joined") : alert("Failed to join team")))*/
+    }
+
+    rejectInvite(e){
+        e.preventDefault();
+        /*fetch((PRODUCTION ? production_url : local_url) + '/rejectinvite/', {
+            method: "POST",
+            headers: {
+                "content-type":"application/json; charset=UTF-8",
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                
+            },
+          }).then(response => response.ok).then(success => (success ? alert("Team successfully joined") : alert("Failed to join team")))*/
+    }
+
+
+
+
     render(){
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
@@ -238,6 +266,15 @@ class UserPage extends React.Component {
                     {this.state.isMe ?  null : <button onCLick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
+                <div className="container">
+                        <h3>Invites</h3>
+                        <React.Fragment>
+                            {
+                                this.state.invites.map((invite)=> 
+                                <InviteButton key={invite} invite={invite}/>)
+                            }
+                        </React.Fragment>
+                </div>
             </div>
         );
     }
@@ -253,4 +290,19 @@ class SkillButton extends React.Component {
         )
     }
 }
+//need to pass invite id to button
+class InviteButton extends React.Component {
+    render(){
+        return(
+            <div>
+                <tr>
+                <td><span>{this.props.invite}   </span></td>
+                <td><button onClick={this.rejectInvite}>Accept</button></td>
+                <td><button onClick={this.acceptInvite}>Reject</button></td>
+                </tr>
+            </div>
+        )
+    }
+}
 export default UserPage;
+//<span id={this.props.invite} onClick={this.props.delete} style={{color:'red', fontWeight:'bold'}}>X</span>
