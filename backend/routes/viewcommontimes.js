@@ -98,7 +98,7 @@ router.get('/:id', async (req,res) => {
 
 });
 
-router.post('/user/get/:id', async (req, res) => {
+router.post('/user/set/:id', async (req, res) => {
     const userId = req.params.id;
     const freeTimes = req.body.times;
 
