@@ -242,7 +242,7 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
-        this.state.blocked = [1,2,3,4]
+
         return(
             <div>
                 <div className="container">
