@@ -203,6 +203,7 @@ class UserPage extends React.Component {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
+            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
     }
 //need to get invite id from button
@@ -241,6 +242,7 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
+        this.state.blocked = [1,2,3,4]
         return(
             <div>
                 <div className="container">
@@ -280,6 +282,16 @@ class UserPage extends React.Component {
                             }
                         </React.Fragment>
                 </div>
+                {this.state.isMe ? 
+                <div className="container">
+                    <h3>Blocked Users</h3>
+                    <React.Fragment>
+                        {
+                            this.state.blocked.map((user)=>
+                                <BlockedUserButton key={user} user={user} unblock = {this.unblock}/>)
+                        }
+                    </React.Fragment>
+                </div> : null }
             </div>
         );
     }
@@ -304,6 +316,16 @@ class InviteButton extends React.Component {
                 <td><button id={this.props.invite} onClick={this.props.accept}>Accept</button></td>
                 <td><button id={this.props.invite} onClick={this.props.reject}>Reject</button></td>
                 </tr>
+            </div>
+        )
+    }
+}
+class BlockedUserButton extends React.Component {
+    render(){
+        return(
+            <div>
+                <span>{this.props.user}</span>
+                <button id={this.props.user} onClick={this.props.unblock}>Unblock</button>
             </div>
         )
     }
