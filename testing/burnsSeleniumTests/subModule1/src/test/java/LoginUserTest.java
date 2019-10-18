@@ -102,7 +102,6 @@ public class LoginUserTest {
             }
             in.close();
 
-            //Assertions.assertEquals("incorrect email or password", lastString);
             boolean exists = lastString.contains("Incorrect username or password");
             Assertions.assertTrue(exists);
         } catch (IOException e) {

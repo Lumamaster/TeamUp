@@ -262,8 +262,8 @@ class UserPage extends React.Component {
                             <p>Rating: {this.state.rating}</p>
                         </form>
                     }
-                    {this.state.isMe ? <button onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
-                    {this.state.isMe ?  null : <button onCLick={this.block}>Block User</button>}
+                    {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
+                    {this.state.isMe ?  null : <button name="blockbutton" onCLick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
                 <div className="container">

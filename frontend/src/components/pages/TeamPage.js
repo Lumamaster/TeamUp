@@ -93,7 +93,7 @@ class TeamPage extends React.Component {
                     <td>{open ? 'Open' : 'Apply'}</td>
                     <td>{maxMembers || 'N/A'}</td>
                     <td>{course || 'N/A'}</td>
-                    <td><button onClick={this.joinTeam} id={_id}>{joined ? 'Leave' : 'Join'}</button></td>
+                    <td><button name="join-leave-button" onClick={this.joinTeam} id={_id}>{joined ? 'Leave' : 'Join'}</button></td>
                 </tr>
             )
         })
