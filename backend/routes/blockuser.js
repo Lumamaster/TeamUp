@@ -112,7 +112,6 @@ router.get('/block/:id', async (req,res) => {
 
     const theirId = req.params.id;
     const myId = req.token.id;
-    const myName = req.token.username;
 
     console.log(theirId);
     console.log(myId);
@@ -134,11 +133,15 @@ router.get('/block/:id', async (req,res) => {
             });
 
             me.then(function (result) {
+                var blockedPair = {
+                    _id: result._id,
+                    username: result.username
+                };
                 /* Add me to the list of people who have blocked them */
                 userdb.collection('user').updateOne(
                     { _id: ObjectID(theirId) },
                     {
-                        $addToSet: { blockedBy: me }
+                        $addToSet: { blockedBy: blockedPair }
                     }
                 ).then(function (result) {
                     console.log('successfully accessed their blockedby');
@@ -150,12 +153,16 @@ router.get('/block/:id', async (req,res) => {
 
                     them.then(function (r) {
                         console.log(r);
+                        var blockedPair2 = {
+                            _id: r._id,
+                            username: r.username
+                        };
                         //console.log(r.name);
                         /* Add them to the list of people that I have blocked */
                         userdb.collection('user').updateOne(
                             { _id: ObjectID(myId) },
                             {
-                                $addToSet: { blockedUsers: r }
+                                $addToSet: { blockedUsers: blockedPair2 }
                             }
                         ).then(function (r) {
                             console.log('successfully accessed my blockedusers');

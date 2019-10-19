@@ -20,8 +20,7 @@ public class FullTest {
 
 
     @Test
-    @Order(1)
-    public void successLogin() throws InterruptedException {
+    public void userTesting() throws InterruptedException {
 
         driver.get(url);
         WebElement emailEl = driver.findElement(By.name("email"));
@@ -107,7 +106,7 @@ public class FullTest {
 
         Thread.sleep(1000);
 
-        WebElement unblockbutton = driver.findElement(By.id("5dab5b9bfa7f4079fd24e0d3"))
+        //WebElement unblockbutton = driver.findElement(By.id("5dab5b9bfa7f4079fd24e0d3"));
 
     }
 }
