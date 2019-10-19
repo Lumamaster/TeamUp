@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -19,9 +18,47 @@ public class FullTest {
     String randString = "";
 
 
+    /**
+     * Automated test for creating user at signup page
+     * @throws InterruptedException
+     */
     @Test
-    public void userTesting() throws InterruptedException {
+    @Order(1)
+    public void createTest() throws InterruptedException {
+        String createUrl = "http://localhost:3000/signup";
+        driver.get(createUrl);
+        WebElement emailEl = driver.findElement(By.name("email"));
+        WebElement nameEl = driver.findElement(By.name("screenname"));
+        WebElement passEl = driver.findElement(By.name("password"));
+        WebElement pass2El = driver.findElement(By.name("password2"));
 
+        double rand = Math.random() * (500000);
+        rand = rand / 1;
+        int randInt = (int) rand;
+        randString = Integer.toString(randInt);
+
+        emailEl.sendKeys(randString + "@purdue.edu");
+        nameEl.sendKeys(randString);
+        passEl.sendKeys("Pa$$w0rd");
+        pass2El.sendKeys("Pa$$w0rd");
+
+        Thread.sleep(500);
+
+        WebElement createButton =  driver.findElement(By.name("createbutton"));
+        createButton.click();
+    }
+
+
+    /**
+     * Test for checking various user functionalities.
+     * Logging in, removing skill, adding skill, editing profile, searching, block other user, unblock other user
+     * @throws InterruptedException
+     */
+    @Test
+    @Order(2)
+    public void userTest() throws InterruptedException {
+
+        /* Login to burns140 */
         driver.get(url);
         WebElement emailEl = driver.findElement(By.name("email"));
         WebElement passEl = driver.findElement(By.name("password"));
@@ -37,11 +74,14 @@ public class FullTest {
         webStorage = (WebStorage) driver;
         localStorage = webStorage.getLocalStorage();
 
+
+        /* Go to my profile */
         url = "http://localhost:3000/profile";
         driver.get(url);
 
         Thread.sleep(2000);
 
+        /* Add a skill */
         WebElement editButton = driver.findElement(By.name("editbutton"));
         editButton.click();
 
@@ -59,6 +99,8 @@ public class FullTest {
 
         Thread.sleep(1000);
 
+
+        /* Remove a skill */
         editButton.click();
 
         driver.get(url);
@@ -79,6 +121,7 @@ public class FullTest {
 
         Thread.sleep(1000);
 
+        /* Go to user search page and search amind */
         url = "http://localhost:3000/users";
         driver.get(url);
 
@@ -87,11 +130,13 @@ public class FullTest {
 
         Thread.sleep(1500);
 
+        /* Go to amind profile */
         WebElement clickID = driver.findElement(By.id("amind"));
         clickID.click();
 
         Thread.sleep(1500);
 
+        /* block amind */
         WebElement blockButton = driver.findElement(By.name("blockbutton"));
         blockButton.click();
 
@@ -101,6 +146,7 @@ public class FullTest {
 
         Thread.sleep(500);
 
+        /* Go back to my profile */
         url = "http://localhost:3000/profile";
         driver.get(url);
 
