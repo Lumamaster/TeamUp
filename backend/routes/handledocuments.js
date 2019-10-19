@@ -30,11 +30,11 @@ router.post('/:teamId', verify, async (req,res) => {
             return;
         }
         const db = client.db('Grid');
-        const storage = multer.memoryStorage()
+        const storage = multer.memoryStorage();
         const upload = multer({storage: storage, limits: {fields:1, fileSize: 1000000, files: 1, parts: 2}});
         upload.single('doc')(req,res, (err => {
             if(err) {
-                console.log(err)
+                console.log(err);
                 res.status(400).json({err: "Validation failed"});
                 return;
             } else if(!req.body.name) {
@@ -60,9 +60,9 @@ router.post('/:teamId', verify, async (req,res) => {
             readableDocStream.pipe(uploadStream);
 
             uploadStream.on('error', () => {
-                res.status(500).json({err:"Error uploading file"})
+                res.status(500).json({err:"Error uploading file"});
                 return;
-            })
+            });
 
             uploadStream.on('finish', () => {
                 res.sendStatus(200);
@@ -84,7 +84,7 @@ router.post('/:teamId', verify, async (req,res) => {
                             type:'file'
                         }
                     }
-                })
+                });
                 client.close();
                 return;
             })
@@ -94,7 +94,53 @@ router.post('/:teamId', verify, async (req,res) => {
         res.status(500).json({err})
         return;
     }
-})
+});
+
+//Delete a file
+//URL should contain file id
+//User should be part of the team that the deleted file was uploaded to
+router.get('/delete:id', async (req,res) => {
+    try {
+        const {token} = req.query;
+        const decoded = (await jwt.verify(token, jwt_key)).data;
+        const userId = decoded && decoded.id;
+        if(!decoded || !userId) {
+            res.status(401).send()
+        }
+        const docId = mongo.ObjectId(req.params.id);
+        const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+        let bucket = new mongo.GridFSBucket(client.db('Grid'), {
+            bucketName: 'documents'
+        });
+
+        let file = await bucket.find({_id:docId}).toArray();
+        if(file.length !== 1) {
+            res.status(404).json({err:"File not found"});
+        }
+        let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
+        if(!team) {
+            res.sendStatus(500);
+            return;
+        }
+        let isInTeam = false;
+        for(let i = 0; i < team.teamMembers.length; i++) {
+            if(team.teamMembers[i].id === userId) {
+                isInTeam = true;
+                break;
+            }
+        }
+        if(!isInTeam && file.metadata.uploaderId !== userId) {  //Let the user download if it's their file, even if not in team
+            res.status(400).json({err:"You are not in that team"});
+            return;
+        }
+        bucket.delete(docId);
+
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({err});
+        return;
+    }
+});
 
 //Download a file
 //URL should contain the file's id
@@ -102,7 +148,7 @@ router.post('/:teamId', verify, async (req,res) => {
 router.get('/:id', async (req,res) => {
     try {
         const {token} = req.query;
-        const decoded = (await jwt.verify(token, jwt_key)).data
+        const decoded = (await jwt.verify(token, jwt_key)).data;
         const userId = decoded && decoded.id;
         if(!decoded || !userId) {
             res.status(401).send()
@@ -139,12 +185,12 @@ router.get('/:id', async (req,res) => {
 
         downloadStream.on('data', chunk => {
             res.write(chunk);
-        })
+        });
 
         downloadStream.on('error', () => {
             res.sendStatus(404);
             return;
-        })
+        });
 
         downloadStream.on('end', () => {
             res.end();
@@ -152,9 +198,9 @@ router.get('/:id', async (req,res) => {
 
     } catch(err) {
         console.log(err);
-        res.status(500).json({err})
+        res.status(500).json({err});
         return;
     }
-})
+});
 
 module.exports = router;
