@@ -37,9 +37,19 @@ router.get('/acceptrequest/:id/:teamid', (req, res) => {
                 teamdb.collection('team').update(
                     {"_id": ObjectID(teamId)},
                     {$addToSet: {teamMembers: {id: reqUserId, username: result.userName}}}, 
-                    {$inc: {numMembers: 1}}
+                    {$inc: {numMembers: 1}},
+                    {$push: {chat: {
+                        sender: req.token.name || req.token.username || req.token.id,
+                        senderId: req.token.id,
+                        type:'join'
+                    }}}
                 );
             });
+            req.app.io.to(teamId).emit('message', {
+                sender: req.token.name || req.token.username || req.token.id,
+                senderId: req.token.id,
+                type:'join'
+            })
             
             client.close();
         });

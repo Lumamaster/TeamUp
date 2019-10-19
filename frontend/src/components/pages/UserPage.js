@@ -65,7 +65,7 @@ class UserPage extends React.Component {
             rating: data.rating,
             prevTeams: data.prevTeams,
             curTeams: data.curTeams,
-            blocked: data.blocked,
+            blocked: data.blockedUsers,
             invites: data.invites,
             prevName: data.name,
             prevBio: data.bio
@@ -194,15 +194,35 @@ class UserPage extends React.Component {
           }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
     }
     unblock = async e => {
+        const name = e.target.id;
+        console.log(" = " + this.state.blocked);
         e.preventDefault();
-        fetch((PRODUCTION ? production_url : local_url) + 'blk/unblk/' + this.state.uid, {
+        fetch((PRODUCTION ? production_url : local_url) + '/blk/unblock/' + e.target.id, {
             method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-          }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
+          }).then(response => response.ok).then(success => {
+              if(success){
+                alert("User successfully unblocked");
+                const items = this.state.blocked;
+                const filtereditems = items.filter((item) => item._id !== name)
+                console.log(filtereditems);
+                //item =>item._id !== e.target.id);
+                this.setState({blocked: filtereditems})
+                console.log(this.state.blocked);
+              }else{
+                  alert("Failed to unblock user");
+              }
+          })
+          
+          //.then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
+          //const items = this.state.blocked;
+            //    const filtereditems = items.filter(item=>item !== e.target.id);
+              //  this.setState({blocked: filtereditems})
+                //console.log(this.state.blocked);
     }
 //need to get invite id from button
     acceptInvite = async e =>{
@@ -238,12 +258,12 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
-        
+        console.log("blocked =" +this.state.blocked);
         if(this.state.blocked === undefined){
             this.state.blocked = []
         }
 
-        console.log("blocked =" +this.state.blocked);
+        
         return(
             <div>
                 <div className="container">
@@ -322,11 +342,12 @@ class InviteButton extends React.Component {
     }
 }
 class BlockedUserButton extends React.Component {
+
     render(){
         return(
             <div>
-                <span>{this.props.user}</span>
-                <button id={this.props.user} onClick={this.props.unblock}>Unblock</button>
+                <span>{this.props.user.username}</span>
+                <button id={this.props.user._id} onClick={this.props.unblock}>Unblock</button>
             </div>
         )
     }

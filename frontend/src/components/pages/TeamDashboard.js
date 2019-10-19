@@ -151,6 +151,20 @@ class TeamDashboard extends React.Component {
                                     </a>
                                 </p>
                             }
+                            if(msg.type === 'join') {
+                                return <p key={"msg"+i}>
+                                    <span style={{fontWeight:'bold'}}>
+                                        <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;joined the team.
+                                    </span>
+                                </p>
+                            }
+                            if(msg.type === 'full') {
+                                return <p key={"msg"+i}>
+                                    <span style={{fontWeight:'bold'}}>
+                                        The team is now full.
+                                    </span>
+                                </p>
+                            }
                             return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>:  </span>{msg.body}</p>
                         }) : null}
                     </div>

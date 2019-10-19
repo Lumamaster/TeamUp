@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FullTest {
     WebDriver driver = new ChromeDriver();
@@ -18,10 +19,8 @@ public class FullTest {
     String randString = "";
 
 
-
     @Test
-    @Order(1)
-    public void successLogin() {
+    public void userTesting() throws InterruptedException {
 
         driver.get(url);
         WebElement emailEl = driver.findElement(By.name("email"));
@@ -33,11 +32,7 @@ public class FullTest {
 
         loginButton.click();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(3000);
 
         webStorage = (WebStorage) driver;
         localStorage = webStorage.getLocalStorage();
@@ -45,23 +40,15 @@ public class FullTest {
         url = "http://localhost:3000/profile";
         driver.get(url);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
 
         WebElement editButton = driver.findElement(By.name("editbutton"));
         editButton.click();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
 
         double rand = Math.random() * (500000);
-        rand = rand/1;
+        rand = rand / 1;
         int randInt = (int) rand;
         randString = Integer.toString(randInt);
 
@@ -69,46 +56,28 @@ public class FullTest {
         skillText.sendKeys("Writing selenium Tests" + randString);
         WebElement addSkillButton = driver.findElement(By.id("add-skill-button"));
         addSkillButton.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        Thread.sleep(1000);
+
         editButton.click();
 
         driver.get(url);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
 
         editButton = driver.findElement(By.name("editbutton"));
         editButton.click();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
 
         WebElement removeSkillButton = driver.findElement(By.id("Writing selenium Tests" + randString));
         removeSkillButton.click();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(1000);
 
         editButton.click();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(1000);
 
         url = "http://localhost:3000/users";
         driver.get(url);
@@ -116,87 +85,28 @@ public class FullTest {
         WebElement searchTextbox = driver.findElement(By.name("searchText"));
         searchTextbox.sendKeys("amind");
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(1500);
 
         WebElement clickID = driver.findElement(By.id("amind"));
         clickID.click();
 
-    }
+        Thread.sleep(1500);
 
-    @Test
-    @Order(2)
-    public void successAddSkill() {
+        WebElement blockButton = driver.findElement(By.name("blockbutton"));
+        blockButton.click();
+
+        Thread.sleep(1000);
+
+        driver.switchTo().alert().accept();
+
+        Thread.sleep(500);
+
         url = "http://localhost:3000/profile";
         driver.get(url);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(1000);
 
-        WebElement editButton = driver.findElement(By.name("editbutton"));
-        editButton.click();
+        //WebElement unblockbutton = driver.findElement(By.id("5dab5b9bfa7f4079fd24e0d3"));
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        double rand = Math.random() * (500000);
-        rand = rand/1;
-        int randInt = (int) rand;
-        randString = Integer.toString(randInt);
-
-        WebElement skillText = driver.findElement(By.id("add-skill-text"));
-        skillText.sendKeys("Writing selenium Tests" + randString);
-        WebElement addSkillButton = driver.findElement(By.id("add-skill-button"));
-        addSkillButton.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        editButton.click();
-
-
-
-    }
-
-    @Test
-    @Order(3)
-    public void successRemoveSkill() {
-        driver.get(url);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        WebElement editButton = driver.findElement(By.name("editbutton"));
-        editButton.click();
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        WebElement removeSkillButton = driver.findElement(By.id("Writing selenium Tests" + randString));
-        removeSkillButton.click();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        editButton.click();
     }
 }
