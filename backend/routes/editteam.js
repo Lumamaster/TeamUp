@@ -14,7 +14,7 @@ router.post('/:id', async(req,res) => {
     const user = req.token;
     const teamId = req.params.id;
 
-    const {teamName, addMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
+    const {teamName, info, requestedSkills, open, course, maxMembers} =  req.body;
 
     // Update team data
     try{
@@ -50,7 +50,7 @@ router.post('/:id', async(req,res) => {
                           }}
         ).then(function(result){
 
-            if(addMembers){
+            /*if(addMembers){
             var teamSplit = addMembers.split(',');
                 teamSplit.forEach(element => {
                 var user = userdb.collection('user').find({
@@ -66,7 +66,7 @@ router.post('/:id', async(req,res) => {
                 )}).catch(function(err){
                     console.log(err);
                 });});
-            }
+            }*/
 
             res.status(200).send("team edited successfully");
             client.close();
