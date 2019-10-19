@@ -326,11 +326,11 @@ class SkillButton extends React.Component {
 class InviteButton extends React.Component {
     render(){
         return(
-            <div>
+            <div key={'invite' + this.props.invite.id}>
                 <tr>
-                <td><span>{this.props.invite}   </span></td>
-                <td><button id={this.props.invite} onClick={this.props.accept}>Accept</button></td>
-                <td><button id={this.props.invite} onClick={this.props.reject}>Reject</button></td>
+                <td><span>{this.props.invite.name}   </span></td>
+                <td><button id={this.props.invite.id} onClick={this.props.accept}>Accept</button></td>
+                <td><button id={this.props.invite.id} onClick={this.props.reject}>Reject</button></td>
                 </tr>
             </div>
         )
