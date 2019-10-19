@@ -50,6 +50,7 @@ router.post('/:id', async(req,res) => {
                           }}
         ).then(function(result){
 
+            if(addMembers.length()>0){
             var teamSplit = addMembers.split(',');
                 teamSplit.forEach(element => {
                 var user = userdb.collection('user').find({
@@ -64,7 +65,8 @@ router.post('/:id', async(req,res) => {
                         }
                 )}).catch(function(err){
                     console.log(err);
-                });
+                });});
+            }
 
             res.status(200).send("team edited successfully");
             client.close();
@@ -81,7 +83,7 @@ router.post('/:id', async(req,res) => {
         
 
         
-        });});
+        });
 
     } catch(err){
         console.log(error);
