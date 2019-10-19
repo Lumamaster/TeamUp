@@ -41,7 +41,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                 /* remove me from their blockedby array */
                 for (var i = 0; i < theirBlocked.length; i++) {
-                    if (theirBlocked[i]._id == ObjectID(myId)) {
+                    if (theirBlocked[i]._id == myId) {
                         theirBlocked.splice(i, 1);
                         break;
                     }
@@ -58,7 +58,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                         /* remove them from my blockedusers array */
                         for (var i = 0; i < myBlocked.length; i++) {
-                            if (myBlocked[i]._id == ObjectID(theirId)) {
+                            if (myBlocked[i]._id == theirId {
                                 myBlocked.splice(i, 1);
                                 break;
                             }
