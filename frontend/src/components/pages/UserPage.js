@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import * as jwt from 'jsonwebtoken';
 import '../../App.css';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
@@ -217,12 +218,6 @@ class UserPage extends React.Component {
                   alert("Failed to unblock user");
               }
           })
-          
-          //.then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
-          //const items = this.state.blocked;
-            //    const filtereditems = items.filter(item=>item !== e.target.id);
-              //  this.setState({blocked: filtereditems})
-                //console.log(this.state.blocked);
     }
 //need to get invite id from button
     acceptInvite = async e =>{
@@ -242,7 +237,7 @@ class UserPage extends React.Component {
         e.preventDefault();
         console.log(e.target.id);
         fetch((PRODUCTION ? production_url : local_url) + '/invite/reject/' + e.target.id, {
-            method: "GET",
+            method:"GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
@@ -346,7 +341,7 @@ class BlockedUserButton extends React.Component {
     render(){
         return(
             <div>
-                <span>{this.props.user.username}</span>
+                <span><Link target="_blank" key={this.props.user._id} to={`/profile/${this.props.user._id}`}>{this.props.user.username}</Link></span>
                 <button id={this.props.user._id} onClick={this.props.unblock}>Unblock</button>
             </div>
         )
