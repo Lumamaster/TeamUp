@@ -9,7 +9,7 @@ class CreateTeamPage extends React.Component {
         super(props);
         this.state = {
             teamName: '',
-            teamMembers: '',
+            teamMembers: [''],
             owner: '', 
             info: '', 
             requestedSkills: [''], 
@@ -48,31 +48,32 @@ class CreateTeamPage extends React.Component {
             })
           }).then(response => response.ok).then(success => (success ? alert("Team successfully created") : alert("Failed to create team")))
     }
-    handleText = i => e => {
-        let requestedSkills = [...this.state.requestedSkills]
-        requestedSkills[i] = e.target.value
+    handleText = (e, stateKey, i) => {
+        let arr = this.state[stateKey]
+        console.log("Hello", i, e.target);
+        arr[i] = e.target.value
         this.setState({
-            requestedSkills
+            [stateKey]: arr
         })
       }
     
-      handleDelete = i => e => {
+      handleDelete = (e, stateKey, i) => {
         e.preventDefault()
-        let requestedSkills = [
-          ...this.state.requestedSkills.slice(0, i),
-          ...this.state.requestedSkills.slice(i + 1)
+        let arr = [
+          ...this.state[stateKey].slice(0, i),
+          ...this.state[stateKey].slice(i + 1)
         ]
         this.setState({
-            requestedSkills
+            [stateKey]: arr
         })
       }
     
-      addQuestion = e => {
+      appendStateArray = (e, stateKey) => {
         e.preventDefault()
-        console.log(this.state.requestedSkills);
-        let requestedSkills = this.state.requestedSkills.concat([''])
+        //console.log(this.state.requestedSkills);
+        let arr = this.state[stateKey].concat([''])
         this.setState({
-            requestedSkills
+            [stateKey]: arr
         })
       }
 
@@ -96,17 +97,31 @@ class CreateTeamPage extends React.Component {
                     </label></div>
                     <React.Fragment>
                         Requested Skills
-                        {this.state.requestedSkills.map((requestedSkills, index) => (
+                        {this.state.requestedSkills && this.state.requestedSkills.map((skill, index) => (
                         <span key={index}>
                         <input
                             type="text"
-                            onChange={this.handleText(index)}
-                            value={requestedSkills}
+                            onChange={e => this.handleText(e, 'requestedSkills', index)}
+                            value={skill}
                         />
-                        <button onClick={this.handleDelete(index)}>X</button>
+                        <button onClick={e => this.handleDelete(e, 'requestedSkills', index)}>X</button>
                         </span>
                         ))}
-                        <button onClick={this.addQuestion}>Add New Skill</button>
+                        <button onClick={e => this.appendStateArray(e, 'requestedSkills')}>Add New Skill</button>
+                    </React.Fragment>
+                    <React.Fragment>
+                        Automatically invite users
+                        {this.state.teamMembers && this.state.teamMembers.map((user, index) => (
+                        <span key={index}>
+                        <input
+                            type="text"
+                            onChange={e => this.handleText(e, 'teamMembers', index)}
+                            value={user}
+                        />
+                        <button onClick={e => this.handleDelete(e, 'teamMembers', index)}>X</button>
+                        </span>
+                        ))}
+                        <button onClick={e => this.appendStateArray(e, 'teamMembers')}>Add New User</button>
                     </React.Fragment>
                     <div><label>
                         Max Number of Members
