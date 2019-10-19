@@ -81,12 +81,15 @@ router.post('/:id', async(req,res) => {
         
 
         
-    });
+        });});
 
     } catch(err){
         console.log(error);
         res.status(400).json({err:error});
     }
+
+
+
 });
 
 module.exports = router;
