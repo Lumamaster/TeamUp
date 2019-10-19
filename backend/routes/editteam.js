@@ -14,7 +14,7 @@ router.post('/:id', async(req,res) => {
     const user = req.token;
     const teamId = req.params.id;
 
-    const {teamName, teamMembers, info, requestedSkills, tags, numMembers, open, course, maxMembers} =  req.body;
+    const {teamName, teamMembers, info, requestedSkills, numMembers, open, course, maxMembers} =  req.body;
 
     // Update team data
     try{
@@ -29,7 +29,6 @@ router.post('/:id', async(req,res) => {
             teamMembers: teamMembers,
             info: info,
             requestedSkills: requestedSkills,
-            tags: tags,
             numMembers: numMembers,
             open: open,
             alive: true,
