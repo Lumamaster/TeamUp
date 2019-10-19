@@ -13,8 +13,8 @@ router.get('/:id', async (req,res) => {
     const teamID = req.params.id
     const userID = req.token.id
 
-    const {teamId} = req.params;
-    if(teamId.length !== 24){
+    //const {teamId} = req.params;
+    if(teamID.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
     }
@@ -43,14 +43,14 @@ router.get('/:id', async (req,res) => {
         
                 // Check for empty result
                 if (result.length == 0) {
-                    console.log(result);
-                    console.log('no team with that id exists');
+                    //console.log(result);
+                    //console.log('no team with that id exists');
                     res.status(400).json({err:"no team with that id exists"});
                     client.close();
                     return;
                 }
         
-                console.log(result);
+                //console.log(result);
                 var ownerLeft = result[0].owner.id === userID;
                 // Remove this member's name from that team
                 var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
@@ -85,7 +85,7 @@ router.get('/:id', async (req,res) => {
                 } else {
                     if (ownerLeft) {
                         var newOwner = memberArr[0];
-                        console.log(newOwner)
+                        //console.log(newOwner)
                         teamdb.collection('team').updateOne(
                             { _id: mongoID },
                             {
@@ -124,7 +124,7 @@ router.get('/:id', async (req,res) => {
             
                     // If you weren't removed from anything, you were never a part of that team
                     if (removed == false) {
-                        console.log('you are not part of a team with that id');
+                        //console.log('you are not part of a team with that id');
                         res.status(400).json({err:'You are not part of that team'});
                         client.close();
                         return;

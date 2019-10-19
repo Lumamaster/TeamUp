@@ -89,8 +89,9 @@ router.get('/:id', async (req,res) => {
                     type:'join'
                 })
                 // Checking if team is full and notifying if it is
-                let teamcheck = teamdb.collection('team').findOne({_id:ObjectId(teamID)})
-                if(teamcheck.numMembers == teamcheck.maxMembers){
+                let teamcheck = await teamdb.collection('team').findOne({_id:ObjectId(teamID)})
+                //console.log(teamcheck.numMembers, teamcheck.maxMembers);
+                if(teamcheck.numMembers === teamcheck.maxMembers){
                     // Team is now full, alert
                     teamdb.collection('team').updateOne({_id:ObjectId(teamID)}, {
                         $push: {
