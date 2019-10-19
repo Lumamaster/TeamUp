@@ -13,7 +13,6 @@ public class createUserSel {
     WebDriver driver = new ChromeDriver();
     final String createUserUrl = "http://localhost:3000/signup";
     final String password = "V4lidPassword$";
-    WebDriverWait wait = new WebDriverWait(driver, 10);
     WebStorage webStorage = (WebStorage) driver;
     LocalStorage localStorage = webStorage.getLocalStorage();
 
@@ -40,9 +39,5 @@ public class createUserSel {
 
         createButton.click();
 
-        WebElement messElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("createResponse")));
-        String responseMessage = messElement.getText();
-        boolean exists = (responseMessage.contains("User successfully created"));
-        Assertions.assertTrue(exists);
     }
 }
