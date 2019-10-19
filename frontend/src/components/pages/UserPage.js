@@ -185,54 +185,49 @@ class UserPage extends React.Component {
     //Need way to tell if profile is blocked or not
     block = async e => {
         e.preventDefault();
-        console.log(e.target.id);
-        fetch((PRODUCTION ? production_url : local_url) + '/blk/', {
-            method: "POST",
+        fetch((PRODUCTION ? production_url : local_url) + '/blk/block/' + this.state.uid, {
+            method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
             },
-            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
     }
     unblock = async e => {
         e.preventDefault();
         fetch((PRODUCTION ? production_url : local_url) + '/unblk/', {
-            method: "POST",
+            method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
     }
 //need to get invite id from button
     acceptInvite = async e =>{
         e.preventDefault();
         console.log(e.target.id);
-        fetch((PRODUCTION ? production_url : local_url) + '/acceptinvite/', {
-            method: "POST",
+        fetch((PRODUCTION ? production_url : local_url) + '/invite/accept/' + e.target.id, {
+            method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("Team successfully joined") : alert("Failed to join team")))
     }
 
     rejectInvite = async e => {
         e.preventDefault();
         console.log(e.target.id);
-        fetch((PRODUCTION ? production_url : local_url) + '/rejectinvite/', {
-            method: "POST",
+        fetch((PRODUCTION ? production_url : local_url) + '/invite/reject/' + e.target.id, {
+            method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("Successfully Rejected invite") : alert("Failed to reject invite")))
     }
 
@@ -243,9 +238,12 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
+        
         if(this.state.blocked === undefined){
             this.state.blocked = []
         }
+
+        console.log("blocked =" +this.state.blocked);
         return(
             <div>
                 <div className="container">
