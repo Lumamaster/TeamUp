@@ -185,13 +185,14 @@ class UserPage extends React.Component {
     //Need way to tell if profile is blocked or not
     block = async e => {
         e.preventDefault();
-        console.log(this.state.uid);
+        console.log(e.target.id);
         fetch((PRODUCTION ? production_url : local_url) + '/blk/', {
             method: "POST",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
             },
+            body: JSON.stringify({id:e.target.id})
           }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
     }
     unblock = async e => {
@@ -272,7 +273,7 @@ class UserPage extends React.Component {
                         </form>
                     }
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
-                    {this.state.isMe ?  null : <button name="blockbutton" onCLick={this.block}>Block User</button>}
+                    {this.state.isMe ?  null : <button name="blockbutton" onClick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
                 <div className="container">
