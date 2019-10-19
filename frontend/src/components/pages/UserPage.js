@@ -194,15 +194,36 @@ class UserPage extends React.Component {
           }).then(response => response.ok).then(success => (success ? alert("User successfully blocked") : alert("Failed to block user")))
     }
     unblock = async e => {
+        const name = e.target.id;
         e.preventDefault();
+<<<<<<< HEAD
         fetch((PRODUCTION ? production_url : local_url) + '/blk/unblk/' + this.state.uid, {
+=======
+        fetch((PRODUCTION ? production_url : local_url) + '/blk/unblock/' + e.target.id, {
+>>>>>>> bc08a175c0fbb14c898503c8f41f4e6f4fcdaf44
             method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-          }).then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
+          }).then(response => response.ok).then(success => {
+              if(success){
+                alert("User successfully unblocked");
+                const items = this.state.blocked;
+                const filtereditems = items.filter(item=>item !== name);
+                this.setState({blocked: filtereditems})
+                console.log(this.state.blocked);
+              }else{
+                  alert("Failed to unblock user");
+              }
+          })
+          
+          //.then(response => response.ok).then(success => (success ? alert("User successfully unblocked") : alert("Failed to unblock user")))
+          //const items = this.state.blocked;
+            //    const filtereditems = items.filter(item=>item !== e.target.id);
+              //  this.setState({blocked: filtereditems})
+                //console.log(this.state.blocked);
     }
 //need to get invite id from button
     acceptInvite = async e =>{
@@ -238,12 +259,12 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
-        
+        console.log("blocked =" +this.state.blocked);
         if(this.state.blocked === undefined){
             this.state.blocked = []
         }
 
-        console.log("blocked =" +this.state.blocked);
+        
         return(
             <div>
                 <div className="container">
@@ -322,6 +343,7 @@ class InviteButton extends React.Component {
     }
 }
 class BlockedUserButton extends React.Component {
+
     render(){
         return(
             <div>
