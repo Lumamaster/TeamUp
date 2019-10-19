@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const ObjectId = require('mongodb').ObjectID;
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
@@ -10,7 +11,7 @@ router.use(express.json());
 router.use(verify);
 router.post('/', async(req,res) => {
 
-    const {teamName, info, requestedSkills, open, course, maxMembers} =  req.body;
+    const {teamName, teamMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
     //TODO: Handle sending invites to other team members
     const owner = {
         id: req.token.id,
@@ -23,6 +24,9 @@ router.post('/', async(req,res) => {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, function(err,client){
             assert.equal(null, err);
             const db = client.db("Teams");
+            const userdb = client.db("Users");
+
+    
 
             // Create team object to be added
             var team = {
@@ -57,6 +61,24 @@ router.post('/', async(req,res) => {
                     console.log(err);
                     res.status(400).json({err:err});
                 });
+
+                var teamSplit = teamMembers.split(',');
+                teamSplit.forEach(element => {
+                var user = userdb.collection('user').find({
+                email: element
+                }).toArray(); 
+        
+                user.then(function (result) {
+                    userdb.collection('user').updateOne(
+                        { email:element },
+                        {
+                         $push: { invites: {id: item.insertedId, name: item.ops[0].teamName} }
+                        }
+                )}).catch(function(err){
+                    console.log(err);
+                });
+            });
+
                 res.status(200).send('Team created successfully');
                 client.close();
             }).catch(function(err){

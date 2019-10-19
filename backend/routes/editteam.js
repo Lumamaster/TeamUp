@@ -14,7 +14,7 @@ router.post('/:id', async(req,res) => {
     const user = req.token;
     const teamId = req.params.id;
 
-    const {teamName, teamMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
+    const {teamName, addMembers, info, requestedSkills, open, course, maxMembers} =  req.body;
 
     // Update team data
     try{
@@ -22,6 +22,8 @@ router.post('/:id', async(req,res) => {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, async function(err,client){
             assert.equal(null, err);
             const db = client.db("Teams");
+            const userdb = client.db("Users");
+
 
         // Update team data on the database
         const foundTeam = db.collection('team').findOne({_id:ObjectId(teamId)});
@@ -47,6 +49,23 @@ router.post('/:id', async(req,res) => {
             maxMembers: maxMembers
                           }}
         ).then(function(result){
+
+            var teamSplit = addMembers.split(',');
+                teamSplit.forEach(element => {
+                var user = userdb.collection('user').find({
+                email: element
+                }).toArray(); 
+        
+                user.then(function (result) {
+                    userdb.collection('user').updateOne(
+                        { email:element },
+                        {
+                         $push: { invites: {id: teamId, name: teamName} }
+                        }
+                )}).catch(function(err){
+                    console.log(err);
+                });
+
             res.status(200).send("team edited successfully");
             client.close();
         }).catch(function(err){   

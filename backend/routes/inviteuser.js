@@ -5,9 +5,7 @@ const router = express.Router();
 const assert = require('assert');
 const dbconfig = require('../db_config.json');
 const verify = require('../verifyjwt');
-const assert = require('assert');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 
 router.use(express.urlencoded({extended:false}));
 
@@ -68,10 +66,10 @@ router.get('/:id/invite/:teamid', async (req, res) => {
                         $push: { invites: {id: teamid, name: teamname} }
                     }
                 ).then(function (r) {
-                    try{
+                    /*try{
                         // Generate test SMTP service account from ethereal.email
                         // Only needed if you don't have a real mail account for testing
-                        var testAccount = await nodemailer.createTestAccount();
+                        var testAccount = nodemailer.createTestAccount();
 
                         // create reusable transporter object using the default SMTP transport
                         var transporter = nodemailer.createTransport({
@@ -94,22 +92,22 @@ router.get('/:id/invite/:teamid', async (req, res) => {
                         transporter.sendMail(mailOptions, function(error, info){
                             if(error){
                                 console.log(error);
-                                res.json({yo: 'error'});
+                                //res.json({yo: 'error'});
                             }else{
                                 console.log('Message sent: ' + info.response);
-                                res.json({yo: info.response});
+                                //res.json({yo: info.response});
                             };
                         });
 
                     }catch(error){
                         console.log(error);
-                    }
+                    }*/
                     res.status(200).send("added invite successfully");
                     client.close();
                     return;
                 }).catch(function (error) {
                     console.log(error);
-                    res.status(400).send(error);
+                    res.status(400).send("adding invite not successful");
                     client.close();
                     return;
                 });
