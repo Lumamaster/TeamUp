@@ -195,6 +195,7 @@ class UserPage extends React.Component {
     }
     unblock = async e => {
         const name = e.target.id;
+        console.log(" = " + this.state.blocked);
         e.preventDefault();
         fetch((PRODUCTION ? production_url : local_url) + '/blk/unblock/' + e.target.id, {
             method: "GET",
@@ -207,7 +208,9 @@ class UserPage extends React.Component {
               if(success){
                 alert("User successfully unblocked");
                 const items = this.state.blocked;
-                const filtereditems = items.filter(item=>item !== name);
+                const filtereditems = items.filter((item) => item._id !== name)
+                console.log(filtereditems);
+                //item =>item._id !== e.target.id);
                 this.setState({blocked: filtereditems})
                 console.log(this.state.blocked);
               }else{
@@ -343,8 +346,8 @@ class BlockedUserButton extends React.Component {
     render(){
         return(
             <div>
-                <span>{this.props.user}</span>
-                <button id={this.props.user} onClick={this.props.unblock}>Unblock</button>
+                <span>{this.props.user.username}</span>
+                <button id={this.props.user._id} onClick={this.props.unblock}>Unblock</button>
             </div>
         )
     }
