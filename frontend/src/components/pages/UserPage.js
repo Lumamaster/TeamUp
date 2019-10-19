@@ -34,7 +34,7 @@ class UserPage extends React.Component {
             const {id} = jwt.decode(window.localStorage.getItem('token')).data
             console.log(uid);
             console.log(id);
-            this.state.uid = uid;
+            this.setState({uid});
             isMe = uid === id || uid === '';
         }
         fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
