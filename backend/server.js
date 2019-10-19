@@ -21,6 +21,9 @@ const viewTeamSkills = require('./routes/viewteamskills');
 const kickUser = require('./routes/kickUser');
 const block = require('./routes/blockuser');
 const handleDocuments = require('./routes/handledocuments');
+const inviteuser = require('./routes/inviteuser');
+const handleinvite = require('./routes/handleInvite');
+const handejoinreq = require('./routes/handleJoinRequest');
 
 const port = process.env.PORT || 8000;
 app.use(cors())
@@ -43,6 +46,9 @@ app.use('/blk', block);
 //app.use('/teams/create', createTeam);
 //app.use('/user/teams/join', joinTeam);
 app.use('/documents', handleDocuments);
+app.use('/inviteuser', inviteuser);
+app.use('/invite',handleinvite);
+app.use('/request',handejoinreq);
 
 app.io = io;
 
