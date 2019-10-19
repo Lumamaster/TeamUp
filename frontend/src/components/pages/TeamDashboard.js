@@ -3,6 +3,7 @@ import '../../App.css';
 import {Link} from 'react-router-dom';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
 import io from 'socket.io-client';
+import * as jwt from 'jsonwebtoken';
 
 class TeamDashboard extends React.Component {
     constructor(props) {
@@ -12,7 +13,17 @@ class TeamDashboard extends React.Component {
             chatmsg:'',
             notetext:'',
             errors: [], 
-            disableChat: true
+            disableChat: true,
+            isOwner: false,
+            edit: false,
+            editForm: {
+                teamName:"",
+                info:"",
+                course:"",
+                maxMembers: 0,
+                open:false,
+                requestedSkills: []
+            }
         }
         const roomId = window.location.href.substr(window.location.href.indexOf('/teams/') + 7)
         this.myId = null;
@@ -26,6 +37,13 @@ class TeamDashboard extends React.Component {
         this.socket.on('ready', data => this.prepareChat(data));
 
         this.fileRef = React.createRef();
+        this.isOwner = null;
+    }
+    toggleEdit = async () => {
+        const wasEditing = this.state.edit;
+        this.setState({edit: !this.state.edit});
+
+        if(!wasEditing) return;
     }
 
     showMessage = msg => {
@@ -74,9 +92,24 @@ class TeamDashboard extends React.Component {
             }
             return;
         }
+        const team = await res.json();
         this.setState({
-            team:await res.json()
+            team:team,
+            editForm:{
+                teamName:team.teamName,
+                info:team.info,
+                course:team.course,
+                maxMembers:team.maxMembers,
+                open:team.open,
+                requestedSkills:team.requestedSkills
+            },
+            isOwner:team.owner.id === jwt.decode(window.localStorage.getItem('token')).data.id
         })
+    }
+    handleFormChange = e => {
+        let {editForm} = this.state;
+        editForm[e.target.name] = e.target.value;
+        this.setState({editForm})
     }
     handleInputChange = e => {
         this.setState({
@@ -114,25 +147,50 @@ class TeamDashboard extends React.Component {
         const res = await fetch(url, fetchParams);
         console.log(res.status)
     }
+    addSkill = e => {
+        e.preventDefault();
+        let {requestedSkills} = this.state.editForm;
+        requestedSkills.push(this.state.newSkill);
+        this.setState({
+            editForm:{
+                ...this.state.editForm,
+                requestedSkills:requestedSkills
+            },
+            newSkill:''
+        })
+    }
+    removeSkill = i => {
+        this.setState({
+            editForm:{
+                ...this.state.editForm,
+                requestedSkills:this.state.editForm.requestedSkills.filter((val,index) => index !== i)
+            }
+        })
+    }
     render() {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
                 <div id="left" style={{minWidth:200, flexGrow:1}}>
-                    {this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
-                    {this.state.team ? <h4>{this.state.team.course}</h4> : null}
-                    {this.state.team ? <p>{this.state.team.info}</p> : null}
+                    {this.state.edit ? <React.Fragment><input type="text" name="teamName" value={this.state.editForm.teamName} onChange={this.handleFormChange}/><br/></React.Fragment> : this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
+                    {this.state.edit ? <input type="text" name="course" value={this.state.editForm.course} onChange={this.handleFormChange}/> : this.state.team ? <h4>{this.state.team.course}</h4> : null}
+                    {this.state.edit ? <textarea name="info" style={{width:'100%'}} value={this.state.editForm.info} onChange={this.handleFormChange}/> : this.state.team ? <p>{this.state.team.info}</p> : null}
+                    {this.state.edit ? <React.Fragment><p>Max Members:</p><input type="number" name="maxMembers" min={1} step={1} value={this.state.editForm.maxMembers} onChange={this.handleFormChange} /></React.Fragment> : null}
+                    {this.state.edit ? <React.Fragment><p>Open:</p><input type="checkbox" name="open" checked={this.state.editForm.open} onChange={e => {
+                            e.target = {name:'open',value:e.target.checked}
+                            this.handleFormChange(e);
+                        }} /></React.Fragment> : null}
+                    {this.state.edit && <React.Fragment><h3>Requested Skills:</h3>{this.state.editForm.requestedSkills.map((skill,i) => {
+                        return <React.Fragment><p key={skill + i}>{skill} <span onClick={() => this.removeSkill(i)} style={{color:'red', cursor:'pointer', fontWeight:'bold'}}>X</span></p></React.Fragment>
+                    })}
+                    <input type="text" name="newSkill" onChange={this.handleInputChange}/>
+                    <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
-                        <h3>Members</h3>
+                        <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
                         {this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
                             return <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
                         }) : null}
                     </div>
-                    <div id="notes">
-                        <h3>Notes</h3>
-                        {this.state.team && this.state.team.notes ? this.state.team.notes.map((note,i) => {
-                            return <p key={'note'+i}><span style={{fontWeight:'bold'}}>{note.author}:   </span>{note.body}</p>
-                        }) : <p>No notes</p>}
-                    </div>
+                    {this.state.isOwner && <button onClick={this.toggleEdit}>Edit Team Info</button>}
                     <div id="errors">
                         {this.showErrors()}
                     </div>
