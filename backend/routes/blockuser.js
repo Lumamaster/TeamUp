@@ -58,7 +58,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                         /* remove them from my blockedusers array */
                         for (var i = 0; i < myBlocked.length; i++) {
-                            if (myBlocked[i]._id == theirId {
+                            if (myBlocked[i]._id == theirId) {
                                 myBlocked.splice(i, 1);
                                 break;
                             }
