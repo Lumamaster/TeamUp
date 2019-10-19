@@ -128,9 +128,46 @@ router.get('/:id', async (req,res) => {
                         name:team.teamName
                     }}
                 })
+
+                try{
+                    // Generate test SMTP service account from ethereal.email
+                    // Only needed if you don't have a real mail account for testing
+                    var testAccount = await nodemailer.createTestAccount();
+
+                    // create reusable transporter object using the default SMTP transport
+                    var transporter = nodemailer.createTransport({
+                        host: 'smtp.ethereal.email',
+                        port: 587,
+                        secure: false, // true for 465, false for other ports
+                        auth: {
+                            user: testAccount.user, // generated ethereal user
+                            pass: testAccount.pass // generated ethereal password
+                        }
+                    })
+                    var mailOptions = {
+                        from: 'example@gmail.com>', // sender address
+                        to: teamcheck.owner.email, // list of receivers
+                        subject: 'Someone joined your team!', // Subject line
+                        text: 'Please check your profile to find who joined' //, // plaintext body
+                        // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+                    };
+
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if(error){
+                            console.log(error);
+                            res.json({yo: 'error'});
+                        }else{
+                            console.log('Message sent: ' + info.response);
+                            res.json({yo: info.response});
+                        };
+                    });
+
+                }catch(error){
+                    console.log(error);
+                }
                 
                 await Promise.all([teamupdate,userupdate])
-                res.status(200).send();
+                res.status(200).send("user joined notified");
                 return;
             } else {
                 //Request to join the team
@@ -178,7 +215,7 @@ router.get('/:id', async (req,res) => {
                 }
                 
                 await Promise.all([teamupdate,userupdate])
-                res.status(200).send();
+                res.status(200).send("user requested notified");
                 return;
             }
         });

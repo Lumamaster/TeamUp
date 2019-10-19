@@ -39,11 +39,12 @@ router.get('/acceptinvite/:id', (req, res) => {
                     {$inc: {numMembers: 1}}
                 );
             });
-            
+            res.status(200).send('accepted invite successfully');
             client.close();
         });
     } catch(err) {
         console.error(err);
+        res.status(400).json({err:err});
     } finally{}
 
 })
@@ -66,11 +67,13 @@ router.get('/declineinvite/:id', (req, res) => {
                 {"_id":ObjectID(userId)},
                 {$pull: {invites: {$eq: teamId}}}
             )
-            
+            res.status(200).send('declined invite successfully');
+
             client.close();
         });
     } catch(err) {
         console.error(err);
+        res.status(400).json({err:err});
     } finally{}
 })
 
