@@ -50,7 +50,7 @@ router.post('/:id', async(req,res) => {
                           }}
         ).then(function(result){
 
-            if(addMembers.length()>0){
+            if(addMembers){
             var teamSplit = addMembers.split(',');
                 teamSplit.forEach(element => {
                 var user = userdb.collection('user').find({
