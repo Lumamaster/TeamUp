@@ -49,8 +49,8 @@ router.post('/', async(req,res) => {
             db.collection('team').insertOne(team).then(function(item){
                 //console.log('Team created succesfully');
                 //teamadded = {teamName , item.insertedId};    
-                client.db("Users").collection('user').updateOne(
-                    {_id: mongodb.ObjectId(owner.id)},
+                userdb.collection('user').updateOne(
+                    {_id: ObjectId(owner.id)},
                     {$push:{
                         curTeams: {
                             id:item.insertedId,
@@ -58,31 +58,39 @@ router.post('/', async(req,res) => {
                         }
                     }}
                 ).catch(function(err){
-                    console.log(err);
-                    res.status(400).json({err:err});
+                        console.log(err);
+                        console.log('err update1');
+                        res.status(400).json({err:err});
                 });
 
-                var teamSplit = teamMembers.split(',');
-                teamSplit.forEach(element => {
-                var user = userdb.collection('user').find({
-                email: element
-                }).toArray(); 
+                teamMembers.forEach(element => {
+                    var user = userdb.collection('user').find({
+                        email: element
+                    }).toArray(); 
+
         
-                user.then(function (result) {
-                    userdb.collection('user').updateOne(
-                        { email:element },
-                        {
-                         $push: { invites: {id: item.insertedId, name: item.ops[0].teamName} }
-                        }
-                )}).catch(function(err){
-                    console.log(err);
-                });
-            });
+                    user.then(function (result) {
+                        userdb.collection('user').updateOne(
+                            { email:element },
+                            {
+                            $push: { invites: {id: item.insertedId, name: item.ops[0].teamName} }
+                            }
+                        ).then(function (r) {
+                            console.log('success');
+                            res.status(200).send('Team created successfully');
+                            client.close();
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
+                    }).catch(function(err){
+                        console.log(err);
+                    });
+                })
 
-                res.status(200).send('Team created successfully');
-                client.close();
+                
             }).catch(function(err){
                 console.log('Could not add team to database');
+                console.log(err);
                 res.status(400).json({err:err});
             });
             
