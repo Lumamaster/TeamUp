@@ -38,7 +38,7 @@ router.post('/:teamId', verify, async (req,res) => {
                 res.status(400).json({err: "Validation failed"});
                 return;
             } else if(!req.body.name) {
-                res.status(400).json({err:"No document name in request body"})
+                res.status(400).json({err:"No document name in request body"});
                 return;
             }
 
@@ -72,7 +72,7 @@ router.post('/:teamId', verify, async (req,res) => {
                     fileId: uploadStream.id,
                     filename: req.body.name,
                     type:'file'
-                })
+                });
                 //console.log(uploadStream.id);
                 client.db('Teams').collection('team').findOneAndUpdate({_id:mongo.ObjectId(req.params.teamId)},{
                     $push: {
@@ -91,7 +91,7 @@ router.post('/:teamId', verify, async (req,res) => {
         }))
     } catch(err) {
         console.log(err);
-        res.status(500).json({err})
+        res.status(500).json({err});
         return;
     }
 });
@@ -129,7 +129,7 @@ router.get('/delete:id', async (req,res) => {
                 break;
             }
         }
-        if(!isInTeam && file.metadata.uploaderId !== userId) {  //Let the user download if it's their file, even if not in team
+        if(!isInTeam || file.metadata.uploaderId !== userId) {  //user cannot delete if they are kicked
             res.status(400).json({err:"You are not in that team"});
             return;
         }
