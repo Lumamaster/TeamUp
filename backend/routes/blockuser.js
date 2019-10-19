@@ -41,7 +41,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                 /* remove me from their blockedby array */
                 for (var i = 0; i < theirBlocked.length; i++) {
-                    if (theirBlocked[i] == myId) {
+                    if (theirBlocked[i]._id == ObjectID(myId)) {
                         theirBlocked.splice(i, 1);
                         break;
                     }
@@ -58,7 +58,7 @@ router.get('/unblock/:id', async (req,res) => {
 
                         /* remove them from my blockedusers array */
                         for (var i = 0; i < myBlocked.length; i++) {
-                            if (myBlocked[i] == theirId) {
+                            if (myBlocked[i]._id == ObjectID(theirId)) {
                                 myBlocked.splice(i, 1);
                                 break;
                             }
@@ -112,6 +112,7 @@ router.get('/block/:id', async (req,res) => {
 
     const theirId = req.params.id;
     const myId = req.token.id;
+    const myName = req.token.username;
 
     console.log(theirId);
     console.log(myId);
@@ -128,26 +129,51 @@ router.get('/block/:id', async (req,res) => {
             assert.equal(null, err);
             const userdb = client.db("Users");
 
-            /* Add me to the list of people who have blocked them */
-            userdb.collection('user').updateOne(
-                { _id: ObjectID(theirId) },
-                {
-                    $addToSet: {blockedBy: myId }
-                }
-            ).then(function (result) {
-                console.log('successfully accessed their blockedby');
+            var me = userdb.collection('user').findOne({
+                "_id":ObjectID(myId)
+            });
 
-                /* Add them to the list of people that I have blocked */
+            me.then(function (result) {
+                /* Add me to the list of people who have blocked them */
                 userdb.collection('user').updateOne(
-                    { _id: ObjectID(myId) },
+                    { _id: ObjectID(theirId) },
                     {
-                        $addToSet: {blockedUsers: theirId }
+                        $addToSet: { blockedBy: me }
                     }
-                ).then(function (r) {
-                    console.log('successfully accessed my blockedusers');
-                    res.status(200).json({message:'successfully accessed both lists'});
-                    client.close();
-                    return;
+                ).then(function (result) {
+                    console.log('successfully accessed their blockedby');
+
+
+                    var them = userdb.collection('user').findOne({
+                        "_id":ObjectID(theirId)
+                    });
+
+                    them.then(function (r) {
+                        console.log(r);
+                        //console.log(r.name);
+                        /* Add them to the list of people that I have blocked */
+                        userdb.collection('user').updateOne(
+                            { _id: ObjectID(myId) },
+                            {
+                                $addToSet: { blockedUsers: r }
+                            }
+                        ).then(function (r) {
+                            console.log('successfully accessed my blockedusers');
+                            res.status(200).json({message:'successfully accessed both lists'});
+                            client.close();
+                            return;
+                        }).catch(function (err) {
+                            console.log(err);
+                            res.status(400).json({err:err});
+                            client.close();
+                            return;
+                        });
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.status(400).json({err:err});
+                        client.close();
+                        return;
+                    });
                 }).catch(function (err) {
                     console.log(err);
                     res.status(400).json({err:err});
@@ -159,7 +185,8 @@ router.get('/block/:id', async (req,res) => {
                 res.status(400).json({err:err});
                 client.close();
                 return;
-            });
+            })
+            
 
         });
     } catch(err) {

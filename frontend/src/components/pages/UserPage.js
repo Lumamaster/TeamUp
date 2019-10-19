@@ -65,7 +65,7 @@ class UserPage extends React.Component {
             rating: data.rating,
             prevTeams: data.prevTeams,
             curTeams: data.curTeams,
-            blocked: data.blocked,
+            blocked: data.blockedUsers,
             invites: data.invites,
             prevName: data.name,
             prevBio: data.bio
@@ -195,7 +195,7 @@ class UserPage extends React.Component {
     }
     unblock = async e => {
         e.preventDefault();
-        fetch((PRODUCTION ? production_url : local_url) + 'blk/unblk/' + this.state.uid, {
+        fetch((PRODUCTION ? production_url : local_url) + '/blk/unblk/' + this.state.uid, {
             method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",

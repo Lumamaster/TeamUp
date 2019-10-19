@@ -21,7 +21,7 @@ class UserSearch extends React.Component {
                 <h2>Search Users</h2>
                 <input style={{width:'100%'}} type="text" name="searchText" onChange={this.handleInputChange} value={this.state.searchText}/>
                 {this.state.users.map(user => {
-                    return <p id={user.username || user.name || user.id} key={user._id}><Link to={'/profile/' + user._id}>{user.username || user.name || user.id}</Link></p>
+                    return <p key={user._id}><Link id={user.username || user.name || user.id} to={'/profile/' + user._id}>{user.username || user.name || user.id}</Link></p>
                 })}
             </div>
         );
