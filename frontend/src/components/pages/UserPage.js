@@ -196,11 +196,7 @@ class UserPage extends React.Component {
     unblock = async e => {
         const name = e.target.id;
         e.preventDefault();
-<<<<<<< HEAD
-        fetch((PRODUCTION ? production_url : local_url) + '/blk/unblk/' + this.state.uid, {
-=======
         fetch((PRODUCTION ? production_url : local_url) + '/blk/unblock/' + e.target.id, {
->>>>>>> bc08a175c0fbb14c898503c8f41f4e6f4fcdaf44
             method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
