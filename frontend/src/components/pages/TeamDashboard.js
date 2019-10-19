@@ -44,6 +44,28 @@ class TeamDashboard extends React.Component {
         this.setState({edit: !this.state.edit});
 
         if(!wasEditing) return;
+
+        const teamId = window.location.href.substr(window.location.href.indexOf('/teams/') + 7)
+        const url = (PRODUCTION ? production_url : local_url) + '/teams/edit/' + teamId;
+        const otherParams = {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            },
+            body: this.state.editForm
+        }
+        console.log(this.state.editForm);
+        this.setState({
+            team: {
+                ...this.state.team,
+                ...this.state.editForm
+            }
+        })
+        const res = await fetch(url, otherParams);
+        if(!res.ok) {
+            alert("Failed to update team");
+            console.log(res)
+        }
     }
 
     showMessage = msg => {
