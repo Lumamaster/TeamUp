@@ -190,6 +190,18 @@ class TeamDashboard extends React.Component {
             }
         })
     }
+    kick = async e => {
+        e.preventDefault();
+        fetch((PRODUCTION ? production_url : local_url) + '/kickuser/' + this.state.tid, {
+            method: "POST",
+            headers: {
+                "content-type":"application/json; charset=UTF-8",
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                
+            },body: JSON.stringify({kick:e.target.id})
+          }).then(response => response.ok).then(success => (success ? alert("Successfully Rejected invite") : alert("Failed to reject invite")))
+    }
+
     render() {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
@@ -209,9 +221,19 @@ class TeamDashboard extends React.Component {
                     <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
                         <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
-                        {this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
-                            return <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.teamteam.teamMembers.map(user => {                            return <span>
+                                <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                                {<button id={user.id} onClick={this.kick}>Kick</button>}
+                                <br/>
+                            </span>
                         }) : null}
+                        {!this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
+                            return <span>
+                                <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                                <br/>
+                            </span>
+                        }) : null}
+
                     </div>
                     {this.state.isOwner && <button onClick={this.toggleEdit}>Edit Team Info</button>}
                     <div id="errors">
