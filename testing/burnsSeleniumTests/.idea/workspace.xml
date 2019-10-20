@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../backend/routes/blockuser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/routes/blockuser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -117,12 +116,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2939" />
+          <entry key="java" value="3988" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2939" />
+          <entry key="JAVA" value="3988" />
         </counts>
       </usages-collector>
     </session>
@@ -156,8 +155,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
+            <state relative-caret-position="221">
+              <caret line="148" column="32" selection-start-line="148" selection-start-column="32" selection-end-line="148" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -326,7 +325,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571521872405" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571524216885" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -427,12 +426,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FullTest_successLogin - 2019.10.19 at 15h 49m 42s.xml">
-      <configuration name="FullTest.successLogin" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest - 2019.10.19 at 16h 00m 59s.xml">
-      <configuration name="FullTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FullTest_successLogin - 2019.10.19 at 16h 04m 34s.xml">
       <configuration name="FullTest.successLogin" configurationId="JUnit" />
     </history-entry>
@@ -458,6 +451,12 @@
       <configuration name="FullTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="FullTest - 2019.10.19 at 17h 48m 38s.xml">
+      <configuration name="FullTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest - 2019.10.19 at 17h 51m 40s.xml">
+      <configuration name="FullTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest - 2019.10.19 at 18h 25m 19s.xml">
       <configuration name="FullTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -703,8 +702,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="108" column="10" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="10" />
+        <state relative-caret-position="221">
+          <caret line="148" column="32" selection-start-line="148" selection-start-column="32" selection-end-line="148" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
