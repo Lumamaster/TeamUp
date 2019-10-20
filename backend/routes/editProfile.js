@@ -14,6 +14,7 @@ router.post('/update', async (req, res) => {
     const username = req.body.username;
     const id = req.token.id;
     const bio = req.body.bio;
+    const schedule = req.body.schedule;
 
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
@@ -28,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { username: username, bio: bio }
+                        $set: { username: username, bio: bio, schedule: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");

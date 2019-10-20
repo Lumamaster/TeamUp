@@ -24,8 +24,10 @@ class UserPage extends React.Component {
             prevName: '',
             prevBio: '',
             uid: '',
+            changedSchedule: false
         }
         this.acceptInvite = this.acceptInvite.bind(this);
+        this.times = ['6:00','6:30','7:00','7:30','8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','1:00','1:30','2:00','2:30','3:00','3:30','4:00','4:30','5:00','5:30','6:00','6:30','7:00','7:30','8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30',]
     }
     //TODO: dont know correct fetch argument
     componentDidMount(){
@@ -57,6 +59,16 @@ class UserPage extends React.Component {
             return Promise.reject('Got an unexpected status code from the server')
         })
         .then(data => {
+            let tempSchedule = [];
+            for(let i = 0; i < 38; i++) {
+                tempSchedule[i] = [false,false,false,false,false,false,false]
+            }
+            /*let tempRow = [];
+            tempRow.fill(false, 0, 18);
+            if(!data.schedule) {
+                tempSchedule.fill(tempRow,0,6)
+            }*/
+            console.log(tempSchedule)
             this.setState({
             isMe: isMe,
             bio: data.bio,
@@ -69,7 +81,8 @@ class UserPage extends React.Component {
             blocked: data.blockedUsers,
             invites: data.invites,
             prevName: data.name,
-            prevBio: data.bio
+            prevBio: data.bio,
+            schedule: data.schedule || tempSchedule
             })
         })
         .catch(err => {})
@@ -149,7 +162,7 @@ class UserPage extends React.Component {
             const bio = this.state.bio !== '' ? this.state.bio : this.state.prevBio;
             const username = this.state.name !== '' ? this.state.username : this.state.prevName;
 
-            if(username === this.state.prevName && bio === this.state.prevBio) {
+            if(username === this.state.prevName && bio === this.state.prevBio && !this.state.changedSchedule) {
                 this.setState({
                     edit: !this.state.edit
                 })
@@ -163,7 +176,7 @@ class UserPage extends React.Component {
                     Authorization: 'Bearer ' + window.localStorage.getItem('token'),
                     "content-type":"application/json; charset=UTF-8"
                 },
-                body: JSON.stringify({username:username, bio:bio})
+                body: JSON.stringify({username:username, bio:bio, schedule:this.state.schedule})
             }
             console.log(fetchParams)
             const res = await fetch(url, fetchParams)
@@ -177,6 +190,7 @@ class UserPage extends React.Component {
                 prevName:username,
                 username:username,
                 bio:bio,
+                changedSchedule:false
             })
         }
         this.setState({
@@ -246,8 +260,60 @@ class UserPage extends React.Component {
           }).then(response => response.ok).then(success => (success ? alert("Successfully Rejected invite") : alert("Failed to reject invite")))
     }
 
+    drawSchedule = () => {
+        return <table style={{width:'100%'}}>
+            <tbody style={{width:'100%'}}>
+                <tr style={{width:'100%'}}>
+                    <th style={{margin:'0px'}}></th>
+                    <th style={{margin:'0px auto'}}>Sun</th>
+                    <th style={{margin:'0px auto'}}>Mon</th>
+                    <th style={{margin:'0px auto'}}>Tues</th>
+                    <th style={{margin:'0px auto'}}>Wed</th>
+                    <th style={{margin:'0px auto'}}>Th</th>
+                    <th style={{margin:'0px auto'}}>Fri</th>
+                    <th style={{margin:'0px auto'}}>Sat</th>
+                </tr>
+                {this.state.schedule && this.state.schedule.map((time,i) => {
+                    return <tr key={'scheduleline' + i}>
+                        <td>{this.times[i]}</td>
+                        {time.map((dayTime,j) => <td key={'schedule' + i + j} style={{backgroundColor:dayTime ? '#6d22d7' : '#ddd'}}>{dayTime}</td>)}
+                    </tr>
+                })}
+            </tbody>
+        </table>
+    }
 
+    drawScheduleEdit = () => {
+        return <table style={{width:'100%'}}>
+            <tbody style={{width:'100%'}}>
+                <tr style={{width:'100%'}}>
+                    <th style={{margin:'0px auto'}}></th>
+                    <th style={{margin:'0px auto'}}>Sun</th>
+                    <th style={{margin:'0px auto'}}>Mon</th>
+                    <th style={{margin:'0px auto'}}>Tues</th>
+                    <th style={{margin:'0px auto'}}>Wed</th>
+                    <th style={{margin:'0px auto'}}>Th</th>
+                    <th style={{margin:'0px auto'}}>Fri</th>
+                    <th style={{margin:'0px auto'}}>Sat</th>
+                </tr>
+                {this.state.schedule && this.state.schedule.map((time,i) => {
+                    //console.log(time)
+                    return <tr key={'scheduleline'+i}>
+                        <td>{this.times[i]}</td>
+                        {time.map((dayTime,j) => <td key={'schedule' + i + j} style={{textAlign:'center'}}><input type="checkbox" checked={this.state.schedule[i][j]} onChange={e => this.updateSchedule(i,j,e)}/></td>)}
+                    </tr>
+                })}
+            </tbody>
+        </table>
+    }
 
+    updateSchedule = (time, day, e) => {
+        let {schedule} = this.state;
+        console.log(day, time)
+        schedule[time][day] = e.target.checked;
+        console.log(schedule[time][day])
+        this.setState({schedule, changedSchedule:true});
+    }
 
     render(){
         if(!window.localStorage.getItem('token')) {
@@ -288,6 +354,10 @@ class UserPage extends React.Component {
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
                     {this.state.isMe ?  null : <button name="blockbutton" onClick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
+                </div>
+                <div className="container" id="schedule">
+                <h3>Schedule{this.state.edit && " - Please select the times when you are free to work with your team"}</h3>
+                    {this.state.edit ? this.drawScheduleEdit() : this.drawSchedule()}
                 </div>
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
