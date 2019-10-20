@@ -33,8 +33,8 @@ router.post('/:id', async(req,res) => {
         
         }
         foundTeam.then(function(result){
-            console.log(result.owner.id);
-            console.log(user);
+            //console.log(result.owner.id);
+            //console.log(user);
             if(result.owner.id !== user.id) {
                 res.status(401).json({err:"You are not the owner of that team."});
                 client.close();
@@ -80,7 +80,7 @@ router.post('/:id', async(req,res) => {
             console.log(err);
             res.status(401).json({err:"didn't work"});
         });
-        console.log("justalog");
+        //console.log("justalog");
         
 
         

@@ -44,7 +44,8 @@ class CreateTeamPage extends React.Component {
                 requestedSkills: this.state.requestedSkills, 
                 open: true, 
                 course: this.state.course, 
-                maxMembers: this.state.maxMembers
+                maxMembers: this.state.maxMembers,
+                teamMembers: this.state.teamMembers
             })
           }).then(response => response.ok).then(success => (success ? alert("Team successfully created") : alert("Failed to create team")))
     }
@@ -109,6 +110,7 @@ class CreateTeamPage extends React.Component {
                         ))}
                         <button onClick={e => this.appendStateArray(e, 'requestedSkills')}>Add New Skill</button>
                     </React.Fragment>
+                    <br/>
                     <React.Fragment>
                         Automatically invite users
                         {this.state.teamMembers && this.state.teamMembers.map((user, index) => (
