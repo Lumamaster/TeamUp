@@ -50,9 +50,10 @@ class TeamDashboard extends React.Component {
         const otherParams = {
             method: 'POST',
             headers: {
-                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                "Content-Type": 'application/json'
             },
-            body: this.state.editForm
+            body: JSON.stringify(this.state.editForm)
         }
         console.log(this.state.editForm);
         this.setState({
@@ -123,7 +124,7 @@ class TeamDashboard extends React.Component {
                 course:team.course,
                 maxMembers:team.maxMembers,
                 open:team.open,
-                requestedSkills:team.requestedSkills
+                requestedSkills:team.requestedSkills || []
             },
             isOwner:team.owner.id === jwt.decode(window.localStorage.getItem('token')).data.id
         })
@@ -193,15 +194,15 @@ class TeamDashboard extends React.Component {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
                 <div id="left" style={{minWidth:200, flexGrow:1}}>
-                    {this.state.edit ? <React.Fragment><input type="text" name="teamName" value={this.state.editForm.teamName} onChange={this.handleFormChange}/><br/></React.Fragment> : this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
-                    {this.state.edit ? <input type="text" name="course" value={this.state.editForm.course} onChange={this.handleFormChange}/> : this.state.team ? <h4>{this.state.team.course}</h4> : null}
-                    {this.state.edit ? <textarea name="info" style={{width:'100%'}} value={this.state.editForm.info} onChange={this.handleFormChange}/> : this.state.team ? <p>{this.state.team.info}</p> : null}
-                    {this.state.edit ? <React.Fragment><p>Max Members:</p><input type="number" name="maxMembers" min={1} step={1} value={this.state.editForm.maxMembers} onChange={this.handleFormChange} /></React.Fragment> : null}
+                    {this.state.edit ? <React.Fragment><input type="text" placeholder="Team Name" name="teamName" value={this.state.editForm.teamName} onChange={this.handleFormChange}/><br/></React.Fragment> : this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
+                    {this.state.edit ? <input type="text" name="course" placeholder="Course" value={this.state.editForm.course} onChange={this.handleFormChange}/> : this.state.team ? <h4>{this.state.team.course}</h4> : null}
+                    {this.state.edit ? <textarea name="info" style={{width:'100%'}} placeholder="Team Info" value={this.state.editForm.info} onChange={this.handleFormChange}/> : this.state.team ? <p>{this.state.team.info}</p> : null}
+                    {this.state.edit ? <React.Fragment><p>Max Members:</p><input type="number" name="maxMembers" min={this.state.team.numMembers} step={1} value={this.state.editForm.maxMembers} onChange={this.handleFormChange} /></React.Fragment> : null}
                     {this.state.edit ? <React.Fragment><p>Open:</p><input type="checkbox" name="open" checked={this.state.editForm.open} onChange={e => {
                             e.target = {name:'open',value:e.target.checked}
                             this.handleFormChange(e);
                         }} /></React.Fragment> : null}
-                    {this.state.edit && <React.Fragment><h3>Requested Skills:</h3>{this.state.editForm.requestedSkills.map((skill,i) => {
+                    {this.state.edit && <React.Fragment><h3>Requested Skills:</h3>{this.state.editForm.requestedSkills && this.state.editForm.requestedSkills.map((skill,i) => {
                         return <React.Fragment><p key={skill + i}>{skill} <span onClick={() => this.removeSkill(i)} style={{color:'red', cursor:'pointer', fontWeight:'bold'}}>X</span></p></React.Fragment>
                     })}
                     <input type="text" name="newSkill" onChange={this.handleInputChange}/>

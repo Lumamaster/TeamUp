@@ -15,6 +15,7 @@ router.post('/:id', async(req,res) => {
     const teamId = req.params.id;
 
     const {teamName, info, requestedSkills, open, course, maxMembers} =  req.body;
+    //console.log(req.body)
 
     // Update team data
     try{
