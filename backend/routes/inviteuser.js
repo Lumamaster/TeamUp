@@ -1,6 +1,6 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 const router = express.Router();
 const assert = require('assert');
 const dbconfig = require('../db_config.json');
@@ -11,42 +11,8 @@ router.use(express.urlencoded({extended:false}));
 
 router.use(verify);
 router.use(express.json());
-router.get('/:id/invite', async (req, res) => {
-    const invitee = req.params; // id of the user you want to invite
-    const owner = req.token; // current user who wants to invite people
 
-    if(invitee.id.length !== 24){
-        res.status(400).json({err:"Invalid user ID"}).send();
-        return;
-    }
-
-    try{
-        MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
-
-            assert.equal(null, err);
-            const db = client.db("Teams");
-
-            db.collection('team').find({
-                $and:
-                [{owner: owner},
-                {alive: true},
-                {numMembers: {$lte: maxMembers}}]
-            }).toArray()
-            ,then(teams => {
-                //console.log(teams);
-                client.close();
-                res.status(200).json(teams);
-                return;
-            })
-
-        });
-    } catch(err){
-        console.log(error);
-        res.status(400).json({err:error});
-    }
-});
-
-router.get('/:id/invite/:teamid', async (req, res) => {
+router.get('/:id/inviteuser/:teamid', async (req, res) => {
 
     const {invitee, teamid, teamname} = req.query; // the user you want to invite and the team to invite to
 
