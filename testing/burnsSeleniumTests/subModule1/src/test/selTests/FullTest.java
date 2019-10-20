@@ -46,6 +46,11 @@ public class FullTest {
 
         WebElement createButton =  driver.findElement(By.name("createbutton"));
         createButton.click();
+
+        Thread.sleep(1000);
+
+        driver.switchTo().alert().accept();
+
     }
 
 
@@ -121,22 +126,54 @@ public class FullTest {
 
         Thread.sleep(1000);
 
+        driver.get(url);
+
+        /* edit name and bio */
+        editButton.click();
+
+        Thread.sleep(1000);
+
+        WebElement nameBox = driver.findElement(By.id("edit-name"));
+        nameBox.clear();
+        nameBox.sendKeys("updating my name");
+        WebElement bioBox = driver.findElement(By.id("edit-bio"));
+        bioBox.clear();
+        bioBox.sendKeys("changing my bio");
+
+        editButton.click();
+        Thread.sleep(1000);
+
+        driver.get(url);
+        Thread.sleep(3000);
+
+        /* change values back to original */
+        editButton.click();
+        Thread.sleep(1000);
+        nameBox.clear();
+        nameBox.sendKeys("Stephen Burns");
+        bioBox.clear();
+        bioBox.sendKeys("placeholder bio");
+        editButton.click();
+        Thread.sleep(1000);
+        driver.get(url);
+        Thread.sleep(2000);
+
         /* Go to user search page and search amind */
         url = "http://localhost:3000/users";
         driver.get(url);
 
         WebElement searchTextbox = driver.findElement(By.name("searchText"));
-        searchTextbox.sendKeys("amind");
+        searchTextbox.sendKeys("user1");
 
         Thread.sleep(1500);
 
-        /* Go to amind profile */
-        WebElement clickID = driver.findElement(By.id("amind"));
+        /* Go to user profile */
+        WebElement clickID = driver.findElement(By.id("user1"));
         clickID.click();
 
         Thread.sleep(1500);
 
-        /* block amind */
+        /* block user */
         WebElement blockButton = driver.findElement(By.name("blockbutton"));
         blockButton.click();
 
@@ -152,7 +189,13 @@ public class FullTest {
 
         Thread.sleep(1000);
 
-        //WebElement unblockbutton = driver.findElement(By.id("5dab5b9bfa7f4079fd24e0d3"));
+        /* Unblock user */
+        WebElement unblockbutton = driver.findElement(By.id("5dacd72e3b6a4a41c85cbc6f"));
+        unblockbutton.click();
 
+        Thread.sleep(500);
+        driver.switchTo().alert().accept();
+
+        driver.get(url);
     }
 }
