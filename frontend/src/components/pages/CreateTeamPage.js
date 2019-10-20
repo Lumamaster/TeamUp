@@ -9,10 +9,10 @@ class CreateTeamPage extends React.Component {
         super(props);
         this.state = {
             teamName: '',
-            teamMembers: [''],
+            teamMembers: [],
             owner: '', 
             info: '', 
-            requestedSkills: [''], 
+            requestedSkills: [], 
             numMembers: '', 
             open: false, 
             course: '', 

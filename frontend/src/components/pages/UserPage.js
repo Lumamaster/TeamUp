@@ -253,7 +253,7 @@ class UserPage extends React.Component {
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
         }
-        console.log("blocked =" +this.state.blocked);
+        //console.log("blocked =" +this.state.blocked);
         if(this.state.blocked === undefined){
             this.state.blocked = []
         }
@@ -288,6 +288,12 @@ class UserPage extends React.Component {
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
                     {this.state.isMe ?  null : <button name="blockbutton" onClick={this.block}>Block User</button>}
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
+                </div>
+                <div className="container" id="curTeams">
+                    <h3>Teams</h3>
+                    {this.state.curTeams && this.state.curTeams.map(team => {
+                        return <p><Link to={'/teams/' + team.id}>{team.name}</Link></p>
+                    })}
                 </div>
                 <div className="container">
                         <h3>Invites</h3>
