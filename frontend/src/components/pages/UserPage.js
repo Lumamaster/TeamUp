@@ -292,7 +292,7 @@ class UserPage extends React.Component {
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
                     {this.state.curTeams && this.state.curTeams.map(team => {
-                        return <p><Link to={'/teams/' + team.id}>{team.name}</Link></p>
+                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link></p>
                     })}
                 </div>
                 <div className="container">
@@ -300,7 +300,7 @@ class UserPage extends React.Component {
                         <React.Fragment>
                             {
                                 this.state.invites.map((invite)=> 
-                                <InviteButton key={invite} invite={invite} accept={this.acceptInvite} reject={this.rejectInvite}/>)
+                                <InviteButton key={invite.id} invite={invite} accept={this.acceptInvite} reject={this.rejectInvite}/>)
                             }
                         </React.Fragment>
                 </div>
@@ -332,13 +332,15 @@ class SkillButton extends React.Component {
 class InviteButton extends React.Component {
     render(){
         return(
-            <div key={'invite' + this.props.invite.id}>
-                <tr>
-                <td><span>{this.props.invite.name}   </span></td>
-                <td><button id={this.props.invite.id} onClick={this.props.accept}>Accept</button></td>
-                <td><button id={this.props.invite.id} onClick={this.props.reject}>Reject</button></td>
-                </tr>
-            </div>
+            <table key={'invite' + this.props.invite.id}>
+                <tbody>
+                    <tr>
+                        <td><span>{this.props.invite.name}   </span></td>
+                        <td><button id={this.props.invite.id} onClick={this.props.accept}>Accept</button></td>
+                        <td><button id={this.props.invite.id} onClick={this.props.reject}>Reject</button></td>
+                    </tr>
+                </tbody>
+            </table>
         )
     }
 }

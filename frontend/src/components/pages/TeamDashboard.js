@@ -228,8 +228,8 @@ class TeamDashboard extends React.Component {
                             </span>
                         }) : null}
                         {!this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
-                            return <span>
-                                <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                            return <span key={user.id}>
+                                <Link to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
                                 <br/>
                             </span>
                         }) : null}
