@@ -66,6 +66,7 @@ class SignupPage extends React.Component {
             console.log(res);
             if(res.status === 201) {
                 //Success!
+                this.props.history.push('/login');
                 alert('Success!')
             } else {
                 const data = await res.json()
