@@ -11,7 +11,7 @@ router.use(verify);
 router.use(express.json());
 
 router.post('/update', async (req, res) => {
-    const name = req.body.name;
+    const username = req.body.username;
     const id = req.token.id;
     const bio = req.body.bio;
 
@@ -28,7 +28,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { name: name, bio: bio }
+                        $set: { username: username, bio: bio }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");

@@ -12,7 +12,7 @@ class UserPage extends React.Component {
             isMe: false,
             edit:false,
             email: '',
-            name: '',
+            username: '',
             bio: '',
             skills: '',
             rating: '',
@@ -61,7 +61,7 @@ class UserPage extends React.Component {
             isMe: isMe,
             bio: data.bio,
             email: data.email,
-            name: data.name,
+            username: data.username,
             skills: data.skills,
             rating: data.rating,
             prevTeams: data.prevTeams,
@@ -147,9 +147,9 @@ class UserPage extends React.Component {
     edit = async () => {
         if(this.state.edit) {
             const bio = this.state.bio !== '' ? this.state.bio : this.state.prevBio;
-            const name = this.state.name !== '' ? this.state.name : this.state.prevName;
+            const username = this.state.name !== '' ? this.state.username : this.state.prevName;
 
-            if(name === this.state.prevName && bio === this.state.prevBio) {
+            if(username === this.state.prevName && bio === this.state.prevBio) {
                 this.setState({
                     edit: !this.state.edit
                 })
@@ -163,7 +163,7 @@ class UserPage extends React.Component {
                     Authorization: 'Bearer ' + window.localStorage.getItem('token'),
                     "content-type":"application/json; charset=UTF-8"
                 },
-                body: JSON.stringify({name:name, bio:bio})
+                body: JSON.stringify({username:username, bio:bio})
             }
             console.log(fetchParams)
             const res = await fetch(url, fetchParams)
@@ -174,8 +174,8 @@ class UserPage extends React.Component {
             }
             this.setState({
                 prevBio:bio,
-                prevName:name,
-                name:name,
+                prevName:username,
+                username:username,
                 bio:bio,
             })
         }
@@ -264,7 +264,7 @@ class UserPage extends React.Component {
                 <div className="container">
                     {!this.state.edit ? 
                         <React.Fragment>
-                            <h1>{this.state.name}</h1>
+                            <h1>{this.state.username}</h1>
                             <p>Email: {this.state.email}</p>
                             <p>Bio: {this.state.bio}</p>
                             <p>Skills: {this.state.skills ? this.state.skills.join(', ') : null}</p>
@@ -272,7 +272,7 @@ class UserPage extends React.Component {
                         </React.Fragment>
                         : 
                         <form>
-                            <input type="text" maxLength="70" placeholder={this.state.prevName} value={this.state.name} name="name" id="edit-name" onChange={this.handleInputChange}/>
+                            <input type="text" maxLength="70" placeholder={this.state.prevName} value={this.state.username} name="username" id="edit-name" onChange={this.handleInputChange}/>
                             <p>Email: {this.state.email}</p>
                             <p>Bio: </p>
                             <input type="textarea" placeholder={this.state.prevBio} value={this.state.bio} name="bio" id="edit-bio" onChange={this.handleInputChange}/>
