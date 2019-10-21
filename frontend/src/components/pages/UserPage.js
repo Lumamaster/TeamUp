@@ -261,6 +261,67 @@ class UserPage extends React.Component {
           }).then(response => response.ok).then(success => (success ? alert("Successfully Rejected invite") : alert("Failed to reject invite")))
     }
 
+    async componentDidUpdate(prevProps) {
+        if(prevProps.location.pathname !== this.props.location.pathname) {
+            //console.log("Hi from componentDidUpdate!")
+            let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
+            let isMe = false;
+            if(window.localStorage.getItem('token')) {
+                const {id} = jwt.decode(window.localStorage.getItem('token')).data
+                //console.log(uid);
+                //console.log(id);
+                this.setState({uid});
+                isMe = uid === id || uid === '';
+            }
+            fetch((PRODUCTION ? production_url : local_url) + '/profile/' + uid, {
+                headers: {
+                    Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                if(response.status === 200) return response.json()
+                if(response.status === 401) {
+                    this.props.history.push('/login')
+                    return Promise.reject('Unauthorized; redirecting to login page')
+                }
+                if(response.status > 500 && response.status < 600) {
+                    console.log(response)
+                    return Promise.reject('Server error')
+                }
+                console.log(response)
+                return Promise.reject('Got an unexpected status code from the server')
+            })
+            .then(data => {
+                let tempSchedule = [];
+                for(let i = 0; i < 38; i++) {
+                    tempSchedule[i] = [false,false,false,false,false,false,false]
+                }
+                /*let tempRow = [];
+                tempRow.fill(false, 0, 18);
+                if(!data.schedule) {
+                    tempSchedule.fill(tempRow,0,6)
+                }*/
+                console.log(tempSchedule)
+                this.setState({
+                isMe: isMe,
+                bio: data.bio,
+                email: data.email,
+                username: data.username,
+                skills: data.skills,
+                rating: data.rating,
+                prevTeams: data.prevTeams,
+                curTeams: data.curTeams,
+                blocked: data.blockedUsers,
+                invites: data.invites,
+                prevName: data.name,
+                prevBio: data.bio,
+                schedule: data.schedule || tempSchedule,
+                })
+            })
+            .catch(err => {})
+        }
+    }
+
     drawSchedule = () => {
         return <table style={{width:'100%'}}>
             <tbody style={{width:'100%'}}>
