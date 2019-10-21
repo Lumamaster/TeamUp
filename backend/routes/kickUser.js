@@ -62,7 +62,7 @@ router.post('/:id', async (req,res) => {
                 teamdb.collection('team').updateOne(            
                     { _id: ObjectID(teamId) },
                     {
-                        $set: { teamMembers: memberArr}
+                        $set: { teamMembers: memberArr}, $inc: {numMembers: -1}
                     }
                 ).then(function (updated) {
                     console.log('team userarray updated');
