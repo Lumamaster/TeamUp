@@ -252,8 +252,8 @@ class TeamDashboard extends React.Component {
                     <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
                         <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
-                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {                            return <span>
-                        <p><Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>&nbsp;&nbsp;{user.id !== this.state.team.owner.id && <button id={user.id} onClick={e => this.kick(e,user.id)}>Kick</button>}</p>
+                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {                            return <span key={user.id}>
+                        <p><Link to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>&nbsp;&nbsp;{user.id !== this.state.team.owner.id && <button id={user.id} onClick={e => this.kick(e,user.id)}>Kick</button>}</p>
                                 
                                 <br/>
                             </span>
@@ -280,7 +280,7 @@ class TeamDashboard extends React.Component {
                                         <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;
                                     </span>
                                     uploaded&nbsp;
-                                    <a target='_blank' href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
+                                    <a target='_blank' rel="noopener noreferrer" href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
                                         {msg.filename}
                                     </a>
                                     {msg.senderId === this.myId && <button onClick={e => this.deleteFile(e,msg.fileId)}>Remove file</button>}
@@ -315,19 +315,6 @@ class TeamDashboard extends React.Component {
     componentWillUnmount() {
         this.socket.disconnect();
     }
-}
-
-const FileSelectModal = props => {
-    return (
-        <div id="modal-background">
-            <div id="modal-body">
-                <h4>Upload File</h4>
-                <form>
-                    <input type="file" />
-                </form>
-            </div>
-        </div>
-    )
 }
 
 export default TeamDashboard;
