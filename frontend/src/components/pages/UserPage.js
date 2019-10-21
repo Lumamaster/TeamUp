@@ -401,6 +401,31 @@ class UserPage extends React.Component {
             console.log(await res.text())
         }
     }
+    leaveTeam = async e => {
+        e.preventDefault();
+        console.log(e.target.id)
+        const name = e.target.id
+        fetch((PRODUCTION ? production_url : local_url) + '/teams/leave/' + e.target.id, {
+            method: "GET",
+            headers: {
+                "content-type":"application/json; charset=UTF-8",
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+            },
+          }).then(response => response.ok).then(success => {
+              if(success){
+                alert("Successfully left team");
+                const items = this.state.curTeams;
+                console.log("items" + items)
+                const filtereditems = items.filter((item) => item.id !== name)
+                console.log("filterditems" + filtereditems);
+                //item =>item._id !== e.target.id);
+                this.setState({curTeams: filtereditems})
+                console.log(this.state.curTeams);
+              }else{
+                  alert("Failed to leave team");
+              }
+          })
+    }
 
     render(){
         if(!window.localStorage.getItem('token')) {
@@ -460,7 +485,7 @@ class UserPage extends React.Component {
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
                     {this.state.curTeams && this.state.curTeams.map(team => {
-                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link></p>
+                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
                     })}
                 </div>
                 <div className="container">
