@@ -35,13 +35,16 @@ router.get('/:id', async (req,res) => {
                 if(err) {
                     res.status(500).send();
                     console.error(err);
+                    client.close();
                     return;
                 }
                 if(!result) {
                     res.sendStatus(404);
+                    client.close();
                     return;
                 } else {
                     res.status(200).json(result);
+                    client.close();
                     return;
                 }
             });
