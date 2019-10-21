@@ -42,7 +42,7 @@ class UserSearch extends React.Component {
                 }
             }
             const res = await fetch(url, fetchParams)
-            if(res.status == 200) {
+            if(res.ok) {
                 const data = await res.json();
                 this.setState({
                     users:data
