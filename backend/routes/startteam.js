@@ -83,8 +83,8 @@ router.post('/', async(req,res) => {
                             }
                         ).then(function (r) {
                             console.log('success');
-                            res.status(200).send('Team created successfully');
-                            client.close();
+                            //res.status(200).send('Team created successfully');
+                            //client.close();
                         }).catch(function (err) {
                             console.log(err);
                             res.status(400).json({err:err});
@@ -95,8 +95,7 @@ router.post('/', async(req,res) => {
                         console.log(err);
                         client.close();
                     });
-                })
-
+                });
                 
             })
             .then(() => {
@@ -106,8 +105,7 @@ router.post('/', async(req,res) => {
                     name:thisteamname
                 });
                 //client.close();
-            })
-            .catch(function(err){
+            }).catch(function(err){
                 console.log('Could not add team to database');
                 console.log(err);
                 res.status(400).json({err:err});
