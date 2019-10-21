@@ -29,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { username: username, bio: bio, schedule: schedule }
+                        $set: { username: username, bio: bio, times: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -166,6 +166,7 @@ router.post('/removeskill', async (req, res) => {
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        return;
     }
 })
 

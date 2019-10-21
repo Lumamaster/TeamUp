@@ -33,7 +33,7 @@ function Navbar() {
         <Link to="/"><img src={TeamUp} alt="" id="navbar-logo" /></Link>
         <Link to="/profile/" id="profile">My Profile</Link>
         <Link to="/users/" id="users">List Users</Link>
-        <Link to="/teams/" >List Teams</Link>
+        <Link to="/teams/" id="teams">List Teams</Link>
         <Link to="/createteam/" id="createteam">Create Team</Link>
       </div>
       <div className="flexend" style={{marginRight:7}}>

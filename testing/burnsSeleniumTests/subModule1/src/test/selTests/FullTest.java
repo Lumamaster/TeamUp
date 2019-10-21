@@ -264,5 +264,29 @@ public class FullTest {
         numMembers.selectByIndex(3);
         Thread.sleep(1000);
         WebElement submitButton = driver.findElement(By.id("submitbutton"));
+        submitButton.click();
+        Thread.sleep(2000);
+
+        /* View list of teams */
+        WebElement teamsButton = driver.findElement(By.id("teams"));
+        teamsButton.click();
+        Thread.sleep(4000);
+        WebElement myNewTeam = driver.findElement(By.id("team " + randString));
+        myNewTeam.click();
+        Thread.sleep(5000);
+        WebElement myprofbutton = driver.findElement(By.id("profile"));
+        myprofbutton.click();
+        Thread.sleep(3000);
+
+        /* leave my team */
+        WebElement leaveNewTeam = driver.findElement(By.name("team " + randString));
+        leaveNewTeam.click();
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+
+        WebElement teamList = driver.findElement(By.id("teams"));
+        teamList.click();
+
+
     }
 }

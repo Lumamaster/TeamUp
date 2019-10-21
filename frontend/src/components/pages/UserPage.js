@@ -485,7 +485,7 @@ class UserPage extends React.Component {
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
                     {this.state.curTeams && this.state.curTeams.map(team => {
-                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
+                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button name={team.name} id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
                     })}
                 </div>
                 <div className="container">
