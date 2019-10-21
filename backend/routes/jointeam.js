@@ -54,8 +54,11 @@ router.get('/:id', async (req,res) => {
                     res.status(400).send({err:"You are already in that team."})
                     isInTeam = true;
                 }
-            })
-            if(isInTeam) return;
+            });
+
+            if(isInTeam) {
+                return;
+            }
 
             if(!team.alive) {
                 res.status(400).send({err:"That team is no longer active."})
@@ -64,6 +67,7 @@ router.get('/:id', async (req,res) => {
 
             if(team.numMembers === team.maxMembers) {
                 res.status(400).json({err:"That team is full."})
+                return;
             }
             
             if(team.open) {
@@ -117,6 +121,7 @@ router.get('/:id', async (req,res) => {
                 
                 await Promise.all([teamupdate,userupdate])
                 res.status(200).send("user joined notified");
+                client.close();
                 return;
             } else {
                 //Request to join the team
@@ -136,8 +141,10 @@ router.get('/:id', async (req,res) => {
                 })
                 await Promise.all([teamupdate,userupdate])
                 res.status(200).send("user requested notified");
+                client.close();
                 return;
             }
+
         });
     } catch (err) {
         console.log(err);
