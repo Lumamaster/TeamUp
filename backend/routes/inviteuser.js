@@ -12,9 +12,9 @@ router.use(express.urlencoded({extended:false}));
 router.use(verify);
 router.use(express.json());
 
-router.get('/:id/inviteuser/:teamid', async (req, res) => {
+router.get('/:userId/:teamId/:teamname', async (req, res) => {
 
-    const {invitee, teamid, teamname} = req.query; // the user you want to invite and the team to invite to
+    const {userId, teamId, teamname} = req.params; // the user you want to invite and the team to invite to
 
     try{
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
@@ -22,14 +22,14 @@ router.get('/:id/inviteuser/:teamid', async (req, res) => {
             const db = client.db("Users");
 
             var user = db.collection('user').find({
-                _id:ObjectId(invitee.id)
+                _id:ObjectId(userId)
             }).toArray(); 
         
             user.then(function (result) {
                 db.collection('user').updateOne(
-                    { _id:ObjectId(invitee.id) },
+                    { _id:ObjectId(userId) },
                     {
-                        $push: { invites: {id: teamid, name: teamname} }
+                        $push: { invites: {id: teamId, name: teamname} }
                     }
                 ).then(function (r) {
                     /*try{

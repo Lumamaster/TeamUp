@@ -24,7 +24,8 @@ class UserPage extends React.Component {
             prevName: '',
             prevBio: '',
             uid: '',
-            changedSchedule: false
+            changedSchedule: false,
+            teamSelect:""
         }
         this.acceptInvite = this.acceptInvite.bind(this);
         this.times = ['6:00','6:30','7:00','7:30','8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','1:00','1:30','2:00','2:30','3:00','3:30','4:00','4:30','5:00','5:30','6:00','6:30','7:00','7:30','8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30',]
@@ -35,8 +36,8 @@ class UserPage extends React.Component {
         let isMe = false;
         if(window.localStorage.getItem('token')) {
             const {id} = jwt.decode(window.localStorage.getItem('token')).data
-            console.log(uid);
-            console.log(id);
+            //console.log(uid);
+            //console.log(id);
             this.setState({uid});
             isMe = uid === id || uid === '';
         }
@@ -82,7 +83,7 @@ class UserPage extends React.Component {
             invites: data.invites,
             prevName: data.name,
             prevBio: data.bio,
-            schedule: data.schedule || tempSchedule
+            schedule: data.schedule || tempSchedule,
             })
         })
         .catch(err => {})
@@ -315,6 +316,31 @@ class UserPage extends React.Component {
         this.setState({schedule, changedSchedule:true});
     }
 
+    invite = async e => {
+        e.preventDefault();
+        const teamId = this.state.teamSelect;
+        const userId = this.state.uid;
+        let teamname;
+        JSON.parse(window.localStorage.getItem('teams')).forEach(team => {
+            if(team.id === teamId) teamname = team.name;
+        })
+        const url = (PRODUCTION ? production_url : local_url) + `/inviteuser/${userId}/${teamId}/${teamname}`
+        const otherParams = {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            }
+        }
+        const res = await fetch(url,otherParams);
+        if(res.ok) {
+            alert("Successfully invited user")
+        }
+        else {
+            alert("Failed to invite user")
+            console.log(await res.text())
+        }
+    }
+
     render(){
         if(!window.localStorage.getItem('token')) {
             return <Redirect to="/login/"/>
@@ -353,6 +379,17 @@ class UserPage extends React.Component {
                     }
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
                     {this.state.isMe ?  null : <button name="blockbutton" onClick={this.block}>Block User</button>}
+                    {!this.state.isMe && 
+                        <React.Fragment>
+                            <button disabled={!(window.localStorage.getItem('teams') && window.localStorage.getItem('teams') !== '[]') || !this.state.teamSelect || this.state.teamSelect === ''} style={{marginLeft:10}} id="invite" onClick={this.invite}>Invite to Team</button>
+                            <select name="teamSelect" disabled={!(window.localStorage.getItem('teams') && window.localStorage.getItem('teams') !== '[]')} onChange={this.handleInputChange}>
+                                <option disabled hidden selected>Choose a team</option>
+                                {window.localStorage.getItem('teams') && window.localStorage.getItem('teams') !== '[]' && 
+                                JSON.parse(window.localStorage.getItem('teams')).map(team => 
+                                <option value={team.id}>{team.name}</option>)}
+                            </select>
+                        </React.Fragment>
+                    }
                     {this.state.edit ? this.state.errors.map(err => <p className="color-error" key={err}>{err}</p>) : null}
                 </div>
                 <div className="container" id="schedule">
