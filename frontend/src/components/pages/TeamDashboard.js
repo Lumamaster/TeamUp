@@ -221,9 +221,9 @@ class TeamDashboard extends React.Component {
                     <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
                         <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
-                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.teamteam.teamMembers.map(user => {                            return <span>
-                                <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
-                                {<button id={user.id} onClick={this.kick}>Kick</button>}
+                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {                            return <span>
+                        <p><Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>&nbsp;&nbsp;{user.id !== this.state.team.owner.id && <button id={user.id} onClick={this.kick}>Kick</button>}</p>
+                                
                                 <br/>
                             </span>
                         }) : null}
