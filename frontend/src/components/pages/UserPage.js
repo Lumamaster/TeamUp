@@ -433,7 +433,7 @@ class UserPage extends React.Component {
         }
         //console.log("blocked =" +this.state.blocked);
         if(this.state.blocked === undefined){
-            this.state.blocked = []
+            this.setState({blocked:[]})
         }
 
         
