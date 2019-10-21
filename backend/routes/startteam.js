@@ -17,7 +17,8 @@ router.post('/', async(req,res) => {
         id: req.token.id,
         username: req.token.username || req.token.name || req.token.id
     } //has id and username stored
-    var thisteamid;
+    let thisteamid;
+    let thisteamname;
 
     // Add team to database
     try{
@@ -48,7 +49,10 @@ router.post('/', async(req,res) => {
             // Insert team object to the database
             db.collection('team').insertOne(team).then(function(item){
                 //console.log('Team created succesfully');
-                //teamadded = {teamName , item.insertedId};    
+                //teamadded = {teamName , item.insertedId}; 
+                thisteamid = item.insertedId;
+                thisteamname = item.ops[0].teamName;
+
                 userdb.collection('user').updateOne(
                     {_id: ObjectId(owner.id)},
                     {$push:{
@@ -88,7 +92,15 @@ router.post('/', async(req,res) => {
                 })
 
                 
-            }).catch(function(err){
+            })
+            .then(() => {
+                //console.log("Done!", thisteamid,thisteamname)
+                res.status(200).json({
+                    id:thisteamid,
+                    name:thisteamname
+                })
+            })
+            .catch(function(err){
                 console.log('Could not add team to database');
                 console.log(err);
                 res.status(400).json({err:err});
@@ -98,11 +110,11 @@ router.post('/', async(req,res) => {
             // Update currTeams on owner's database
             /*client.db("Users").collection('user').update({email: owner}, {$addToSet: {curTeams: teamadded}});
             client.close();*/
-                        
+            
         });
     } catch(err) {
         console.error(err);
-    } finally{}
+    }
 });
 
 module.exports = router;

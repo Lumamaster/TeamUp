@@ -190,16 +190,32 @@ class TeamDashboard extends React.Component {
             }
         })
     }
-    kick = async e => {
+    kick = async (e,userid) => {
         e.preventDefault();
-        fetch((PRODUCTION ? production_url : local_url) + '/kickuser/' + this.state.tid, {
+        //console.log(this.state.team._id, userid);
+        //return;
+        fetch((PRODUCTION ? production_url : local_url) + '/kickuser/' + this.state.team._id, {
             method: "POST",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
-            },body: JSON.stringify({kick:e.target.id})
-          }).then(response => response.ok).then(success => (success ? alert("Successfully Rejected invite") : alert("Failed to reject invite")))
+            },body: JSON.stringify({kick:userid})
+        }).then(response => {
+            if(response.ok) {
+                let {teamMembers} = this.state.team;
+                teamMembers = teamMembers.filter(user => user.id !== userid)
+                this.setState({
+                    team: {
+                        ...this.state.team,
+                        teamMembers:teamMembers
+                    }
+                })
+            } else {
+                alert("Failed to kick user.")
+            }
+        })
+        .catch()
     }
 
     render() {
@@ -221,9 +237,9 @@ class TeamDashboard extends React.Component {
                     <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
                         <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
-                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.teamteam.teamMembers.map(user => {                            return <span>
-                                <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
-                                {<button id={user.id} onClick={this.kick}>Kick</button>}
+                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {                            return <span>
+                        <p><Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>&nbsp;&nbsp;{user.id !== this.state.team.owner.id && <button id={user.id} onClick={e => this.kick(e,user.id)}>Kick</button>}</p>
+                                
                                 <br/>
                             </span>
                         }) : null}

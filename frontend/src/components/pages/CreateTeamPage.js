@@ -17,7 +17,8 @@ class CreateTeamPage extends React.Component {
             open: false, 
             course: '', 
             maxMembers: 1,
-            errors: []
+            errors: [],
+            canSubmit:true
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,25 +30,38 @@ class CreateTeamPage extends React.Component {
         this.setState({maxMembers: event.target.value});
     }
     /*TODO: need to get token and set logged in email to owner*/
-    handleSubmit(event) {
+    handleSubmit = async event => {
         event.preventDefault();
+        this.setState({canSubmit:false})
     
-        fetch((PRODUCTION ? production_url : local_url) + '/startteam', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + window.localStorage.getItem('token')
-            },
-            body: JSON.stringify({
-                teamName: this.state.teamName,
-                info: this.state.info, 
-                requestedSkills: this.state.requestedSkills, 
-                open: true, 
-                course: this.state.course, 
-                maxMembers: this.state.maxMembers,
-                teamMembers: this.state.teamMembers
+        try {
+            const res = await fetch((PRODUCTION ? production_url : local_url) + '/startteam', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    teamName: this.state.teamName,
+                    info: this.state.info, 
+                    requestedSkills: this.state.requestedSkills, 
+                    open: true, 
+                    course: this.state.course, 
+                    maxMembers: this.state.maxMembers,
+                    teamMembers: this.state.teamMembers
+                })
             })
-          }).then(response => response.ok).then(success => (success ? alert("Team successfully created") : alert("Failed to create team")))
+            const data = await res.json()
+            let joinedTeams = JSON.parse(window.localStorage.getItem('teams') || []);
+            joinedTeams.push(data);
+            //console.log(joinedTeams);
+            window.localStorage.setItem('teams', JSON.stringify(joinedTeams));
+            this.props.history.push('/teams/' + data.id)
+        } catch(err) {
+            console.error(err);
+            alert("Failed to create team")
+            this.setState({canSubmit:true})
+        }
     }
     handleText = (e, stateKey, i) => {
         let arr = this.state[stateKey]
@@ -136,7 +150,7 @@ class CreateTeamPage extends React.Component {
                             <option value="6">6</option>
                         </select>
                     </label></div>
-                    <input type="submit" value="Submit" />
+                    <input disabled={!this.state.canSubmit} type="submit" value="Submit" />
                     </form>
                 </div>
             </div>

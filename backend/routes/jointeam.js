@@ -4,6 +4,8 @@ const router = express.Router();
 const dbconfig = require('../db_config.json');
 const verify = require('../verifyjwt');
 const assert = require('assert');
+const ObjectID = require('mongodb').ObjectID;
+
 
 router.use(verify);
 router.use(express.json());
@@ -50,7 +52,7 @@ router.get('/:id', async (req,res) => {
             let isInTeam = false;
             //console.log(user)
             user.curTeams.forEach(team => {
-                if(team.id === teamID) {
+                if(team._id === ObjectID(teamID)) {
                     res.status(400).send({err:"You are already in that team."})
                     isInTeam = true;
                 }

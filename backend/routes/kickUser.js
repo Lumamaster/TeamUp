@@ -14,6 +14,7 @@ router.post('/:id', async (req,res) => {
 
     // Confirm a valid team ID
     const teamId = req.params.id;
+    
     if(teamId.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
@@ -61,7 +62,7 @@ router.post('/:id', async (req,res) => {
                 teamdb.collection('team').updateOne(            
                     { _id: ObjectID(teamId) },
                     {
-                        $set: { teamMembers: memberArr}
+                        $set: { teamMembers: memberArr}, $inc: {numMembers: -1}
                     }
                 ).then(function (updated) {
                     console.log('team userarray updated');
