@@ -237,7 +237,7 @@ class UserPage extends React.Component {
     acceptInvite = async e =>{
         e.preventDefault();
         console.log(e.target.id);
-        fetch((PRODUCTION ? production_url : local_url) + '/invite/accept/' + e.target.id, {
+        fetch((PRODUCTION ? production_url : local_url) + '/invite/acceptinvite/' + e.target.id, {
             method: "GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",
@@ -250,7 +250,7 @@ class UserPage extends React.Component {
     rejectInvite = async e => {
         e.preventDefault();
         console.log(e.target.id);
-        fetch((PRODUCTION ? production_url : local_url) + '/invite/reject/' + e.target.id, {
+        fetch((PRODUCTION ? production_url : local_url) + '/invite/declineinvite/' + e.target.id, {
             method:"GET",
             headers: {
                 "content-type":"application/json; charset=UTF-8",

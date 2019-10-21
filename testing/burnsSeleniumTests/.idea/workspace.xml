@@ -65,14 +65,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3695" />
+          <entry key="java" value="3766" />
           <entry key="seltests" value="42" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3737" />
+          <entry key="JAVA" value="3808" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -135,8 +135,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+            <state relative-caret-position="410">
+              <caret line="201" column="23" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -289,7 +289,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571609691538" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571611476385" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -392,30 +392,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FullTest - 2019.10.19 at 16h 47m 08s.xml">
-      <configuration name="FullTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest - 2019.10.19 at 17h 48m 38s.xml">
-      <configuration name="FullTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest - 2019.10.19 at 17h 51m 40s.xml">
-      <configuration name="FullTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest - 2019.10.19 at 18h 25m 19s.xml">
-      <configuration name="FullTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_createTest - 2019.10.20 at 17h 59m 15s.xml">
-      <configuration name="FullTest.createTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_createTest - 2019.10.20 at 18h 00m 39s.xml">
-      <configuration name="FullTest.createTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_createTest - 2019.10.20 at 18h 02m 42s.xml">
-      <configuration name="FullTest.createTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_createTest - 2019.10.20 at 18h 03m 22s.xml">
-      <configuration name="FullTest.createTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FullTest_createTest - 2019.10.20 at 18h 04m 31s.xml">
       <configuration name="FullTest.createTest" configurationId="JUnit" />
     </history-entry>
@@ -423,6 +399,30 @@
       <configuration name="FullTest.createTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="FullTest_userTest - 2019.10.20 at 18h 05m 50s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 34m 21s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 35m 12s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 36m 39s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 38m 01s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 39m 11s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 40m 22s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 41m 37s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 43m 03s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -605,8 +605,8 @@
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/editProfileSel.java" />
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+        <state relative-caret-position="410">
+          <caret line="201" column="23" selection-start-line="201" selection-start-column="23" selection-end-line="201" selection-end-column="23" />
         </state>
       </provider>
     </entry>
