@@ -268,7 +268,7 @@ public class FullTest {
         Thread.sleep(2000);
 
         /* View list of teams */
-        WebElement teamsButton = driver.findElement(By.id("teams"));
+        WebElement teamsButton = driver.findElement(By.id("listteams"));
         teamsButton.click();
         Thread.sleep(4000);
         WebElement myNewTeam = driver.findElement(By.id("team " + randString));
@@ -284,7 +284,7 @@ public class FullTest {
         Thread.sleep(2000);
         driver.switchTo().alert().accept();
 
-        WebElement teamList = driver.findElement(By.id("teams"));
+        WebElement teamList = driver.findElement(By.id("listteams"));
         teamList.click();
 
 
