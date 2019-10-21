@@ -53,7 +53,7 @@ router.get('/:id', async (req,res) => {
 router.get('/', async(req,res) => {
     // Searching team
     //console.log(req.query);
-    const {name, owner, members, info, skills, open, course} = req.query;
+    const name = req.query.search, info = req.query.search, skills = req.query.search, course = req.query.search;
     //const owner = req.token //has id and username stored
 
     try{
@@ -62,14 +62,15 @@ router.get('/', async(req,res) => {
             const db = client.db("Teams");
 
             let filter_list = [];
-            if(name) filter_list.push({teamname:name});
-            if(owner) filter_list.push({owner:ObjectID(owner)});
-            if(members) filter_list.push({members:members});
-            if(info) filter_list.push({info:info});
-            if(skills) filter_list.push({skills:skills});
-            if(open === 'true') filter_list.push({open:true});
-            if(open === 'false') filter_list.push({open:false});
-            if(course) filter_list.push({course:course});
+            if(name) filter_list.push({teamName:{$regex: new RegExp(name,'i')}});
+            if(info) filter_list.push({info:{$regex: new RegExp(info,'i')}});
+            if(skills) {
+                filter_list.push({requestedSkills: {$elemMatch: {$elemMatch: {$regex: new RegExp(skills,'i')}}}});
+                filter_list.push({requestedSkills: {$elemMatch:{$regex: new RegExp(skills,'i')}}});
+            }
+            if(course) filter_list.push({course:{$regex: new RegExp(course,'i')}});
+
+            //console.log(filter_list)
 
             if(filter_list.length === 0) {
                 //return all teams
@@ -94,7 +95,7 @@ router.get('/', async(req,res) => {
                     }
                 ).toArray()
                 .then(teams => {
-                    console.log(teams);
+                    //console.log(teams[0].requestedSkills[0]);
                     client.close();
                     res.status(200).json(teams);
                     return;

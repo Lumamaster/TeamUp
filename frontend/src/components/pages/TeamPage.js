@@ -22,7 +22,8 @@ class TeamPage extends React.Component {
             password: "",
             teams: [
             ],
-            errors: []
+            errors: [],
+            filter: ""
         }
     }
     joinTeam = async e => {
@@ -98,6 +99,25 @@ class TeamPage extends React.Component {
             )
         })
     }
+    updateFilter = e => {
+        const newFilter = e.target.value;
+        this.setState({filter:newFilter})
+        let url = (PRODUCTION ? production_url : local_url)
+        url += '/teams'
+        if(newFilter !== '') {
+            url += `?search=${newFilter}`
+        }
+        //console.log(url)
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data);
+            this.setState({
+                teams: data
+            })
+        })
+        .catch(err => console.error(err))
+    }
     renderTableHeader(){
         return(
             <React.Fragment>
@@ -115,14 +135,19 @@ class TeamPage extends React.Component {
     }
     render(){
         return(
-           <div>
-            <table id='teams'>
-               <tbody>
-                   <tr>{this.renderTableHeader()}</tr>
-                  {this.renderTableData()}
-               </tbody>
-            </table>
-           </div>     
+            <React.Fragment>
+                <div className="container">
+                    <input style={{width:'100%'}} type="text" name="filter" onChange={this.updateFilter} placeholder="Search teams by name, info, course or requested skills"/>
+                </div>
+                <div>
+                    <table id='teams'>
+                        <tbody>
+                            <tr>{this.renderTableHeader()}</tr>
+                            {this.renderTableData()}
+                        </tbody>
+                    </table>
+                </div>     
+            </React.Fragment>
         );
     }
 }
