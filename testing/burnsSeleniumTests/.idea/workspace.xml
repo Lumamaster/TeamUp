@@ -55,7 +55,7 @@
     <session id="2131059497">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
@@ -135,7 +135,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
+            <state relative-caret-position="-394">
               <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
             </state>
           </provider>
@@ -290,7 +290,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629577222" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629617689" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -393,12 +393,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 36m 39s.xml">
-      <configuration name="FullTest.userTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 38m 01s.xml">
-      <configuration name="FullTest.userTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FullTest_userTest - 2019.10.20 at 18h 39m 11s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
@@ -426,10 +420,15 @@
     <history-entry file="FullTest_userTest - 2019.10.20 at 23h 43m 43s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 23h 46m 01s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_teamTest - 2019.10.20 at 23h 46m 50s.xml">
+      <configuration name="FullTest.teamTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="2062" height="1166" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="2062" height="1166" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16633366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -441,7 +440,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.51694095" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.51694095" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -475,6 +474,12 @@
           <line>39</line>
           <properties />
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -606,7 +611,7 @@
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/editProfileSel.java" />
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
+        <state relative-caret-position="-394">
           <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
         </state>
       </provider>
