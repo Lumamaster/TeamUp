@@ -99,7 +99,7 @@ router.post('/:teamId', verify, async (req,res) => {
 //Delete a file
 //URL should contain file id
 //User should be part of the team that the deleted file was uploaded to
-router.get('/delete:id', async (req,res) => {
+router.get('/delete/:id', async (req,res) => {
     try {
         const {token} = req.query;
         const decoded = (await jwt.verify(token, jwt_key)).data;
