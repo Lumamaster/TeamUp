@@ -4,6 +4,7 @@
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/target/test-classes/FullTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/target/test-classes/FullTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
@@ -64,14 +65,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5203" />
+          <entry key="java" value="5207" />
           <entry key="seltests" value="42" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5245" />
+          <entry key="JAVA" value="5249" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -134,8 +135,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="287" column="25" lean-forward="true" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
+            <state relative-caret-position="116">
+              <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -226,10 +227,11 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1272" />
-    <option name="width" value="1297" />
-    <option name="height" value="1448" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1298" />
+    <option name="height" value="1449" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -288,7 +290,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629057088" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629577222" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -391,9 +393,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 35m 12s.xml">
-      <configuration name="FullTest.userTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FullTest_userTest - 2019.10.20 at 18h 36m 39s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
@@ -424,12 +423,15 @@
     <history-entry file="FullTest_teamTest - 2019.10.20 at 23h 27m 01s.xml">
       <configuration name="FullTest.teamTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 23h 43m 43s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1018" y="0" width="1037" height="1158" extended-state="0" />
+    <frame x="-7" y="-7" width="2062" height="1166" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3408393" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16633366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -439,7 +441,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13365854" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.51694095" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -455,7 +457,7 @@
       <window_info anchor="right" id="Ant Build" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.118730806" />
+      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.05794206" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -604,8 +606,8 @@
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/editProfileSel.java" />
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="287" column="25" lean-forward="true" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
+        <state relative-caret-position="116">
+          <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
         </state>
       </provider>
     </entry>

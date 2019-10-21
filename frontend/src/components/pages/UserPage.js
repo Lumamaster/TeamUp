@@ -460,7 +460,7 @@ class UserPage extends React.Component {
                                     <input type="text" value={this.state.addSkillText || ''} placeholder="Add a skill" name="addSkillText" id="add-skill-text" onChange={this.handleInputChange}/>
                                     <button onClick={this.addSkill} id="add-skill-button">Add Skill</button>
                                 </React.Fragment>
-                            <p>Rating: {this.state.rating}</p>
+                            {/* <p>Rating: {this.state.rating}</p> */}
                         </form>
                     }
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}

@@ -184,7 +184,7 @@ public class FullTest {
         WebElement blockButton = driver.findElement(By.name("blockbutton"));
         blockButton.click();
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         driver.switchTo().alert().accept();
 
