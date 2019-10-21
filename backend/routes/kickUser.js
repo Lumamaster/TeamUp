@@ -14,6 +14,7 @@ router.post('/:id', async (req,res) => {
 
     // Confirm a valid team ID
     const teamId = req.params.id;
+    
     if(teamId.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
         return;
