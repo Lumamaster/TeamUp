@@ -124,10 +124,13 @@ public class FullTest {
 
         editButton.click();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         driver.get(url);
+        Thread.sleep(3000);
+        editButton = driver.findElement(By.name("editbutton"));
 
+        Thread.sleep(1000);
         /* edit name and bio */
         editButton.click();
 
@@ -145,12 +148,15 @@ public class FullTest {
 
         driver.get(url);
         Thread.sleep(3000);
+        editButton = driver.findElement(By.name("editbutton"));
 
         /* change values back to original */
         editButton.click();
         Thread.sleep(1000);
+        nameBox = driver.findElement(By.id("edit-name"));
         nameBox.clear();
         nameBox.sendKeys("Stephen Burns");
+        bioBox = driver.findElement(By.id("edit-bio"));
         bioBox.clear();
         bioBox.sendKeys("placeholder bio");
         editButton.click();
@@ -193,7 +199,7 @@ public class FullTest {
         WebElement unblockbutton = driver.findElement(By.id("5dacd72e3b6a4a41c85cbc6f"));
         unblockbutton.click();
 
-        Thread.sleep(500);
+        Thread.sleep(2000);
         driver.switchTo().alert().accept();
 
         driver.get(url);
