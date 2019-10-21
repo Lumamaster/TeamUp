@@ -117,21 +117,8 @@ router.delete('/:id', async (req,res) => {
         if(file.length !== 1) {
             res.status(404).json({err:"File not found"});
         }
-        let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
-        if(!team) {
-            res.sendStatus(500);
-            client.close();
-            return;
-        }
-        let isInTeam = false;
-        for(let i = 0; i < team.teamMembers.length; i++) {
-            if(team.teamMembers[i].id === userId) {
-                isInTeam = true;
-                break;
-            }
-        }
-        if(!isInTeam || file.metadata.uploaderId !== userId) {  //user cannot delete if they are kicked
-            res.status(400).json({err:"You are not in that team"});
+        if(file.metadata.uploaderId !== userId) {  //user cannot delete if they do not own the file
+            res.status(400).json({err:"You do not own that file"});
             client.close();
             return;
         }
