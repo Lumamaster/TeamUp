@@ -218,6 +218,21 @@ class TeamDashboard extends React.Component {
         .catch()
     }
 
+    deleteFile = async (e,fileid) => {
+        e.preventDefault();
+        const res = await fetch((PRODUCTION ? production_url : local_url) + `/documents/${fileid}?token=${window.localStorage.getItem('token')}`, {
+            method:'DELETE',
+            headers:{
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            }
+        });
+        if(res.ok) {
+            alert("Successfully removed file");
+        } else {
+            alert("Failed to remove file")
+        }
+    }
+
     render() {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
@@ -268,6 +283,7 @@ class TeamDashboard extends React.Component {
                                     <a target='_blank' href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
                                         {msg.filename}
                                     </a>
+                                    {msg.senderId === this.myId && <button onClick={e => this.deleteFile(e,msg.fileId)}>Remove file</button>}
                                 </p>
                             }
                             if(msg.type === 'join') {
