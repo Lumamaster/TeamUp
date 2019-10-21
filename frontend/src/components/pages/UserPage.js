@@ -360,7 +360,7 @@ class UserPage extends React.Component {
                             <p>Email: {this.state.email}</p>
                             <p>Bio: {this.state.bio}</p>
                             <p>Skills: {this.state.skills ? this.state.skills.join(', ') : null}</p>
-                            <p>Rating: {this.state.rating}</p>
+                            {/* <p>Rating: {this.state.rating}</p> */}
                         </React.Fragment>
                         : 
                         <form>
