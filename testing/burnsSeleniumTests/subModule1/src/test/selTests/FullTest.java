@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FullTest {
@@ -231,10 +232,37 @@ public class FullTest {
 
         Thread.sleep(2000);
 
+        /* Go to create team page */
+        WebElement teamClick = driver.findElement(By.id("createteam"));
+        teamClick.click();
+        Thread.sleep(3000);
 
         double rand = Math.random() * (500000);
         rand = rand / 1;
         int randInt = (int) rand;
         randString = Integer.toString(randInt);
+
+        /* Creating Team */
+        WebElement teamNameBox = driver.findElement(By.id("teamName"));
+        teamNameBox.sendKeys("team " + randString);
+        WebElement courseNameBox = driver.findElement(By.id("course"));
+        courseNameBox.sendKeys(randString);
+        WebElement infoBox = driver.findElement(By.id("info"));
+        infoBox.sendKeys("this is project info");
+        WebElement addSkillButton = driver.findElement(By.id("addNewSkill"));
+        addSkillButton.click();
+        Thread.sleep(500);
+        WebElement addSkillText = driver.findElement(By.id("addSkillText"));
+        addSkillText.sendKeys("good at selenium");
+        WebElement addNewUserButton = driver.findElement(By.id("addNewUser"));
+        addNewUserButton.click();
+        Thread.sleep(500);
+        WebElement addUserBox = driver.findElement(By.id("addUserTextbox"));
+        addUserBox.sendKeys("user1@purdue.edu");
+        Select numMembers = new Select(driver.findElement(By.id("membersSelect")));
+        Thread.sleep(500);
+        numMembers.selectByIndex(3);
+        Thread.sleep(1000);
+        WebElement submitButton = driver.findElement(By.id("submitbutton"));
     }
 }
