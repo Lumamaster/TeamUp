@@ -65,6 +65,8 @@ router.post('/', async(req,res) => {
                         console.log(err);
                         console.log('err update1');
                         res.status(400).json({err:err});
+                        client.close();
+                        return;
                 });
 
                 teamMembers.forEach(element => {
@@ -85,9 +87,13 @@ router.post('/', async(req,res) => {
                             client.close();
                         }).catch(function (err) {
                             console.log(err);
+                            res.status(400).json({err:err});
+                            client.close();
                         });
                     }).catch(function(err){
+                        res.status(400).json({err:err});
                         console.log(err);
+                        client.close();
                     });
                 })
 
@@ -98,7 +104,8 @@ router.post('/', async(req,res) => {
                 res.status(200).json({
                     id:thisteamid,
                     name:thisteamname
-                })
+                });
+                //client.close();
             })
             .catch(function(err){
                 console.log('Could not add team to database');
