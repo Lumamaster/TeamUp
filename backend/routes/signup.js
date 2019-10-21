@@ -64,7 +64,7 @@ router.post('/', async (req,res) => {
                 // If the request was empty, create the user    
                 } else {
                     db.collection('user').insertOne({
-                        times: times,
+                        schedule: times,
                         email: email,
                         password: password,
                         username: screenname,
