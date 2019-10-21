@@ -99,7 +99,7 @@ router.post('/:teamId', verify, async (req,res) => {
 //Delete a file
 //URL should contain file id
 //User should be part of the team that the deleted file was uploaded to
-router.get('/delete/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
     try {
         const {token} = req.query;
         const decoded = (await jwt.verify(token, jwt_key)).data;
@@ -120,6 +120,7 @@ router.get('/delete/:id', async (req,res) => {
         let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
         if(!team) {
             res.sendStatus(500);
+            client.close();
             return;
         }
         let isInTeam = false;
@@ -131,9 +132,11 @@ router.get('/delete/:id', async (req,res) => {
         }
         if(!isInTeam || file.metadata.uploaderId !== userId) {  //user cannot delete if they are kicked
             res.status(400).json({err:"You are not in that team"});
+            client.close();
             return;
         }
         bucket.delete(docId);
+        client.close();
 
     } catch(err) {
         console.log(err);
@@ -167,6 +170,7 @@ router.get('/:id', async (req,res) => {
         let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
         if(!team) {
             res.sendStatus(500);
+            client.close();
             return;
         }
         let isInTeam = false;
@@ -178,6 +182,7 @@ router.get('/:id', async (req,res) => {
         }
         if(!isInTeam && file.metadata.uploaderId !== userId) {  //Let the user download if it's their file, even if not in team
             res.status(400).json({err:"You are not in that team"});
+            client.close();
             return;
         }
         let downloadStream = bucket.openDownloadStream(docId);
@@ -185,15 +190,18 @@ router.get('/:id', async (req,res) => {
 
         downloadStream.on('data', chunk => {
             res.write(chunk);
+            client.close();
         });
 
         downloadStream.on('error', () => {
             res.sendStatus(404);
+            client.close();
             return;
         });
 
         downloadStream.on('end', () => {
             res.end();
+            client.close();
         })
 
     } catch(err) {
