@@ -53,8 +53,8 @@ router.get('/:id', async (req,res) => {
 
             let isInTeam = false;
             //console.log(user)
-            user.curTeams.forEach(team => {
-                if(team._id === ObjectID(teamID)) {
+            user.curTeams.forEach(curTeam => {
+                if(curTeam.id === teamID) {
                     res.status(400).json({err:"You are already in that team."})
                     isInTeam = true;
                 }
@@ -113,11 +113,11 @@ router.get('/:id', async (req,res) => {
                 }
                 let userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
                     $pull: {prevTeams: {
-                        id:teamID,
+                        id:ObjectId(teamID),
                         name:team.teamName
                     }},
                     $push: {curTeams: {
-                        id:teamID,
+                        id:ObjectId(teamID),
                         name:team.teamName
                     }}
                 })

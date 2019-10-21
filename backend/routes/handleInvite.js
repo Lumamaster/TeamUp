@@ -45,7 +45,7 @@ router.get('/acceptinvite/:id', (req, res) => {
                             "_id":ObjectID(teamId)
                         }).then(function (result) {
                             var teampair = {
-                                id: teamId,
+                                id: ObjectID(teamId),
                                 name: result.teamName
                             }
                             userdb.collection('user').updateOne(
