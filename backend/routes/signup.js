@@ -82,6 +82,7 @@ router.post('/', async (req,res) => {
                     }).catch(function (err) {
                         console.log(err);
                         res.status(400).json({err:err});
+                        client.close();
                     });
                 }
             });

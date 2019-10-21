@@ -204,4 +204,37 @@ public class FullTest {
 
         driver.get(url);
     }
+
+    @Test
+    @Order(3)
+    public void teamTest() throws InterruptedException {
+        /* Login to burns140 */
+        driver.get(url);
+        WebElement emailEl = driver.findElement(By.name("email"));
+        WebElement passEl = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.name("loginbutton"));
+
+        emailEl.sendKeys("burns140@purdue.edu");
+        passEl.sendKeys(password);
+
+        loginButton.click();
+
+        Thread.sleep(3000);
+
+        webStorage = (WebStorage) driver;
+        localStorage = webStorage.getLocalStorage();
+
+
+        /* Go to my profile */
+        url = "http://localhost:3000/profile";
+        driver.get(url);
+
+        Thread.sleep(2000);
+
+
+        double rand = Math.random() * (500000);
+        rand = rand / 1;
+        int randInt = (int) rand;
+        randString = Integer.toString(randInt);
+    }
 }

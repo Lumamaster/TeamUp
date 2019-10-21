@@ -45,12 +45,14 @@ router.post('/update', async (req, res) => {
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
+                client.close();
             });
             
         });
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
     }
 })
 
@@ -101,12 +103,16 @@ router.post('/addskill', async (req, res) => {
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
+                client.close();
+                return;
             });
             
         });
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
+        return;
     }
 })
 
