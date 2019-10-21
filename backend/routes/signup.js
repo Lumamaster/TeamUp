@@ -34,15 +34,15 @@ router.post('/', async (req,res) => {
         return;
     }
     
-    var times = new Array(7);
-    var sections = 37;
-    for (var i = 0; i < times.length; i++) {
-        times[i] = new Array(sections);
+    var schedule = new Array(37);
+    var sections = 7;
+    for (var i = 0; i < schedule.length; i++) {
+        schedule[i] = new Array(sections);
     }
 
-    for (var i = 0; i < times.length; i ++) {
+    for (var i = 0; i < schedule.length; i ++) {
         for (var k = 0; k < sections; k++) {
-            times[i][k] = false;
+            schedule[i][k] = false;
         }
     }
 
@@ -64,7 +64,7 @@ router.post('/', async (req,res) => {
                 // If the request was empty, create the user    
                 } else {
                     db.collection('user').insertOne({
-                        schedule: times,
+                        schedule: schedule,
                         email: email,
                         password: password,
                         username: screenname,
