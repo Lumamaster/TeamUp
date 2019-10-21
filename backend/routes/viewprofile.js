@@ -12,7 +12,7 @@ router.use(express.json());
 router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
     //console.log(req.token)
-    const {id} = req.params;
+    const id = req.params.id;
     //console.log(id)
 
     if(id.length !== 24){
@@ -35,13 +35,16 @@ router.get('/:id', async (req,res) => {
                 if(err) {
                     res.status(500).send();
                     console.error(err);
+                    client.close();
                     return;
                 }
                 if(!result) {
                     res.sendStatus(404);
+                    client.close();
                     return;
                 } else {
                     res.status(200).json(result);
+                    client.close();
                     return;
                 }
             });
@@ -53,7 +56,7 @@ router.get('/:id', async (req,res) => {
 
 router.get('/', (req,res) => {
     
-    const {id} = req.token
+    const id = req.token.id;
 
     if(id.length !== 24){
         res.status(400).json({err:"Invalid user ID"}).send();
@@ -71,14 +74,17 @@ router.get('/', (req,res) => {
             }}, (err, result) => {
                 if(err) {
                     res.status(500).send();
+                    client.close();
                     console.error(err);
                     return;
                 }
                 if(!result) {
                     res.sendStatus(404);
+                    client.close();
                     return;
                 } else {
                     res.status(200).json(result);
+                    client.close();
                     return;
                 }
             });

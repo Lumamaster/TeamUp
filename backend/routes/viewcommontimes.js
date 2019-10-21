@@ -31,7 +31,7 @@ router.get('/user/get/:id', async (req, res) => {
 
             /* Return this user's time array */
             user.then(function (result) {
-                res.status(200).json({times:result.times});
+                res.status(200).json({schedule:result.times});
                 console.log(result.times);
                 client.close();
                 return;
@@ -76,12 +76,12 @@ router.get('/:id', async (req,res) => {
             users.then(function (result) {
                 var timeArr = result[0].times;
                 for (var i = 1; i < result.length; i++) {
-                    if (result[i] == 0) {
-                        timeArr[i] = 0;
+                    if (result[i] == false) {
+                        timeArr[i] = false;
                     }
                 };
 
-                res.status(200).json({times:timeArr, message:'found common times'});
+                res.status(200).json({schedule:timeArr, message:'found common times'});
                 client.close();
                 return;
             }).catch(function (err) {
@@ -116,7 +116,7 @@ router.post('/user/set/:id', async (req, res) => {
             db.collection('user').updateOne(
                 { _id:ObjectId(userId) },
                 {
-                    $set: { times: freeTimes }
+                    $set: { schedule: freeTimes }
                 }
             ).then(function (result) {
                 res.status(200).json({success:'free times updated'});

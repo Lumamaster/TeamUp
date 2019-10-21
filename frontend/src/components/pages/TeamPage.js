@@ -84,8 +84,8 @@ class TeamPage extends React.Component {
             const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course, _id} = team
             const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
             return(
-                <tr key={teamName}>
-                    <td><Link to={`/teams/${_id}`}>{teamName || 'Untitled Team'}</Link></td>
+                <tr key={'team'+ _id}>
+                    <td><Link id={teamName} to={`/teams/${_id}`}>{teamName || 'Untitled Team'}</Link></td>
                     <td><Link to={owner ? `/profile/${owner.id}` : '#'}>{owner ? owner.username || owner.name || 'None' : 'None'}</Link></td>
                     <td>{info || 'None'}</td>
                     <td>{requestedSkills ? requestedSkills.join(', ') || 'None' : 'None'}</td>

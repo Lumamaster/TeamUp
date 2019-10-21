@@ -4,6 +4,8 @@ const router = express.Router();
 const dbconfig = require('../db_config.json');
 const verify = require('../verifyjwt');
 const assert = require('assert');
+const ObjectID = require('mongodb').ObjectID;
+
 
 router.use(verify);
 router.use(express.json());
@@ -38,10 +40,12 @@ router.get('/:id', async (req,res) => {
 
             if(team.length === 0) {
                 res.status(404).json({err:"Couldn't find that team"})
+                client.close();
                 return;
             }
             if(user.length === 0 || user.length > 1 || team.length > 1) {
                 res.status(500).send()
+                client.close();
                 return;
             }
             team = team[0]
@@ -50,15 +54,18 @@ router.get('/:id', async (req,res) => {
             let isInTeam = false;
             //console.log(user)
             user.curTeams.forEach(team => {
-                if(team.id === teamID) {
-                    res.status(400).send({err:"You are already in that team."})
+                if(team._id === ObjectID(teamID)) {
+                    res.status(400).json({err:"You are already in that team."})
                     isInTeam = true;
                 }
             })
-            if(isInTeam) return;
-
+            if(isInTeam) {
+                client.close();
+                return;
+            }
             if(!team.alive) {
-                res.status(400).send({err:"That team is no longer active."})
+                res.status(400).json({err:"That team is no longer active."});
+                client.close();
                 return;
             }
 
@@ -117,6 +124,7 @@ router.get('/:id', async (req,res) => {
                 
                 await Promise.all([teamupdate,userupdate])
                 res.status(200).send("user joined notified");
+                client.close();
                 return;
             } else {
                 //Request to join the team
@@ -136,12 +144,14 @@ router.get('/:id', async (req,res) => {
                 })
                 await Promise.all([teamupdate,userupdate])
                 res.status(200).send("user requested notified");
+                client.close();
                 return;
             }
         });
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
+        client.close();
         return;
     }
 })

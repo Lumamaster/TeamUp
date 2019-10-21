@@ -11,9 +11,10 @@ router.use(verify);
 router.use(express.json());
 
 router.post('/update', async (req, res) => {
-    const name = req.body.name;
+    const username = req.body.username;
     const id = req.token.id;
     const bio = req.body.bio;
+    const schedule = req.body.schedule;
 
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
@@ -28,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { name: name, bio: bio }
+                        $set: { username: username, bio: bio, times: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -44,12 +45,14 @@ router.post('/update', async (req, res) => {
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
+                client.close();
             });
             
         });
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
     }
 })
 
@@ -100,12 +103,16 @@ router.post('/addskill', async (req, res) => {
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
+                client.close();
+                return;
             });
             
         });
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
+        return;
     }
 })
 
@@ -159,6 +166,7 @@ router.post('/removeskill', async (req, res) => {
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        return;
     }
 })
 

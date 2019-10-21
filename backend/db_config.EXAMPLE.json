@@ -1,4 +1,0 @@
-{
-    "url":"mongodb+srv://[MONGODB_URI]",
-    "jwt_key":"supersecretkey"
-}

@@ -35,14 +35,14 @@ router.post('/', async (req,res) => {
     }
     
     var times = new Array(7);
-    var sections = 48;
+    var sections = 37;
     for (var i = 0; i < times.length; i++) {
         times[i] = new Array(sections);
     }
 
     for (var i = 0; i < times.length; i ++) {
         for (var k = 0; k < sections; k++) {
-            times[i][k] = 0;
+            times[i][k] = false;
         }
     }
 
@@ -77,11 +77,12 @@ router.post('/', async (req,res) => {
                         invites: []
                     }).then(function(count){
                         console.log('User successfully created');
-                        res.status(200).json({message:'User successfully created'});
+                        res.status(201).json({message:'User successfully created'});
                         client.close();
                     }).catch(function (err) {
                         console.log(err);
                         res.status(400).json({err:err});
+                        client.close();
                     });
                 }
             });

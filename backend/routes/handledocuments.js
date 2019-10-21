@@ -99,7 +99,7 @@ router.post('/:teamId', verify, async (req,res) => {
 //Delete a file
 //URL should contain file id
 //User should be part of the team that the deleted file was uploaded to
-router.get('/delete:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
     try {
         const {token} = req.query;
         const decoded = (await jwt.verify(token, jwt_key)).data;
@@ -108,32 +108,30 @@ router.get('/delete:id', async (req,res) => {
             res.status(401).send()
         }
         const docId = mongo.ObjectId(req.params.id);
+        console.log(docId)
         const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
         let bucket = new mongo.GridFSBucket(client.db('Grid'), {
             bucketName: 'documents'
         });
-
+        console.log("checking if file exists");
         let file = await bucket.find({_id:docId}).toArray();
         if(file.length !== 1) {
             res.status(404).json({err:"File not found"});
-        }
-        let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
-        if(!team) {
-            res.sendStatus(500);
             return;
         }
-        let isInTeam = false;
-        for(let i = 0; i < team.teamMembers.length; i++) {
-            if(team.teamMembers[i].id === userId) {
-                isInTeam = true;
-                break;
-            }
-        }
-        if(!isInTeam || file.metadata.uploaderId !== userId) {  //user cannot delete if they are kicked
-            res.status(400).json({err:"You are not in that team"});
+        console.log(file.length)
+        file = file[0];
+        console.log("checking if user owns the file");
+        console.log(file.metadata.uploaderId);
+        if(file.metadata.uploaderId !== userId) {  //user cannot delete if they do not own the file
+            res.status(400).json({err:"You do not own that file"});
+            client.close();
             return;
         }
+        console.log("about to delete");
         bucket.delete(docId);
+        res.status(200).send("File deletion successful");
+        client.close();
 
     } catch(err) {
         console.log(err);
@@ -167,6 +165,7 @@ router.get('/:id', async (req,res) => {
         let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
         if(!team) {
             res.sendStatus(500);
+            client.close();
             return;
         }
         let isInTeam = false;
@@ -178,6 +177,7 @@ router.get('/:id', async (req,res) => {
         }
         if(!isInTeam && file.metadata.uploaderId !== userId) {  //Let the user download if it's their file, even if not in team
             res.status(400).json({err:"You are not in that team"});
+            client.close();
             return;
         }
         let downloadStream = bucket.openDownloadStream(docId);
@@ -185,15 +185,18 @@ router.get('/:id', async (req,res) => {
 
         downloadStream.on('data', chunk => {
             res.write(chunk);
+            client.close();
         });
 
         downloadStream.on('error', () => {
             res.sendStatus(404);
+            client.close();
             return;
         });
 
         downloadStream.on('end', () => {
             res.end();
+            client.close();
         })
 
     } catch(err) {

@@ -3,6 +3,7 @@ import '../../App.css';
 import {Link} from 'react-router-dom';
 import {PRODUCTION, production_url, local_url} from '../../env.json';
 import io from 'socket.io-client';
+import * as jwt from 'jsonwebtoken';
 
 class TeamDashboard extends React.Component {
     constructor(props) {
@@ -12,7 +13,17 @@ class TeamDashboard extends React.Component {
             chatmsg:'',
             notetext:'',
             errors: [], 
-            disableChat: true
+            disableChat: true,
+            isOwner: false,
+            edit: false,
+            editForm: {
+                teamName:"",
+                info:"",
+                course:"",
+                maxMembers: 0,
+                open:false,
+                requestedSkills: []
+            }
         }
         const roomId = window.location.href.substr(window.location.href.indexOf('/teams/') + 7)
         this.myId = null;
@@ -26,6 +37,36 @@ class TeamDashboard extends React.Component {
         this.socket.on('ready', data => this.prepareChat(data));
 
         this.fileRef = React.createRef();
+        this.isOwner = null;
+    }
+    toggleEdit = async () => {
+        const wasEditing = this.state.edit;
+        this.setState({edit: !this.state.edit});
+
+        if(!wasEditing) return;
+
+        const teamId = window.location.href.substr(window.location.href.indexOf('/teams/') + 7)
+        const url = (PRODUCTION ? production_url : local_url) + '/teams/edit/' + teamId;
+        const otherParams = {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(this.state.editForm)
+        }
+        console.log(this.state.editForm);
+        this.setState({
+            team: {
+                ...this.state.team,
+                ...this.state.editForm
+            }
+        })
+        const res = await fetch(url, otherParams);
+        if(!res.ok) {
+            alert("Failed to update team");
+            console.log(res)
+        }
     }
 
     showMessage = msg => {
@@ -74,9 +115,24 @@ class TeamDashboard extends React.Component {
             }
             return;
         }
+        const team = await res.json();
         this.setState({
-            team:await res.json()
+            team:team,
+            editForm:{
+                teamName:team.teamName,
+                info:team.info,
+                course:team.course,
+                maxMembers:team.maxMembers,
+                open:team.open,
+                requestedSkills:team.requestedSkills || []
+            },
+            isOwner:team.owner.id === jwt.decode(window.localStorage.getItem('token')).data.id
         })
+    }
+    handleFormChange = e => {
+        let {editForm} = this.state;
+        editForm[e.target.name] = e.target.value;
+        this.setState({editForm})
     }
     handleInputChange = e => {
         this.setState({
@@ -114,25 +170,103 @@ class TeamDashboard extends React.Component {
         const res = await fetch(url, fetchParams);
         console.log(res.status)
     }
+    addSkill = e => {
+        e.preventDefault();
+        let {requestedSkills} = this.state.editForm;
+        requestedSkills.push(this.state.newSkill);
+        this.setState({
+            editForm:{
+                ...this.state.editForm,
+                requestedSkills:requestedSkills
+            },
+            newSkill:''
+        })
+    }
+    removeSkill = i => {
+        this.setState({
+            editForm:{
+                ...this.state.editForm,
+                requestedSkills:this.state.editForm.requestedSkills.filter((val,index) => index !== i)
+            }
+        })
+    }
+    kick = async (e,userid) => {
+        e.preventDefault();
+        //console.log(this.state.team._id, userid);
+        //return;
+        fetch((PRODUCTION ? production_url : local_url) + '/kickuser/' + this.state.team._id, {
+            method: "POST",
+            headers: {
+                "content-type":"application/json; charset=UTF-8",
+                Authorization: 'Bearer ' + window.localStorage.getItem('token')
+                
+            },body: JSON.stringify({kick:userid})
+        }).then(response => {
+            if(response.ok) {
+                let {teamMembers} = this.state.team;
+                teamMembers = teamMembers.filter(user => user.id !== userid)
+                this.setState({
+                    team: {
+                        ...this.state.team,
+                        teamMembers:teamMembers
+                    }
+                })
+            } else {
+                alert("Failed to kick user.")
+            }
+        })
+        .catch()
+    }
+
+    deleteFile = async (e,fileid) => {
+        e.preventDefault();
+        const res = await fetch((PRODUCTION ? production_url : local_url) + `/documents/${fileid}?token=${window.localStorage.getItem('token')}`, {
+            method:'DELETE',
+            headers:{
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            }
+        });
+        if(res.ok) {
+            alert("Successfully removed file");
+        } else {
+            alert("Failed to remove file")
+        }
+    }
+
     render() {
         return (
             <div className="container" style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
                 <div id="left" style={{minWidth:200, flexGrow:1}}>
-                    {this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
-                    {this.state.team ? <h4>{this.state.team.course}</h4> : null}
-                    {this.state.team ? <p>{this.state.team.info}</p> : null}
+                    {this.state.edit ? <React.Fragment><input type="text" placeholder="Team Name" name="teamName" value={this.state.editForm.teamName} onChange={this.handleFormChange}/><br/></React.Fragment> : this.state.team ? <h1>{this.state.team.teamName}</h1> : null}
+                    {this.state.edit ? <input type="text" name="course" placeholder="Course" value={this.state.editForm.course} onChange={this.handleFormChange}/> : this.state.team ? <h4>{this.state.team.course}</h4> : null}
+                    {this.state.edit ? <textarea name="info" style={{width:'100%'}} placeholder="Team Info" value={this.state.editForm.info} onChange={this.handleFormChange}/> : this.state.team ? <p>{this.state.team.info}</p> : null}
+                    {this.state.edit ? <React.Fragment><p>Max Members:</p><input type="number" name="maxMembers" min={this.state.team.numMembers} step={1} value={this.state.editForm.maxMembers} onChange={this.handleFormChange} /></React.Fragment> : null}
+                    {this.state.edit ? <React.Fragment><p>Open:</p><input type="checkbox" name="open" checked={this.state.editForm.open} onChange={e => {
+                            e.target = {name:'open',value:e.target.checked}
+                            this.handleFormChange(e);
+                        }} /></React.Fragment> : null}
+                    {this.state.edit && <React.Fragment><h3>Requested Skills:</h3>{this.state.editForm.requestedSkills && this.state.editForm.requestedSkills.map((skill,i) => {
+                        return <React.Fragment><p key={skill + i}>{skill} <span onClick={() => this.removeSkill(i)} style={{color:'red', cursor:'pointer', fontWeight:'bold'}}>X</span></p></React.Fragment>
+                    })}
+                    <input type="text" name="newSkill" onChange={this.handleInputChange}/>
+                    <button onClick={this.addSkill}>Add Skill</button></React.Fragment>}
                     <div id="members">
-                        <h3>Members</h3>
-                        {this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
-                            return <Link key={user.id} to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                        <h3>Members&nbsp;{this.state.team && '(' + this.state.team.numMembers + '/' + this.state.team.maxMembers + ')'}</h3>
+                        {this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {                            return <span key={user.id}>
+                        <p><Link to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>&nbsp;&nbsp;{user.id !== this.state.team.owner.id && <button id={user.id} onClick={e => this.kick(e,user.id)}>Kick</button>}</p>
+                                
+                                <br/>
+                            </span>
                         }) : null}
+                        {!this.state.isOwner && this.state.team && this.state.team.teamMembers ? this.state.team.teamMembers.map(user => {
+                            return <span key={user.id}>
+                                <Link to={`/profile/${user.id}`}>{user.username || user.name || user.id}</Link>
+                                <br/>
+                            </span>
+                        }) : null}
+
                     </div>
-                    <div id="notes">
-                        <h3>Notes</h3>
-                        {this.state.team && this.state.team.notes ? this.state.team.notes.map((note,i) => {
-                            return <p key={'note'+i}><span style={{fontWeight:'bold'}}>{note.author}:   </span>{note.body}</p>
-                        }) : <p>No notes</p>}
-                    </div>
+                    {this.state.isOwner && <button onClick={this.toggleEdit}>Edit Team Info</button>}
                     <div id="errors">
                         {this.showErrors()}
                     </div>
@@ -146,9 +280,10 @@ class TeamDashboard extends React.Component {
                                         <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;
                                     </span>
                                     uploaded&nbsp;
-                                    <a target='_blank' href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
+                                    <a target='_blank' rel="noopener noreferrer" href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
                                         {msg.filename}
                                     </a>
+                                    {msg.senderId === this.myId && <button onClick={e => this.deleteFile(e,msg.fileId)}>Remove file</button>}
                                 </p>
                             }
                             if(msg.type === 'join') {
@@ -180,19 +315,6 @@ class TeamDashboard extends React.Component {
     componentWillUnmount() {
         this.socket.disconnect();
     }
-}
-
-const FileSelectModal = props => {
-    return (
-        <div id="modal-background">
-            <div id="modal-body">
-                <h4>Upload File</h4>
-                <form>
-                    <input type="file" />
-                </form>
-            </div>
-        </div>
-    )
 }
 
 export default TeamDashboard;
