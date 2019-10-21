@@ -38,6 +38,11 @@ class TeamDashboard extends React.Component {
 
         this.fileRef = React.createRef();
         this.isOwner = null;
+        this.isInTeam = false;
+        JSON.parse(window.localStorage.getItem('teams') || '[]').forEach(team => {
+            if(team.id === roomId) this.isInTeam = true;
+        })
+        //console.log(this.isInTeam)
     }
     toggleEdit = async () => {
         const wasEditing = this.state.edit;
@@ -304,10 +309,10 @@ class TeamDashboard extends React.Component {
                         }) : null}
                     </div>
                     <div style={{display:'flex'}}>
-                        <input disabled={this.state.disableChat} style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
+                        <input disabled={this.state.disableChat || !this.isInTeam} style={{flexGrow:1}} type="text" name="chatmsg" id="chat-textbox" placeholder="Type a message to chat" value={this.state.chatmsg} onChange={this.handleInputChange}/>
                         <button style={{width:50}} disabled={this.state.disableChat} onClick={this.sendChatMsg}>Send</button>
                     </div>
-                    <form encType='multipart/form-data' onSubmit={this.upload}><input type="file" required ref={this.fileRef} name="doc" onChange={e => console.log(e.target.value)}/><button>Upload File</button></form>
+                    <form encType='multipart/form-data' onSubmit={this.upload}><input type="file" disabled={this.state.disableChat || !this.isInTeam} required ref={this.fileRef} name="doc" onChange={e => console.log(e.target.value)}/><button disabled={this.state.disableChat || !this.isInTeam}>Upload File</button></form>
                 </div>
             </div>
         );
