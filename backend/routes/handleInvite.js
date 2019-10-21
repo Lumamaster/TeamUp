@@ -24,7 +24,7 @@ router.get('/acceptinvite/:id', (req, res) => {
 
             userdb.collection('user').updateOne(
                 {_id: ObjectID(userId)},
-                {$pull: { invites: { id: ObjectID(teamId)}}}
+                {$pull: { invites: { id: teamId}}}
             ).then(function (r) {
                 userdb.collection('user').findOne({
                     "_id":ObjectID(userId)
