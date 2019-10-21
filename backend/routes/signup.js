@@ -42,7 +42,7 @@ router.post('/', async (req,res) => {
 
     for (var i = 0; i < times.length; i ++) {
         for (var k = 0; k < sections; k++) {
-            times[i][k] = 0;
+            times[i][k] = false;
         }
     }
 

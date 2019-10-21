@@ -460,7 +460,7 @@ class UserPage extends React.Component {
                                     <input type="text" value={this.state.addSkillText || ''} placeholder="Add a skill" name="addSkillText" id="add-skill-text" onChange={this.handleInputChange}/>
                                     <button onClick={this.addSkill} id="add-skill-button">Add Skill</button>
                                 </React.Fragment>
-                            <p>Rating: {this.state.rating}</p>
+                            {/* <p>Rating: {this.state.rating}</p> */}
                         </form>
                     }
                     {this.state.isMe ? <button name="editbutton" onClick={this.edit}>{this.state.edit ? 'Save Changes' : 'Edit Profile'}</button> : null}
@@ -485,7 +485,7 @@ class UserPage extends React.Component {
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
                     {this.state.curTeams && this.state.curTeams.map(team => {
-                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
+                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button name={team.name} id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
                     })}
                 </div>
                 <div className="container">
