@@ -237,7 +237,9 @@ class UserPage extends React.Component {
 //need to get invite id from button
     acceptInvite = async e =>{
         e.preventDefault();
-        console.log(e.target.id);
+        const joinTeamName = e.target.name;
+        const joinTeamId = e.target.id;
+        //console.log(e.target.name);
         fetch((PRODUCTION ? production_url : local_url) + '/invite/acceptinvite/' + e.target.id, {
             method: "GET",
             headers: {
@@ -245,7 +247,18 @@ class UserPage extends React.Component {
                 Authorization: 'Bearer ' + window.localStorage.getItem('token')
                 
             },
-          }).then(response => response.ok).then(success => (success ? alert("Team successfully joined") : alert("Failed to join team")))
+        }).then(response => {
+            if(response.ok) {
+                let teams = JSON.parse(window.localStorage.getItem('teams') || '[]');
+                teams.push({name:joinTeamName, id:joinTeamId})
+                window.localStorage.setItem('teams', JSON.stringify(teams))
+                alert("Successfully joined " + joinTeamName)
+                let invites = this.state.invites.filter(inv => inv.id !== joinTeamId)
+                this.setState({invites})
+            } else {
+                alert("Failed to join " + joinTeamName)
+            }
+        })
     }
 
     rejectInvite = async e => {
@@ -529,7 +542,7 @@ class InviteButton extends React.Component {
                 <tbody>
                     <tr>
                         <td><span>{this.props.invite.name}   </span></td>
-                        <td><button id={this.props.invite.id} onClick={this.props.accept}>Accept</button></td>
+                        <td><button name={this.props.invite.name} id={this.props.invite.id} onClick={this.props.accept}>Accept</button></td>
                         <td><button id={this.props.invite.id} onClick={this.props.reject}>Reject</button></td>
                     </tr>
                 </tbody>
