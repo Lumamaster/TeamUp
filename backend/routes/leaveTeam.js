@@ -51,7 +51,7 @@ router.get('/:id', async (req,res) => {
                 }
         
                 //console.log(result);
-                var ownerLeft = result[0].owner.id === userID;
+                var ownerLeft = result[0].owner.id.toString() === userID;
                 // Remove this member's name from that team
                 var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
                 if(memberArr.length === result[0].teamMembers.length) {
@@ -114,7 +114,8 @@ router.get('/:id', async (req,res) => {
                     // Remove the team from your curTeam array
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
-                        if (teamArr[i].id === ObjectId(teamID)) {
+                        //console.log(teamarr[i].id, teamID)
+                        if (teamArr[i].id.toString() === teamID) {
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;
