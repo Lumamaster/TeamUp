@@ -13,6 +13,7 @@ router.use(express.urlencoded({extended:false}));
 router.get('/:id', async (req,res) => {
     //console.log(req.token)
     const id = req.params.id;
+    const myid = req.token.id;
     //console.log(id)
 
     if(id.length !== 24){
@@ -45,7 +46,8 @@ router.get('/:id', async (req,res) => {
                 } else {
                     var blockedarr = result.blockedUsers;
                     for (user of blockedarr) {
-                        if (ObjectID(id) == user._id) {
+                        console.log(user);
+                        if (ObjectID(myid) == user._id) {
                             res.status(401).json({err:'this user has blocked you'});
                             client.close();
                             return;
