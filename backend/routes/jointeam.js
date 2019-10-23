@@ -78,10 +78,10 @@ router.get('/:id', async (req,res) => {
                 /*let obj = {id:userID, username:user.username}
                 let newMembersArr = team.teamMembers;*/
                 //newMembersArr.push(obj);
-                let teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
+                var teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
                     $inc: {numMembers: 1},
                     $push: {teamMembers: {
-                        id:userID,
+                        id:ObjectId(userID),
                         username:user.username
                     },
                     chat: {
@@ -111,7 +111,7 @@ router.get('/:id', async (req,res) => {
                         type:'full'
                     })
                 }
-                let userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
+                var userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
                     $pull: {prevTeams: {
                         id:ObjectId(teamID),
                         name:team.teamName

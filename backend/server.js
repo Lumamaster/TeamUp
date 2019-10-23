@@ -81,8 +81,11 @@ io.on('connection', async socket => {
         //console.log(team)
         let isInTeam = false;
         team.teamMembers.forEach(async member => {
-            if(!isInTeam && member.id === socket.user.id) {
-                //console.log(socket.user.name, 'joins', room);
+            const memberId = member.id.toString();
+            //console.log(typeof memberId, typeof socket.user.id)
+            //console.log(memberId, socket.user.id)
+            if(!isInTeam && memberId === socket.user.id) {
+                //console.log(socket.user.name, 'joins', room)
                 isInTeam = true;
                 socket.join(room);
                 socket.on('message', msg => {

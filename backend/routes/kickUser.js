@@ -72,7 +72,7 @@ router.post('/:id', async (req,res) => {
                         var curArr = result[0].curTeams;
                         var oldteam = null;
                         for (var i = 0; i < curArr.length; i++) {
-                            if (curArr[i].id === ObjectID(teamId)) {
+                            if (curArr[i].id.toString() === teamId) {
                                 oldteam = curArr[i];
                                 curArr.splice(i, 1);
                                 break;

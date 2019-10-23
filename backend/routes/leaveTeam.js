@@ -12,7 +12,6 @@ router.get('/:id', async (req,res) => {
 
     const teamID = req.params.id
     const userID = req.token.id
-
     //const {teamId} = req.params;
     if(teamID.length !== 24){
         res.status(400).json({err:"Invalid team ID"}).send();
@@ -40,7 +39,6 @@ router.get('/:id', async (req,res) => {
             }).toArray();
         
             team.then(function (result) {
-        
                 // Check for empty result
                 if (result.length == 0) {
                     //console.log(result);
@@ -51,9 +49,9 @@ router.get('/:id', async (req,res) => {
                 }
         
                 //console.log(result);
-                var ownerLeft = result[0].owner.id === userID;
+                var ownerLeft = result[0].owner.id.toString() === userID;
                 // Remove this member's name from that team
-                var memberArr = result[0].teamMembers.filter(member => member.id !== userID);
+                var memberArr = result[0].teamMembers.filter(member => member.id.toString() !== userID);
                 if(memberArr.length === result[0].teamMembers.length) {
                     //Nothing was removed therefore the user was not part of the team
                     res.status(400).json({err:'You are not part of that team'});
@@ -110,11 +108,12 @@ router.get('/:id', async (req,res) => {
                     var removed = false; 
                     var teamArr = userResult[0].curTeams;
                     var prevArr = userResult[0].prevTeams;
-            
+                    //console.log("Got a user")
                     // Remove the team from your curTeam array
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
-                        if (teamArr[i].id === ObjectId(teamID)) {
+                        console.log(teamArr[i].id, teamID)
+                        if (teamArr[i].id.toString() === teamID) {
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;
