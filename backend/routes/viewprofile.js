@@ -48,7 +48,7 @@ router.get('/:id', async (req,res) => {
                     for (user of blockedarr) {
                         if (myid == user._id) {
                             console.log('returning 401');
-                            res.status(401).json({err:'this user has blocked you'});
+                            res.status(400).json({err:'this user has blocked you'});
                             client.close();
                             return;
                         }
