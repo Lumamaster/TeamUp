@@ -114,24 +114,19 @@ router.delete('/:id', async (req,res) => {
         let bucket = new mongo.GridFSBucket(client.db('Grid'), {
             bucketName: 'documents'
         });
-        console.log("checking if file exists");
         let file = await bucket.find({_id:docId}).toArray();
         if(file.length !== 1) {
             res.status(404).json({err:"File not found"});
             client.close();
             return;
         }
-        console.log(file.length)
         file = file[0];
-        console.log("checking if user owns the file");
-        console.log(file.metadata.uploaderId);
         if(file.metadata.uploaderId !== userId) {  //user cannot delete if they do not own the file
             res.status(401).json({err:"You do not own that file"});
             client.close();
             return;
         }
-        console.log("about to delete");
-        bucket.delete(docId);
+        //bucket.delete(docId);
         res.status(200).send("File deletion successful");
         client.close();
         return;

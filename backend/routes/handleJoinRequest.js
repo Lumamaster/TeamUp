@@ -25,10 +25,10 @@ router.get('/acceptrequest/:id/:teamid', (req, res) => {
             const teamdb = client.db("Teams");
 
             // Removing the request
-            teamdb.collection('team').update(
+            /*teamdb.collection('team').update(
                 {"_id":ObjectID(teamId)},
                 {$pull: {reqReceived: {$eq: reqUserId }}}
-            )
+            )*/
 
             // Adding user to teamMembers, updating numMembers
             userdb.collection('user').findOne({
