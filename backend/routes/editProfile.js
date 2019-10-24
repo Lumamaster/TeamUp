@@ -29,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { username: username, bio: bio, times: schedule }
+                        $set: { username: username, times: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -137,7 +137,7 @@ router.post('/removeskill', async (req, res) => {
                 for (var i = 0; i < skillArr.length; i++) {
                     //console.log(skill, skillArr[i])
                     if (skillArr[i] == skill) {
-                        skillArr.splice(i, 1);
+                        skillArr.splice(i+1, 1);
                         removed = true;
                         break;
                     }
