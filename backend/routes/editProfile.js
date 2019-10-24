@@ -29,11 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-<<<<<<< HEAD
                         $set: { username: username, times: schedule }
-=======
-                        $set: { username: username, bio: bio, schedule: schedule }
->>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -78,11 +74,11 @@ router.post('/addskill', async (req, res) => {
                 for (curSkill of skillArr) {
                     console.log('cur ' + curSkill);
                     console.log('ski ' + skill);
-                    /*if (curSkill == skill) {
+                    if (curSkill == skill) {
                         res.status(400).json({message:'Skill already in your profile'});
                         client.close();
                         return;
-                    }*/
+                    }
                 }
                 skillArr.push(skill);
                 console.log(skill);

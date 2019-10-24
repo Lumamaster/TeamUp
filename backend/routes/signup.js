@@ -34,17 +34,10 @@ router.post('/', async (req,res) => {
         return;
     }*/
     
-<<<<<<< HEAD
     var times = new Array(8);
     var sections = 37;
     for (var i = 0; i < times.length; i++) {
         times[i] = new Array(sections);
-=======
-    var schedule = new Array(37);
-    var sections = 7;
-    for (var i = 0; i < schedule.length; i++) {
-        schedule[i] = new Array(sections);
->>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
     }
 
     for (var i = 0; i < schedule.length; i ++) {
@@ -63,7 +56,7 @@ router.post('/', async (req,res) => {
             });
         
             cursor.count().then(function(result) {
-                // If the request returned another user, it already exists
+                /*// If the request returned another user, it already exists
                 if (result != 0) {
                     console.log('User with that email already exists.');
                     res.status(400).json({err:'User with that email already exists'});
@@ -91,7 +84,28 @@ router.post('/', async (req,res) => {
                         res.status(400).json({err:err});
                         client.close();
                     });
-                }
+                }*/
+                db.collection('user').insertOne({
+                    schedule: schedule,
+                    email: email,
+                    password: password,
+                    username: screenname,
+                    prevTeams: [],
+                    curTeams: [],
+                    rating: -1,
+                    skills: [],
+                    bio: "",
+                    blockedUsers: [],
+                    invites: []
+                }).then(function(count){
+                    console.log('User successfully created');
+                    res.status(201).json({message:'User successfully created'});
+                    client.close();
+                }).catch(function (err) {
+                    console.log(err);
+                    res.status(400).json({err:err});
+                    client.close();
+                });
             });
         });
     } catch(err) {

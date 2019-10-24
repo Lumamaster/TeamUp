@@ -40,7 +40,7 @@ router.post('/', async(req,res) => {
                 open: open,
                 alive: true,
                 course: course,
-                maxMembers: parseInt(maxMembers),
+                maxMembers: 500,
                 chat: []
             };
 
