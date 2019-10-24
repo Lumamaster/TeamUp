@@ -42,7 +42,7 @@ router.post('/:id', async(req,res) => {
             }
 
             db.collection('team').updateOne({_id: ObjectId(teamId)}, 
-        { $set: {teamName: teamName,
+        { $set: {teamName: `$set-${teamName}`,
             info: info,
             requestedSkills: requestedSkills,
             open: open,

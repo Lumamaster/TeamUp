@@ -29,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { username: username, bio: bio, schedule: schedule }
+                        $set: { username: username, times: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -74,11 +74,11 @@ router.post('/addskill', async (req, res) => {
                 for (curSkill of skillArr) {
                     console.log('cur ' + curSkill);
                     console.log('ski ' + skill);
-                    /*if (curSkill == skill) {
+                    if (curSkill == skill) {
                         res.status(400).json({message:'Skill already in your profile'});
                         client.close();
                         return;
-                    }*/
+                    }
                 }
                 skillArr.push(skill);
                 console.log(skill);
@@ -137,7 +137,7 @@ router.post('/removeskill', async (req, res) => {
                 for (var i = 0; i < skillArr.length; i++) {
                     //console.log(skill, skillArr[i])
                     if (skillArr[i] == skill) {
-                        skillArr.splice(i, 1);
+                        skillArr.splice(i+1, 1);
                         removed = true;
                         break;
                     }

@@ -9,7 +9,7 @@ router.post('/', async (req,res) => {
     console.log("Signup", req.body);
     
     const {email, password, screenname} = req.body;
-    if(!email || !password) {
+    /*if(!email || !password) {
         res.status(400).json({err:"Missing email, password, or screenname"});
         return;
     }
@@ -21,7 +21,7 @@ router.post('/', async (req,res) => {
         return;
     }
 
-    // Check password length
+     Check password length
     if (password.length < 8 || password.length > 20) {
         console.log('password must be between 8 and 20 characters');
         res.status(400).json({err:'password must be between 8 and 20 characters'});
@@ -32,12 +32,12 @@ router.post('/', async (req,res) => {
     if (passwordRegex.test(password) == false) {
         res.status(400).json({err:'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'});
         return;
-    }
+    }*/
     
-    var schedule = new Array(37);
-    var sections = 7;
-    for (var i = 0; i < schedule.length; i++) {
-        schedule[i] = new Array(sections);
+    var times = new Array(8);
+    var sections = 37;
+    for (var i = 0; i < times.length; i++) {
+        times[i] = new Array(sections);
     }
 
     for (var i = 0; i < schedule.length; i ++) {
@@ -56,7 +56,7 @@ router.post('/', async (req,res) => {
             });
         
             cursor.count().then(function(result) {
-                // If the request returned another user, it already exists
+                /*// If the request returned another user, it already exists
                 if (result != 0) {
                     console.log('User with that email already exists.');
                     res.status(400).json({err:'User with that email already exists'});
@@ -84,7 +84,28 @@ router.post('/', async (req,res) => {
                         res.status(400).json({err:err});
                         client.close();
                     });
-                }
+                }*/
+                db.collection('user').insertOne({
+                    schedule: schedule,
+                    email: email,
+                    password: password,
+                    username: screenname,
+                    prevTeams: [],
+                    curTeams: [],
+                    rating: -1,
+                    skills: [],
+                    bio: "",
+                    blockedUsers: [],
+                    invites: []
+                }).then(function(count){
+                    console.log('User successfully created');
+                    res.status(201).json({message:'User successfully created'});
+                    client.close();
+                }).catch(function (err) {
+                    console.log(err);
+                    res.status(400).json({err:err});
+                    client.close();
+                });
             });
         });
     } catch(err) {
