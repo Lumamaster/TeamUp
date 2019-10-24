@@ -51,7 +51,7 @@ router.get('/:id', async (req,res) => {
             team = team[0]
             user = user[0]
 
-            let isInTeam = false;
+            /*let isInTeam = false;
             //console.log(user)
             user.curTeams.forEach(curTeam => {
                 if(curTeam.id === teamID) {
@@ -62,7 +62,7 @@ router.get('/:id', async (req,res) => {
             if(isInTeam) {
                 client.close();
                 return;
-            }
+            }*/
             if(!team.alive) {
                 res.status(400).json({err:"That team is no longer active."});
                 client.close();
