@@ -121,7 +121,7 @@ router.get('/:id', async (req,res) => {
                     // Remove the team from your curTeam array
                     // Add team to prevTeam array
                     for (var i = 0; i < teamArr.length; i++) {
-                        if (teamArr[i].id == teamID) {
+                        if (teamArr[i].id === ObjectId(teamID)) {
                             prevArr.push(teamArr[i]);
                             teamArr.splice(i, 1);
                             removed = true;

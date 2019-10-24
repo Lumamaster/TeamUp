@@ -31,8 +31,8 @@ router.get('/user/get/:id', async (req, res) => {
 
             /* Return this user's time array */
             user.then(function (result) {
-                res.status(200).json({schedule:result.times});
-                console.log(result.times);
+                res.status(200).json({schedule:result.schedule});
+                console.log(result.schedule);
                 client.close();
                 return;
             }).catch(function (err) {
@@ -61,23 +61,34 @@ router.get('/:id', async (req,res) => {
     }
 
     try {
-        MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
+        MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, async function(err, client) {
             assert.equal(null, err);
             const userdb = client.db("Users");
 
             /* Find all users that have an element with this teamID in their curTeams array */
             var users = userdb.collection('user').find({
-                curTeams: { $all: [
-                    { "$elemMatch" : { id: ObjectID(teamId) } }
-                ] }
+                $or: [
+                    {curTeams: { $all: [
+                        { "$elemMatch" : { id: teamId } }
+                    ] }},
+                    {curTeams: { $all: [
+                        { "$elemMatch" : { id: ObjectID(teamId) } }
+                    ] }}
+                ]
             }).toArray();
 
             /* find all values that are marked as free (1) for everyone */
             users.then(function (result) {
-                var timeArr = result[0].times;
+                //console.log(result[0])
+                var timeArr = result[0].schedule;
                 for (var i = 1; i < result.length; i++) {
-                    if (result[i] == false) {
-                        timeArr[i] = false;
+                    for(let timeSlot = 0; timeSlot < timeArr.length; timeSlot++) {
+                        for(let day = 0; day < timeArr[timeSlot].length; day++) {
+                            //console.log(result[i].schedule[timeSlot][day])
+                            if(!result[i].schedule[timeSlot][day]) {
+                                timeArr[timeSlot][day] = false;
+                            }
+                        }
                     }
                 };
 
@@ -100,7 +111,7 @@ router.get('/:id', async (req,res) => {
 
 router.post('/user/set/:id', async (req, res) => {
     const userId = req.params.id;
-    const freeTimes = req.body.times;
+    const freeTimes = req.body.schedule;
 
     if(userId.length !== 24){
         console.log("invalid team ID");
@@ -128,7 +139,7 @@ router.post('/user/set/:id', async (req, res) => {
                 console.log(err);
                 client.close();
                 return;
-            })
+            });
             
             
         });

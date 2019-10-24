@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="14c62af7-2eb2-4e90-ab19-561449c80c20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../frontend/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java" afterDir="false" />
+    </list>
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/subModule1/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,24 +58,24 @@
     <session id="2131059497">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5207" />
+          <entry key="java" value="5225" />
           <entry key="seltests" value="42" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5249" />
+          <entry key="JAVA" value="5267" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -132,8 +139,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="452">
               <caret line="291" column="1" selection-start-line="291" selection-start-column="1" selection-end-line="291" selection-end-column="1" />
+=======
+            <state relative-caret-position="767">
+              <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
             </state>
           </provider>
         </entry>
@@ -224,11 +236,18 @@
       <select />
     </treeState>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1300" />
     <option name="height" value="1450" />
+=======
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-8" />
+    <option name="width" value="1408" />
+    <option name="height" value="1448" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -237,6 +256,11 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+<<<<<<< HEAD
+=======
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,7 +311,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629577222" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571629617689" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -390,12 +414,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 36m 39s.xml">
-      <configuration name="FullTest.userTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullTest_userTest - 2019.10.20 at 18h 38m 01s.xml">
-      <configuration name="FullTest.userTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FullTest_userTest - 2019.10.20 at 18h 39m 11s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
@@ -423,11 +441,24 @@
     <history-entry file="FullTest_userTest - 2019.10.20 at 23h 43m 43s.xml">
       <configuration name="FullTest.userTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="FullTest_userTest - 2019.10.20 at 23h 46m 01s.xml">
+      <configuration name="FullTest.userTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FullTest_teamTest - 2019.10.20 at 23h 46m 50s.xml">
+      <configuration name="FullTest.teamTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-6" y="-6" width="1293" height="733" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16923077" />
+=======
+    <frame x="-6" y="0" width="1126" height="1158" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15572232" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -437,7 +468,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.51694095" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.51694095" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -453,7 +484,11 @@
       <window_info anchor="right" id="Ant Build" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.05748988" />
+=======
+      <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.052532833" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -471,6 +506,12 @@
           <line>39</line>
           <properties />
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -584,8 +625,13 @@
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/editProfileSel.java" />
     <entry file="file://$PROJECT_DIR$/subModule1/src/test/selTests/FullTest.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="452">
           <caret line="291" column="1" selection-start-line="291" selection-start-column="1" selection-end-line="291" selection-end-column="1" />
+=======
+        <state relative-caret-position="767">
+          <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
         </state>
       </provider>
     </entry>

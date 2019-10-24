@@ -488,7 +488,7 @@ class UserPage extends React.Component {
                         return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button name={team.name} id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
                     })}
                 </div>
-                <div className="container">
+                {this.state.isMe && <div className="container">
                         <h3>Invites</h3>
                         <React.Fragment>
                             {
@@ -496,7 +496,7 @@ class UserPage extends React.Component {
                                 <InviteButton key={invite.id} invite={invite} accept={this.acceptInvite} reject={this.rejectInvite}/>)
                             }
                         </React.Fragment>
-                </div>
+                </div>}
                 {this.state.isMe ? 
                 <div className="container">
                     <h3>Blocked Users</h3>

@@ -29,7 +29,11 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
+<<<<<<< HEAD
                         $set: { username: username, times: schedule }
+=======
+                        $set: { username: username, bio: bio, schedule: schedule }
+>>>>>>> c48df290693b482b023e9f56779e21c913fe9e07
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
