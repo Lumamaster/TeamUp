@@ -19,7 +19,7 @@ router.post('/:id', async(req,res) => {
 
     // Update team data
     try{
-
+        //console.log("Hello")
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true}, async function(err,client){
             assert.equal(null, err);
             const db = client.db("Teams");
@@ -35,7 +35,7 @@ router.post('/:id', async(req,res) => {
         foundTeam.then(function(result){
             //console.log(result.owner.id);
             //console.log(user);
-            if(result.owner.id !== user.id) {
+            if(result.owner.id.toString() !== user.id) {
                 res.status(401).json({err:"You are not the owner of that team."});
                 client.close();
                 return;

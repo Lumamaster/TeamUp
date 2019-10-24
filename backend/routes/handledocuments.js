@@ -20,7 +20,7 @@ router.post('/:teamId', verify, async (req,res) => {
         }
         let isInTeam = false;
         for(let i = 0; i < team.teamMembers.length; i++) {
-            if(team.teamMembers[i].id === req.token.id) {
+            if(team.teamMembers[i].id.toString() === req.token.id) {
                 isInTeam = true;
                 break;
             }
@@ -106,6 +106,7 @@ router.delete('/:id', async (req,res) => {
         const userId = decoded && decoded.id;
         if(!decoded || !userId) {
             res.status(401).send()
+            return;
         }
         const docId = mongo.ObjectId(req.params.id);
         console.log(docId)
@@ -113,25 +114,22 @@ router.delete('/:id', async (req,res) => {
         let bucket = new mongo.GridFSBucket(client.db('Grid'), {
             bucketName: 'documents'
         });
-        console.log("checking if file exists");
         let file = await bucket.find({_id:docId}).toArray();
         if(file.length !== 1) {
             res.status(404).json({err:"File not found"});
-            return;
-        }
-        console.log(file.length)
-        file = file[0];
-        console.log("checking if user owns the file");
-        console.log(file.metadata.uploaderId);
-        if(file.metadata.uploaderId !== userId) {  //user cannot delete if they do not own the file
-            res.status(400).json({err:"You do not own that file"});
             client.close();
             return;
         }
-        console.log("about to delete");
-        bucket.delete(docId);
+        file = file[0];
+        if(file.metadata.uploaderId !== userId) {  //user cannot delete if they do not own the file
+            res.status(401).json({err:"You do not own that file"});
+            client.close();
+            return;
+        }
+        //bucket.delete(docId);
         res.status(200).send("File deletion successful");
         client.close();
+        return;
 
     } catch(err) {
         console.log(err);
@@ -150,6 +148,7 @@ router.get('/:id', async (req,res) => {
         const userId = decoded && decoded.id;
         if(!decoded || !userId) {
             res.status(401).send()
+            return;
         }
         const docId = mongo.ObjectId(req.params.id);
         const client = await mongo.MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -160,6 +159,7 @@ router.get('/:id', async (req,res) => {
         let file = await bucket.find({_id:docId}).toArray();
         if(file.length !== 1) {
             res.status(404).json({err:"File not found"});
+            return;
         }
         file = file[0];
         let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});

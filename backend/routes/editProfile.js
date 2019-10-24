@@ -78,11 +78,11 @@ router.post('/addskill', async (req, res) => {
                 for (curSkill of skillArr) {
                     console.log('cur ' + curSkill);
                     console.log('ski ' + skill);
-                    if (curSkill == skill) {
+                    /*if (curSkill == skill) {
                         res.status(400).json({message:'Skill already in your profile'});
                         client.close();
                         return;
-                    }
+                    }*/
                 }
                 skillArr.push(skill);
                 console.log(skill);

@@ -51,7 +51,7 @@ router.get('/:id', async (req,res) => {
             team = team[0]
             user = user[0]
 
-            let isInTeam = false;
+            /*let isInTeam = false;
             //console.log(user)
             user.curTeams.forEach(curTeam => {
                 if(curTeam.id === teamID) {
@@ -62,7 +62,7 @@ router.get('/:id', async (req,res) => {
             if(isInTeam) {
                 client.close();
                 return;
-            }
+            }*/
             if(!team.alive) {
                 res.status(400).json({err:"That team is no longer active."});
                 client.close();
@@ -80,10 +80,10 @@ router.get('/:id', async (req,res) => {
                 /*let obj = {id:userID, username:user.username}
                 let newMembersArr = team.teamMembers;*/
                 //newMembersArr.push(obj);
-                let teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
+                var teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
                     $inc: {numMembers: 1},
                     $push: {teamMembers: {
-                        id:userID,
+                        id:ObjectId(userID),
                         username:user.username
                     },
                     chat: {
@@ -113,7 +113,7 @@ router.get('/:id', async (req,res) => {
                         type:'full'
                     })
                 }
-                let userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
+                var userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
                     $pull: {prevTeams: {
                         id:ObjectId(teamID),
                         name:team.teamName

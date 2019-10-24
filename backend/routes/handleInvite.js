@@ -17,6 +17,7 @@ router.get('/acceptinvite/:id', (req, res) => {
     const userId = req.token.id; // the user id of the current user
 
     try {
+        let isFull = false;
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
             assert.equal(null, err);
             const userdb = client.db("Users");
@@ -28,11 +29,21 @@ router.get('/acceptinvite/:id', (req, res) => {
             ).then(function (r) {
                 userdb.collection('user').findOne({
                     "_id":ObjectID(userId)
-                }).then(function (result) {
+                }).then(async function (result) {
+                    const checkteam = await teamdb.collection('team').findOne({_id:ObjectID(teamId)});
+                    if(checkteam.numMembers >= checkteam.maxMembers) {
+                        res.status(400).json({err:'That team is full.'})
+                        return;
+                    }
+                    //console.log(checkteam.numMembers);
+                    //console.log(checkteam.maxMembers);
+                    if(checkteam.numMembers === checkteam.maxMembers - 1) {
+                        isFull = true;
+                    }
                     teamdb.collection('team').updateOne(
                         {"_id": ObjectID(teamId)},
                         
-                        {$addToSet: {teamMembers: {id: userId, username: result.username}}, 
+                        {$addToSet: {teamMembers: {id: ObjectID(userId), username: result.username}}, 
                         $inc: {numMembers: 1},
                         $push: {chat: {
                             sender: req.token.name || req.token.username || req.token.id,
@@ -41,6 +52,14 @@ router.get('/acceptinvite/:id', (req, res) => {
                         }}}
                         
                     ).then(function (r) {
+                        //console.log(isFull)
+                        if(isFull) {
+                            teamdb.collection('team').updateOne({_id: ObjectID(teamId)}, {
+                                $push: {chat: {
+                                    type: 'full'
+                                }}
+                            })
+                        }
                         teamdb.collection('team').findOne({
                             "_id":ObjectID(teamId)
                         }).then(function (result) {
@@ -52,6 +71,17 @@ router.get('/acceptinvite/:id', (req, res) => {
                                 {_id: ObjectID(userId)},
                                 {$addToSet: {curTeams: teampair}}
                             ).then(function (result) {
+                                //console.log("Result", isFull)
+                                req.app.io.to(teamId).emit('message', {
+                                    sender: req.token.name || req.token.username || req.token.id,
+                                    senderId: req.token.id,
+                                    type:'join'
+                                });
+                                if(isFull) {
+                                    req.app.io.to(teamId).emit('message', {
+                                        type:'full'
+                                    });
+                                }
                                 res.status(200).send('accepted invite successfully');
                                 client.close();
                             }).catch(function (err) {
@@ -64,12 +94,6 @@ router.get('/acceptinvite/:id', (req, res) => {
                             res.status(400).json({err:err});
                             client.close();
                         });
-                        
-                    });
-                    req.app.io.to(teamId).emit('message', {
-                        sender: req.token.name || req.token.username || req.token.id,
-                        senderId: req.token.id,
-                        type:'join'
                     });
                 }).catch(function (err) {
                     console.log(err);
