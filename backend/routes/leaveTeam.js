@@ -75,13 +75,13 @@ router.get('/:id', async (req,res) => {
                         { _id: mongoID },
                         {
                             $inc: {numMembers: -1},
-                            $set: { teamMembers: memberArr, owner:"-1", alive: false }
+                            $set: { teamMembers: memberArr }
                         }
                     )
         
                 // If the team isn't empty, simply update the array
                 } else {
-                    if (ownerLeft) {
+                    /*if (ownerLeft) {
                         var newOwner = memberArr[0];
                         //console.log(newOwner)
                         teamdb.collection('team').updateOne(
@@ -99,7 +99,14 @@ router.get('/:id', async (req,res) => {
                                 $set: { teamMembers: memberArr }
                             }
                         )
-                    }
+                    }*/
+                    teamdb.collection('team').updateOne(
+                        { _id: mongoID },
+                        {
+                            $inc: {numMembers: -1},
+                            $set: { teamMembers: memberArr }
+                        }
+                    )
                     
                 }
 

@@ -67,10 +67,7 @@ router.get('/', async (req,res) => {
             assert.equal(null, err);
             const db = client.db("Users");
 
-            var cursor = db.collection('user').find({},
-                {projection: {
-                    password: false
-            }});
+            var cursor = db.collection('user').find({});
 
             var arr = cursor.toArray();
 

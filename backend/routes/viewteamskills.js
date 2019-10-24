@@ -42,9 +42,9 @@ router.get('/:id', async (req,res) => {
                     console.log(member.curTeams);
                     var curSkills = member.skills;
                     for (skill of curSkills) {
-                        if (!allSkills.includes(skill)) {
-                            allSkills.push(skill);
-                        }
+                        //if (!allSkills.includes(skill)) {
+                          allSkills.push(skill);
+                        //}
                     }
                 }
 

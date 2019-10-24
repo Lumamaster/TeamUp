@@ -20,7 +20,7 @@ router.post('/:id', async (req,res) => {
         return;
     }
 
-    const userToKick = req.body.kick;       // ID of user to kick from team
+    const userToKick = req.token.id;       // ID of user to kick from team
 
     try {
         MongoClient.connect(dbconfig.url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {

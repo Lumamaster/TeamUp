@@ -70,7 +70,9 @@ router.get('/:id', async (req,res) => {
             }
 
             if(team.numMembers === team.maxMembers) {
-                res.status(400).json({err:"That team is full."})
+                res.status(400).json({err:"That team is full."});
+                client.close();
+                return;
             }
             
             if(team.open) {
