@@ -93,7 +93,7 @@ io.on('connection', async socket => {
                 socket.on('message', msg => {
                     //console.log("Send message to", room)
                     io.to(room).emit('message', {
-                        sender: socket.user.name,
+                        sender: socket.user.id,
                         senderId: socket.user.id,
                         body: msg
                     })
