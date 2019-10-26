@@ -75,10 +75,63 @@ router.get('/:id', async (req,res) => {
                 return;
             }
             
-            if(team.open) {
+            //Join the team
+            let obj = {id:userID, username:user.username}
+            let newMembersArr = team.teamMembers;
+            //newMembersArr.push(obj);
+            var teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
+                $inc: {numMembers: 1},
+                $push: {teamMembers: {
+                    id:ObjectId(userID),
+                    username:user.username
+                },
+                chat: {
+                    sender: req.token.name || req.token.username || req.token.id,
+                    senderId: req.token.id,
+                    type:'join'
+                }}
+            })
+            req.app.io.to(teamID).emit('message', {
+                sender: req.token.name || req.token.username || req.token.id,
+                senderId: req.token.id,
+                type:'join'
+            })
+            // Checking if team is full and notifying if it is
+            let teamcheck = await teamdb.collection('team').findOne({_id:ObjectId(teamID)})
+            //console.log(teamcheck.numMembers, teamcheck.maxMembers);
+            if(teamcheck.numMembers === teamcheck.maxMembers){
+                // Team is now full, alert
+                teamdb.collection('team').updateOne({_id:ObjectId(teamID)}, {
+                    $push: {
+                        chat: {
+                            type:'full'
+                        }
+                    }
+                })
+                req.app.io.to(teamID).emit('message', {
+                    type:'full'
+                })
+            }
+            var userupdate = userdb.collection('user').updateOne({_id:ObjectId(userID)},{
+                $pull: {prevTeams: {
+                    id:ObjectId(teamID),
+                    name:team.teamName
+                }},
+                $push: {curTeams: {
+                    id:ObjectId(teamID),
+                    name:team.teamName
+                }}
+            })
+            
+            await Promise.all([teamupdate,userupdate])
+            res.status(200).send("user joined notified");
+            client.close();
+            return;
+
+            /*if(team.open) {
                 //Join the team
                 /*let obj = {id:userID, username:user.username}
-                let newMembersArr = team.teamMembers;*/
+                let newMembersArr = team.teamMembers;
                 //newMembersArr.push(obj);
                 var teamupdate = teamdb.collection('team').updateOne({_id:ObjectId(teamID)},{
                     $inc: {numMembers: 1},
@@ -148,7 +201,7 @@ router.get('/:id', async (req,res) => {
                 res.status(200).send("user requested notified");
                 client.close();
                 return;
-            }
+            }*/
         });
     } catch (err) {
         console.log(err);
