@@ -84,7 +84,8 @@ io.on('connection', async socket => {
             const memberId = member.id.toString();
             //console.log(typeof memberId, typeof socket.user.id)
             //console.log(memberId, socket.user.id)
-            if(!isInTeam && memberId === socket.user.id) {
+            //if(!isInTeam && memberId === socket.user.id) {
+                if(memberId === socket.user.id) {
                 //console.log(socket.user.name, 'joins', room)
                 isInTeam = true;
                 socket.join(room);
@@ -113,7 +114,7 @@ io.on('connection', async socket => {
         })
         if(!isInTeam) {
             console.log("Not in team");
-            socket.disconnect();
+            //socket.disconnect();
         }
     } catch(err) {
         console.log(err)
