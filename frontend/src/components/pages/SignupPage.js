@@ -35,11 +35,11 @@ class SignupPage extends React.Component {
         } else if(! /^[0-9a-zA-Z@#$%^&*()_]/.test(this.state.screenname) || this.state.screenname.length < 5 || this.state.screenname.length > 16) {
             errors.push('Please enter a valid screen name.')
         }
-        if(!this.state.password || this.state.password.length === 0) {
+        /*if(!this.state.password || this.state.password.length === 0) {
             errors.push('The password field cannot be blank.');
         } else if(! /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/.test(this.state.password) || this.state.password.length > 140) {
             errors.push('Please enter a valid password.')
-        }
+        }*/
         if(this.state.password !== this.state.password2) {
             errors.push('The two passwords do not match.')
         }
@@ -66,8 +66,8 @@ class SignupPage extends React.Component {
             console.log(res);
             if(res.status === 201) {
                 //Success!
-                this.props.history.push('/login');
-                alert('Success!')
+                //this.props.history.push('/login');
+                //alert('Success!')
             } else {
                 const data = await res.json()
                 if(data.err) errors.push(data.err);

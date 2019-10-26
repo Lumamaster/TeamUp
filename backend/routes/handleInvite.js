@@ -128,7 +128,7 @@ router.get('/declineinvite/:id', (req, res) => {
             const userdb = client.db("Users");
 
             // Removing the invite
-            userdb.collection('user').updateOne(
+            /*userdb.collection('user').updateOne(
                 {_id: ObjectID(userId)},
                 {$pull: { invites: { id: ObjectID(teamId)}}}
             ).then(function (result) {
@@ -140,7 +140,7 @@ router.get('/declineinvite/:id', (req, res) => {
                 res.status(400).json({err:err});
                 client.close();
                 return;
-            });
+            });*/
         });
     } catch(err) {
         console.error(err);

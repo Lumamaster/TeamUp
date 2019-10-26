@@ -28,11 +28,11 @@ class LoginPage extends React.Component {
         } else if(! /\@purdue\.edu/.test(this.state.email)) {
             errors.push('Please enter a valid Purdue email address.')
         }
-        if(!this.state.password || this.state.password.length === 0) {
+        /*if(!this.state.password || this.state.password.length === 0) {
             errors.push('The password field cannot be blank.');
         } else if(! /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/.test(this.state.password) || this.state.password.length > 140) {
             errors.push('Please enter a valid password.')
-        }
+        }*/
 
         this.setState({
             errors:errors
