@@ -87,7 +87,8 @@ io.on('connection', async socket => {
             //if(!isInTeam && memberId === socket.user.id) {
                 if(memberId === socket.user.id) {
                 //console.log(socket.user.name, 'joins', room)
-                isInTeam = true;
+                    isInTeam = true;
+                }
                 socket.join(room);
                 socket.on('message', msg => {
                     //console.log("Send message to", room)
@@ -110,7 +111,7 @@ io.on('connection', async socket => {
                     myId: socket.user.id,
                     messages: team.chat || []
                 })
-            }
+            //}
         })
         if(!isInTeam) {
             console.log("Not in team");
