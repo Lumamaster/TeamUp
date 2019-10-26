@@ -126,7 +126,7 @@ router.delete('/:id', async (req,res) => {
             client.close();
             return;
         }
-        //bucket.delete(docId);
+        bucket.delete(docId);
         res.status(200).send("File deletion successful");
         client.close();
         return;
@@ -162,7 +162,7 @@ router.get('/:id', async (req,res) => {
             return;
         }
         file = file[0];
-        let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
+        /*let team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(file.metadata.teamId)});
         if(!team) {
             res.sendStatus(500);
             client.close();
@@ -179,7 +179,7 @@ router.get('/:id', async (req,res) => {
             res.status(400).json({err:"You are not in that team"});
             client.close();
             return;
-        }
+        }*/
         let downloadStream = bucket.openDownloadStream(docId);
         res.attachment(file.filename);
 
