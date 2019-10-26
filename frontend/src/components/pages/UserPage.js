@@ -33,7 +33,7 @@ class UserPage extends React.Component {
     //TODO: dont know correct fetch argument
     componentDidMount(){
         let uid = window.location.toString().substr(window.location.toString().indexOf('/profile') + 9)
-        let isMe = false;
+        let isMe = true;
         if(window.localStorage.getItem('token')) {
             const {id} = jwt.decode(window.localStorage.getItem('token')).data
             //console.log(uid);
@@ -129,7 +129,7 @@ class UserPage extends React.Component {
         e.preventDefault();
         let newSkills = this.state.skills
         let skill = this.state.addSkillText;
-        if(skill && skill !== '' && !this.state.skills.includes(skill)) {
+        if(skill && skill !== '') { //&& !this.state.skills.includes(skill)) {
             newSkills.push(skill);
         } else {
             return;
@@ -498,7 +498,7 @@ class UserPage extends React.Component {
                 <div className="container" id="curTeams">
                     <h3>Teams</h3>
                     {this.state.curTeams && this.state.curTeams.map(team => {
-                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{this.state.isMe && <button name={team.name} id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
+                        return <p key={'team'+team.id}><Link to={'/teams/' + team.id}>{team.name}</Link>&nbsp;&nbsp;{/*this.state.isMe && */<button name={team.name} id={team.id} onClick={this.leaveTeam}> Leave Team</button>}</p>
                     })}
                 </div>
                 {this.state.isMe && <div className="container">

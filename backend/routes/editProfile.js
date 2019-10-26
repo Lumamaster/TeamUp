@@ -29,7 +29,7 @@ router.post('/update', async (req, res) => {
                 db.collection('user').updateOne(
                     { _id:ObjectId(id) },
                     {
-                        $set: { username: username, times: schedule }
+                        $set: { username: username, schedule: schedule }
                     }
                 ).then(function (r) {
                     res.status(200).send("profile changed successfully");
@@ -57,7 +57,7 @@ router.post('/update', async (req, res) => {
 })
 
 router.post('/addskill', async (req, res) => {
-
+    console.log('addingskill');
     const {skill} = req.body;
     const {id} = req.token;
     try {
@@ -71,7 +71,7 @@ router.post('/addskill', async (req, res) => {
     
             user.then(function (result) {
                 var skillArr = result[0].skills;
-                for (curSkill of skillArr) {
+                /*for (curSkill of skillArr) {
                     console.log('cur ' + curSkill);
                     console.log('ski ' + skill);
                     if (curSkill == skill) {
@@ -79,7 +79,7 @@ router.post('/addskill', async (req, res) => {
                         client.close();
                         return;
                     }
-                }
+                }*/
                 skillArr.push(skill);
                 console.log(skill);
                 console.log(skillArr);
