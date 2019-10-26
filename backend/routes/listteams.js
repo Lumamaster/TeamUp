@@ -75,7 +75,7 @@ router.get('/', async(req,res) => {
             if(filter_list.length === 0) {
                 //return all teams
                 //console.log("Hello");
-                db.collection('team').find({alive: true}).toArray().then(teams => {
+                db.collection('team').find().toArray().then(teams => {
                     //console.log(teams);
                     client.close();
                     try{
@@ -89,17 +89,18 @@ router.get('/', async(req,res) => {
                 })
             } else {
                 db.collection('team').find({
-                    $and: 
+                    /*$and: 
                         [{$or: filter_list}, 
                         {alive:true}]
-                    }
-                ).toArray()
+                    }*/
+                    $or: filter_list
+                }).toArray()
                 .then(teams => {
                     //console.log(teams[0].requestedSkills[0]);
                     client.close();
                     res.status(200).json(teams);
                     return;
-                })
+                });
     
                 client.close();
             }
