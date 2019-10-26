@@ -89,9 +89,10 @@ router.get('/', async(req,res) => {
                 })
             } else {
                 db.collection('team').find({
-                    $and: 
+                    /*$and: 
                         [{$or: filter_list}, 
-                        {alive:true}]
+                        {alive:true}]*/
+                    $or: filter_list
                     }
                 ).toArray()
                 .then(teams => {
