@@ -75,7 +75,7 @@ router.get('/', async(req,res) => {
             if(filter_list.length === 0) {
                 //return all teams
                 //console.log("Hello");
-                db.collection('team').find({alive: true}).toArray().then(teams => {
+                db.collection('team').find().toArray().then(teams => {
                     //console.log(teams);
                     client.close();
                     try{
