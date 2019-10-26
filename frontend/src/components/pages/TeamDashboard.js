@@ -327,7 +327,7 @@ class TeamDashboard extends React.Component {
                                 if(msg.type === 'file') {
                                     return <p key={"msg"+i}>
                                         <span style={{fontWeight:'bold'}}>
-                                            <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;
+                                            <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.senderId}</Link>&nbsp;
                                         </span>
                                         uploaded&nbsp;
                                         <a target='_blank' rel="noopener noreferrer" href={(PRODUCTION ? production_url : local_url) + '/documents/' + msg.fileId + '?token=' + window.localStorage.getItem('token')}>
@@ -339,7 +339,7 @@ class TeamDashboard extends React.Component {
                                 if(msg.type === 'join') {
                                     return <p key={"msg"+i}>
                                         <span style={{fontWeight:'bold'}}>
-                                            <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>&nbsp;joined the team.
+                                            <Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.senderId}</Link>&nbsp;
                                         </span>
                                     </p>
                                 }
@@ -350,7 +350,7 @@ class TeamDashboard extends React.Component {
                                         </span>
                                     </p>
                                 }
-                                return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.sender}</Link>:  </span>{msg.body}</p>
+                                return <p key={"msg"+i}><span style={{fontWeight:'bold'}}><Link to={`/profile/${msg.senderId}`}>{msg.senderId === this.myId ? 'You' : msg.senderId}</Link>:  </span>{msg.body}</p>
                             }) : null}
                         </div>
                         <div style={{display:'flex'}}>
