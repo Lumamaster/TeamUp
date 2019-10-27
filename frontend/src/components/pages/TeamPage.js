@@ -28,7 +28,8 @@ class TeamPage extends React.Component {
     }
     joinTeam = async e => {
         const {id} = e.target
-        const joined = this.state.joinedteams.map(team => team.id).indexOf(id) !== -1
+        //const joined = this.state.joinedteams.map(team => team.id).indexOf(id) !== -1
+        const joined = false;
         const url = `/teams/${joined ? 'leave' : 'join'}/${id}`
         const fetchParams = {
             headers: {
@@ -83,7 +84,8 @@ class TeamPage extends React.Component {
         const joinedteamIds = this.state.joinedteams.map(team => team.id)
         return  this.state.teams.map((team, index)=>{
             const {teamName, owner, info, requestedSkills, numMembers, open, maxMembers, course, _id} = team
-            const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
+            //const joined = joinedteamIds.indexOf(_id) !== -1 ? true : false
+            const joined = false;
             return(
                 <tr key={'team'+ _id}>
                     <td><Link id={teamName} to={`/teams/${_id}`}>{teamName || 'Untitled Team'}</Link></td>
