@@ -172,6 +172,7 @@ router.post('/removeskill', async (req, res) => {
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
         return;
     }
 })

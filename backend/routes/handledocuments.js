@@ -65,6 +65,7 @@ router.post('/:teamId', verify, async (req,res) => {
 
             uploadStream.on('error', () => {
                 res.status(500).json({err:"Error uploading file"});
+                client.close();
                 return;
             });
 
