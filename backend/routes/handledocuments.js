@@ -16,6 +16,7 @@ router.post('/:teamId', verify, async (req,res) => {
         const team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(req.params.teamId)});
         if(!team) {
             res.status(400).json({err:"Invalid team"});
+            client.close();
             return;
         }
         let isInTeam = false;
@@ -27,6 +28,7 @@ router.post('/:teamId', verify, async (req,res) => {
         }
         if(!isInTeam) {
             res.status(400).json({err:"You are not in that team"});
+            client.close();
             return;
         }
         const db = client.db('Grid');
@@ -36,9 +38,11 @@ router.post('/:teamId', verify, async (req,res) => {
             if(err) {
                 console.log(err);
                 res.status(400).json({err: "Validation failed"});
+                client.close();
                 return;
             } else if(!req.body.name) {
                 res.status(400).json({err:"No document name in request body"});
+                client.close();
                 return;
             }
 

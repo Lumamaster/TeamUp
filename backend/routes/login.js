@@ -39,9 +39,11 @@ router.post('/', async (req,res) => {
                         }
                     }, dbconfig.jwt_key, { expiresIn: '1d' })
                     res.status(200).json({token:token,teams:result[0].curTeams,message:'successfully logged in'});
+                    client.close();
                     return;
                 } else {
                     res.status(500).json({err:"Server error"})
+                    client.close();
                     return;
                 }
             })

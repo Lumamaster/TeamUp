@@ -104,10 +104,12 @@ router.post('/', async (req,res) => {
                     console.log('User successfully created');
                     res.status(201).json({message:'User successfully created'});
                     client.close();
+                    return;
                 }).catch(function (err) {
                     console.log(err);
                     res.status(400).json({err:err});
                     client.close();
+                    return;
                 });
             }).catch(err => {
                 console.log(err);

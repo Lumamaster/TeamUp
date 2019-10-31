@@ -35,18 +35,22 @@ router.get('/:id', async (req,res) => {
         if(result.length <= 0) {
             //couldn't find team
             res.status(404).json({err:"Team not found"});
+            client.close();
             return;
         }
         if(result.length > 1) {
             //found >1 team with that id
             res.status(500).json({err:"Server Error"});
+            client.close();
             return;
         }
         //res.length === 1
         result = result[0];
         res.status(200).json(result);
+        client.close();
     } catch(err) {
         res.status(500).json(err);
+        client.close();
     }
 })
 
@@ -84,6 +88,7 @@ router.get('/', async(req,res) => {
                         //res.status(200).send('All teams displayed successfully');
                     } catch(err){
                         console.log(err);
+                        client.close();
                     }
                     return;
                 })
@@ -108,6 +113,7 @@ router.get('/', async(req,res) => {
     } catch(err){
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
     }
 
     // Filter teams based on class

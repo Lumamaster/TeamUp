@@ -25,14 +25,15 @@ router.get('/acceptinvite/:id', (req, res) => {
 
             userdb.collection('user').updateOne(
                 {_id: ObjectID(userId)},
-                {$pull: { invites: { id: teamId}}}
+                {$set: { invites: invites}}
             ).then(function (r) {
                 userdb.collection('user').findOne({
                     "_id":ObjectID(userId)
                 }).then(async function (result) {
                     const checkteam = await teamdb.collection('team').findOne({_id:ObjectID(teamId)});
                     if(checkteam.numMembers >= checkteam.maxMembers) {
-                        res.status(400).json({err:'That team is full.'})
+                        res.status(400).json({err:'That team is full.'});
+                        client.close();
                         return;
                     }
                     //console.log(checkteam.numMembers);
@@ -111,6 +112,7 @@ router.get('/acceptinvite/:id', (req, res) => {
     } catch(err) {
         console.error(err);
         res.status(400).json({err:err});
+        client.close();
     } finally{}
 })
 
@@ -145,6 +147,7 @@ router.get('/declineinvite/:id', (req, res) => {
     } catch(err) {
         console.error(err);
         res.status(400).json({err:err});
+        client.close();
     } finally{}
 })
 
