@@ -79,13 +79,13 @@ io.on('connection', async socket => {
         const client = await mongo.MongoClient.connect(config.url, { useNewUrlParser: true, useUnifiedTopology: true });
         const team = await client.db('Teams').collection('team').findOne({_id:mongo.ObjectId(room)});
         //console.log(team)
-        let isInTeam = true;    //seeded bug; this way, it lets anyone see & participate in chat
-        team.teamMembers.forEach(async member => {
-            const memberId = member.id.toString();
+        //let isInTeam = true;    //seeded bug; this way, it lets anyone see & participate in chat
+        //team.teamMembers.forEach(async member => {
+            //const memberId = member.id.toString();
             //console.log(typeof memberId, typeof socket.user.id)
             //console.log(memberId, socket.user.id)
             //if(!isInTeam && memberId === socket.user.id) {
-            if(memberId === socket.user.id) {
+            //if(memberId === socket.user.id) {
             //console.log(socket.user.name, 'joins', room)
                 isInTeam = true;
                 socket.join(room);
@@ -115,8 +115,8 @@ io.on('connection', async socket => {
                     myId: socket.user.id,
                     messages: team.chat || []
                 })
-            }
-        })
+            //}
+        //})
         if(!isInTeam) {
             console.log("Not in team");
             //socket.disconnect();
