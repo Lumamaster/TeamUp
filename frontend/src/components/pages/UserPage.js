@@ -286,6 +286,7 @@ class UserPage extends React.Component {
                     <th style={{margin:'0px auto'}}>Th</th>
                     <th style={{margin:'0px auto'}}>Fri</th>
                     <th style={{margin:'0px auto'}}>Sat</th>
+                    <th style={{margin:'0px auto'}}>Sun</th>
                 </tr>
                 {this.state.schedule && this.state.schedule.map((time,i) => {
                     return <tr key={'scheduleline' + i}>
@@ -309,6 +310,7 @@ class UserPage extends React.Component {
                     <th style={{margin:'0px auto'}}>Th</th>
                     <th style={{margin:'0px auto'}}>Fri</th>
                     <th style={{margin:'0px auto'}}>Sat</th>
+                    <th style={{margin:'0px auto'}}>Sun</th>
                 </tr>
                 {this.state.schedule && this.state.schedule.map((time,i) => {
                     //console.log(time)
