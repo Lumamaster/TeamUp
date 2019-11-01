@@ -42,7 +42,7 @@ router.post('/', async (req,res) => {
                     client.close();
                     return;
                 } else {
-                    res.status(500).json({err:"Server error"})
+                    res.status(500).json({err:"Found more than 1 user with that email and password."})
                     client.close();
                     return;
                 }
