@@ -152,10 +152,16 @@ router.post('/removeskill', async (req, res) => {
                     {
                         $set: { skills: skillArr }
                     }
-                )
-                res.status(200).json({message:'Skill removed successfully'});
-                client.close();
-                return;
+                ).then(function (result) {
+                    res.status(200).json({message:'Skill removed successfully'});
+                    client.close();
+                    return;
+                }).catch(function (err) {
+                    console.log(err);
+                    res.status(400).json({err:err});
+                    client.close();
+                    return;
+                });
             }).catch(function (err) {
                 console.log(err);
                 res.status(400).json({err:err});
@@ -166,6 +172,7 @@ router.post('/removeskill', async (req, res) => {
     } catch (err) {
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
         return;
     }
 })

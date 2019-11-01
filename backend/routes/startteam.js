@@ -89,11 +89,13 @@ router.post('/', async(req,res) => {
                             console.log(err);
                             res.status(400).json({err:err});
                             client.close();
+                            return;
                         });
                     }).catch(function(err){
                         res.status(400).json({err:err});
                         console.log(err);
                         client.close();
+                        return;
                     });
                 });
                 
@@ -104,7 +106,7 @@ router.post('/', async(req,res) => {
                     id:thisteamid,
                     name:thisteamname
                 });
-                //client.close();
+                client.close();
             }).catch(function(err){
                 console.log('Could not add team to database');
                 console.log(err);

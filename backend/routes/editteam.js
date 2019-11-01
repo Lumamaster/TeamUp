@@ -42,14 +42,14 @@ router.post('/:id', async(req,res) => {
             }
 
             db.collection('team').updateOne({_id: ObjectId(teamId)}, 
-        { $set: {teamName: `$set-${teamName}`,
-            info: info,
-            requestedSkills: requestedSkills,
-            open: open,
-            course: course,
-            maxMembers: maxMembers
-                          }}
-        ).then(function(result){
+            { $set: {teamName: `$set-${teamName}`,
+                info: info,
+                requestedSkills: requestedSkills,
+                open: open,
+                course: course,
+                maxMembers: maxMembers
+                            }}
+            ).then(function(result){
 
             /*if(addMembers){
             var teamSplit = addMembers.split(',');
@@ -69,16 +69,21 @@ router.post('/:id', async(req,res) => {
                 });});
             }*/
 
-            res.status(200).send("team edited successfully");
-            client.close();
-        }).catch(function(err){   
-            console.log(err);
-            res.status(401).json({err:"didn't work"});
-        });
+                res.status(200).send("team edited successfully");
+                client.close();
+                return;
+            }).catch(function(err){   
+                console.log(err);
+                res.status(401).json({err:"didn't work"});
+                client.close();
+                return;
+            });
 
         }).catch(function(err){
             console.log(err);
             res.status(401).json({err:"didn't work"});
+            client.close();
+            return;
         });
         //console.log("justalog");
         
@@ -89,6 +94,8 @@ router.post('/:id', async(req,res) => {
     } catch(err){
         console.log(error);
         res.status(400).json({err:error});
+        client.close();
+        return;
     }
 
 
